@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "598765469665",
+    "project_id": "virtual-volunteer-3f246",
+    "storage_bucket": "virtual-volunteer-3f246.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:598765469665:android:eb44484c661a2c51e71ca0",
+        "android_client_info": {
+          "package_name": "com.example.virtualvolunteer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "598765469665-67moon0gf0hbejmonsu6l6d1k9vnbmlq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANoo9uDNAdGiiKU6nqtDBX34UbQgeDpzQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "598765469665-67moon0gf0hbejmonsu6l6d1k9vnbmlq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
