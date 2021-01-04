@@ -48,7 +48,8 @@
             android:layout_height="200dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            app:srcCompat="@drawable/volunteer" />
+            app:srcCompat="@drawable/volunteer"
+            android:contentDescription="@string/app_name" />
 
         <EditText
             android:id="@+id/email"
@@ -57,12 +58,13 @@
             android:backgroundTint="#fff"
             android:ems="10"
             android:foregroundTint="#fff"
-            android:hint="Your Email"
-            android:inputType="textPersonName"
+            android:hint="@string/login_email"
+            android:inputType="textEmailAddress"
             android:textColor="@color/dark_purple"
             android:textColorHighlight="#D1BBEC"
             android:textColorHint="#FFFFFF"
-            android:textColorLink="@color/teal" />
+            android:textColorLink="@color/teal"
+            android:autofillHints="" />
 
         <EditText
             android:id="@+id/password"
@@ -72,12 +74,13 @@
             android:backgroundTint="#fff"
             android:ems="10"
             android:foregroundTint="#fff"
-            android:hint="Password"
-            android:inputType="textPersonName"
+            android:hint="@string/login_password"
+            android:inputType="textPassword"
             android:textColor="@color/dark_purple"
             android:textColorHighlight="#D1BBEC"
             android:textColorHint="#FFFFFF"
-            android:textColorLink="@color/teal" />
+            android:textColorLink="@color/teal"
+            android:autofillHints="" />
 
         <Button
             android:id="@+id/login"
@@ -86,7 +89,7 @@
             android:layout_marginTop="48dp"
             android:background="#FFFFFF"
             android:backgroundTint="#FFFFFF"
-            android:text="Login"
+            android:text="@string/login_button"
             android:textColor="@color/dark_purple" />
 
         <TextView
@@ -95,10 +98,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="132dp"
             android:layout_marginTop="36dp"
-            android:text="Debugging Label"
+            android:text="@string/login_debug"
             android:textColor="@color/dark_purple" />
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
