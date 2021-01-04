@@ -8,4 +8,4 @@ Organizers can post details on the volunteer opportunity and see who is interest
 Volunteers can share their personality and contributions through their profile that includes their name, picture, location, number of hours volunteered, and organizations that they have helped out.
 
 # Login Page
-![alt text](https://github.com/hyma200/VirtualVolunteer/blob/main/util/login.PNG?raw=true)
+![alt text](https://github.com/hyma200/VirtualVolunteer/blob/main/util/virtualVolunteerLogin.png?raw=true)

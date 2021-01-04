@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_200"
+    android:background="@drawable/gradient"
     android:padding="8dp"
     tools:context=".MainActivity">
 
@@ -12,30 +12,88 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginBottom="27dp"
+        android:fontFamily="sans-serif-condensed"
+        android:foregroundGravity="center"
         android:gravity="center"
-        android:text="Sign Up"
+        android:text="@string/create_account"
         android:textAllCaps="true"
         android:textColor="#FFFFFF"
         android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:id="@+id/linearLayout"
+        android:layout_width="346dp"
+        android:layout_height="550dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:foregroundGravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8">
 
-        <ScrollView
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:contentDescription="@string/app_name"
+            app:srcCompat="@drawable/volunteer" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" />
-        </ScrollView>
+        <EditText
+            android:id="@+id/new_email"
+            android:layout_width="349dp"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:backgroundTint="#fff"
+            android:ems="10"
+            android:foregroundTint="#fff"
+            android:hint="@string/login_email"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/dark_purple"
+            android:textColorHighlight="#D1BBEC"
+            android:textColorHint="#FFFFFF"
+            android:textColorLink="@color/teal" />
+
+        <EditText
+            android:id="@+id/new_password"
+            android:layout_width="348dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints=""
+            android:backgroundTint="#fff"
+            android:ems="10"
+            android:foregroundTint="#fff"
+            android:hint="@string/login_password"
+            android:inputType="textPassword"
+            android:textColor="@color/dark_purple"
+            android:textColorHighlight="#D1BBEC"
+            android:textColorHint="#FFFFFF"
+            android:textColorLink="@color/teal" />
+
+        <Button
+            android:id="@+id/new_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="#FFFFFF"
+            android:backgroundTint="#FFFFFF"
+            android:text="@string/sign_up"
+            android:textColor="@color/dark_purple" />
+
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
