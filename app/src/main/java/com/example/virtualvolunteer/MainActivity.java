@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -19,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
-    private Button signIn;
+    private Button loginBtn;
     private EditText email;
     private EditText password;
     private FirebaseAuth mAuth;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        signIn = (Button) findViewById(R.id.login);
+        loginBtn = (Button) findViewById(R.id.login);
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
         debug = (TextView) findViewById(R.id.debug);
@@ -57,8 +58,13 @@ public class MainActivity extends AppCompatActivity {
                             });
                 }
         );
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setContentView(R.layout.activity_home);  //view home page after clicking the login button (might need to change to work with authentication)
+            }
+        });
     }
-
     @Override
     public void onStart(){
         super.onStart();
