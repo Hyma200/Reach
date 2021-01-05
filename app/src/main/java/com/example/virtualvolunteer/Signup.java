@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,8 +30,8 @@ public class Signup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         signUp = (Button) findViewById(R.id.sign_up);
-        email = (EditText) findViewById(R.id.email);
-        password = (EditText) findViewById(R.id.password);
+        email = (EditText) findViewById(R.id.signup_email);
+        password = (EditText) findViewById(R.id.signup_password);
 
         signUp.setOnClickListener(
                 view -> {
@@ -42,9 +44,16 @@ public class Signup extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "createUserWithEmail:success");
-                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        Toast toast = Toast.makeText(Signup.this, "Account Created Successfully",
+                                                Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
                                     } else {
-                                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                        Log.w(TAG, "Account Creation Failure, most likely due to an invalid email", task.getException());
+                                        Toast toast = Toast.makeText(Signup.this, "Account Creation Failure, most likely due to an invalid email",
+                                                Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
                                         // If sign in fails, display a message to the user.
                                     }
                                 }

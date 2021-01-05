@@ -50,14 +50,18 @@ public class MainActivity extends AppCompatActivity {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "signInWithEmail:success");
                                         FirebaseUser user = mAuth.getCurrentUser();
-                                        Toast.makeText(MainActivity.this, "Authentication Success.",
-                                                Toast.LENGTH_SHORT).show();
+                                        Toast toast = Toast.makeText(MainActivity.this, "Authentication Success",
+                                                Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
                                         openHome();
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                        Toast.makeText(MainActivity.this, "Authentication failed.",
-                                                Toast.LENGTH_SHORT).show();
+                                        Toast toast = Toast.makeText(MainActivity.this, "Authentication Failure. Please Try Again.",
+                                                Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
                                     }
                                 }
                             });

@@ -52,7 +52,7 @@
             app:srcCompat="@drawable/volunteer" />
 
         <EditText
-            android:id="@+id/new_name"
+            android:id="@+id/signup_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -68,7 +68,7 @@
             android:textColorLink="@color/teal" />
 
         <EditText
-            android:id="@+id/new_email"
+            android:id="@+id/signup_email"
             android:layout_width="349dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -84,7 +84,7 @@
             android:textColorLink="@color/teal" />
 
         <EditText
-            android:id="@+id/new_password"
+            android:id="@+id/signup_password"
             android:layout_width="348dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -107,15 +107,6 @@
             android:background="#FFFFFF"
             android:backgroundTint="#FFFFFF"
             android:text="@string/sign_up"
-            android:textColor="@color/dark_purple" />
-
-        <TextView
-            android:id="@+id/debug2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="3dp"
-            android:text="@string/login_debug"
             android:textColor="@color/dark_purple" />
 
         <Button
