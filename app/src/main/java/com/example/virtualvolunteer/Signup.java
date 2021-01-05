@@ -17,26 +17,33 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Signup extends AppCompatActivity {
     private Button signUp;
     private EditText email;
     private EditText password;
+    private EditText name;
     private FirebaseAuth mAuth;
     private static final String TAG = "EmailPassword";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         mAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Users");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         signUp = (Button) findViewById(R.id.sign_up);
         email = (EditText) findViewById(R.id.signup_email);
         password = (EditText) findViewById(R.id.signup_password);
+        name = (EditText) findViewById(R.id.signup_name);
 
         signUp.setOnClickListener(
                 view -> {
                     String fEmail = email.getText().toString();
                     String fPassword = password.getText().toString();
+                    String fName = name.getText().toString();
                     mAuth.createUserWithEmailAndPassword(fEmail, fPassword)
                             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -44,6 +51,7 @@ public class Signup extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "createUserWithEmail:success");
+                                        myRef.child(fName).child("email").setValue(fEmail);
                                         Toast toast = Toast.makeText(Signup.this, "Account Created Successfully",
                                                 Toast.LENGTH_SHORT);
                                         toast.setGravity(Gravity.CENTER, 0, 0);
