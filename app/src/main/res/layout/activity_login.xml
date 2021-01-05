@@ -92,25 +92,17 @@
             android:text="@string/login_button"
             android:textColor="@color/dark_purple" />
 
-        <TextView
-            android:id="@+id/debug"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="36dp"
-            android:text="@string/login_debug"
-            android:textColor="@color/dark_purple" />
-
         <Button
             android:id="@+id/sign_up"
             android:layout_width="105dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="124dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="64dp"
             android:background="#63FFFFFF"
             android:backgroundTint="#00FFFFFF"
             android:clickable="true"
             android:text="@string/sign_up"
+            android:outlineProvider="none"
             android:textColor="@color/dark_purple"
             android:focusable="true" />
     </LinearLayout>
