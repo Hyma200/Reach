@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Signup extends AppCompatActivity {
+public class SignUp extends AppCompatActivity {
     private Button signUp;
     private EditText email;
     private EditText password;
@@ -52,13 +52,13 @@ public class Signup extends AppCompatActivity {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "createUserWithEmail:success");
                                         myRef.child(fName).child("email").setValue(fEmail);
-                                        Toast toast = Toast.makeText(Signup.this, "Account Created Successfully",
+                                        Toast toast = Toast.makeText(SignUp.this, "Account Created Successfully",
                                                 Toast.LENGTH_SHORT);
                                         toast.setGravity(Gravity.CENTER, 0, 0);
                                         toast.show();
                                     } else {
                                         Log.w(TAG, "Account Creation Failure, most likely due to an invalid email", task.getException());
-                                        Toast toast = Toast.makeText(Signup.this, "Account Creation Failure, most likely due to an invalid email",
+                                        Toast toast = Toast.makeText(SignUp.this, "Account Creation Failure, most likely due to an invalid email",
                                                 Toast.LENGTH_SHORT);
                                         toast.setGravity(Gravity.CENTER, 0, 0);
                                         toast.show();

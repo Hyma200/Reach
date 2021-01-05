@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
     android:padding="8dp"
-    tools:context=".MainActivity">
+    tools:context=".Login">
 
     <TextView
         android:id="@+id/textView8"
