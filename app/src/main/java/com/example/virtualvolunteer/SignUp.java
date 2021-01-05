@@ -14,6 +14,7 @@ public class SignUp extends AppCompatActivity {
 
     private Button signUpBtn;
     private Button backBtn;
+    private EditText new_name;
     private EditText new_email;
     private EditText new_password;
     private TextView debug;
@@ -25,18 +26,20 @@ public class SignUp extends AppCompatActivity {
 
         signUpBtn = findViewById(R.id.sign_up);
         backBtn = findViewById(R.id.back);
+        new_name = findViewById(R.id.new_name);
         new_email = findViewById(R.id.new_email);
         new_password = findViewById(R.id.new_password);
         debug = findViewById(R.id.debug);
 
-        signUpBtn.setOnClickListener(v -> createAccount(findViewById(R.id.new_email), findViewById(R.id.new_password)));
+        signUpBtn.setOnClickListener(v -> createAccount(new_name, new_email, new_password));
 
         backBtn.setOnClickListener(v -> {
             setContentView(R.layout.activity_login);  //return to login
         });
     }
 
-    public void createAccount(EditText new_email, EditText new_password){
+    public void createAccount(EditText new_name, EditText new_email, EditText new_password){
+        String name = new_name.getText().toString();
         String email = new_email.getText().toString();
         String password = new_password.getText().toString();
         //store email and password in database

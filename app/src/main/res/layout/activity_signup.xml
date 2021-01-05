@@ -54,6 +54,22 @@
             app:srcCompat="@drawable/volunteer" />
 
         <EditText
+            android:id="@+id/new_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:autofillHints=""
+            android:backgroundTint="#fff"
+            android:ems="10"
+            android:foregroundTint="#fff"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:textColor="@color/dark_purple"
+            android:textColorHighlight="#D1BBEC"
+            android:textColorHint="#FFFFFF"
+            android:textColorLink="@color/teal" />
+
+        <EditText
             android:id="@+id/new_email"
             android:layout_width="349dp"
             android:layout_height="wrap_content"
