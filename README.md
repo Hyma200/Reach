@@ -1,4 +1,4 @@
-# VirtualVolunteer
+# Virtual Volunteer
 An Android application that provides a platform for organizations to connect to volunteers and vice versa.
 
 ## A convenient communication space for volunteers and organizers
