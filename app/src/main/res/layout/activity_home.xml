@@ -10,15 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <include layout="@layout/layout_top_navigation_toolbar" />
-
-        </RelativeLayout>
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
