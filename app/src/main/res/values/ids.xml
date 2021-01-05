@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="search" type="id" />
+    <item name="log" type="id" />
+    <item name="saved" type="id" />
+    <item name="profile" type="id" />
+</resources>
