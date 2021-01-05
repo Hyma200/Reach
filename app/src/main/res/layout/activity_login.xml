@@ -93,7 +93,7 @@
             android:textColor="@color/dark_purple" />
 
         <Button
-            android:id="@+id/signUp"
+            android:id="@+id/sign_up"
             android:layout_width="105dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="124dp"
@@ -102,7 +102,8 @@
             android:backgroundTint="#00FFFFFF"
             android:clickable="true"
             android:text="@string/sign_up"
-            android:textColor="@color/dark_purple" />
+            android:textColor="@color/dark_purple"
+            android:focusable="true" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
