@@ -9,20 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.VirtualVolunteer">
+        <activity android:name=".profile"></activity>
         <activity
             android:name=".SignUp"
             android:parentActivityName=".Login" />
         <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".Home"
-            android:parentActivityName=".Login"
-            >
-        </activity>
+            android:parentActivityName=".Login"></activity>
         <activity
             android:name=".Search"
             android:parentActivityName=".Home" />
