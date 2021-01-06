@@ -18,7 +18,7 @@ public class Saved extends AppCompatActivity {
         Navigation.enableNavigationClick(this, navView);
 
         Menu menu = navView.getMenu();
-        MenuItem menuItem = menu.getItem(0);
+        MenuItem menuItem = menu.getItem(3);
         menuItem.setChecked(true);
     }
 }
