@@ -10,6 +10,7 @@
             android:id="@+id/Bottom_navigation_icon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/bottom_navigation_toolbar_border"
             app:itemIconTint="@color/teal"
             app:itemTextColor="@color/dark_purple"
             app:menu="@menu/bottom_navigation_icon">
