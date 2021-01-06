@@ -17,7 +17,7 @@
             <include layout="@layout/layout_view_pager_center" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/location"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_marginStart="132dp"
