@@ -50,6 +50,8 @@ public class SignUp extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
+
+
                                         Log.d(TAG, "createUserWithEmail:success");
                                         myRef.child(fName).child("email").setValue(fEmail);
                                         Toast toast = Toast.makeText(SignUp.this, "Account Created Successfully",
