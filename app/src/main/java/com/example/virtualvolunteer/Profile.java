@@ -88,8 +88,8 @@ public class Profile extends AppCompatActivity {
         hoursRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot){
-                String value = snapshot.getValue(String.class);
-                hoursOutput.setText(value);
+                Long value = snapshot.getValue(Long.class);
+                hoursOutput.setText(value.toString() + "Hours");
                 if (value == null)
                     hoursOutput.setText("0");
             }
