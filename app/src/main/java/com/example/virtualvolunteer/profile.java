@@ -8,7 +8,7 @@ import android.os.Bundle;
 public class profile extends AppCompatActivity {
     //private TextView name;
     //private ImageView image;
-
+//comment
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //name = (TextView) findViewById(R.id.name);
