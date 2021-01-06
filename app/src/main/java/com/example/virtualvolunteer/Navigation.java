@@ -28,8 +28,8 @@ public class Navigation {
                     case R.id.saved:
                         context.startActivity(new Intent(context, Saved.class));
                         break;
-                    //case R.id.profile:
-                    //context.startActivity(new Intent(context, Profile.class));
+                    case R.id.profile:
+                        context.startActivity(new Intent(context, Profile.class));
                 }
                 return false;
             }

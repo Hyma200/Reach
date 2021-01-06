@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.VirtualVolunteer">
-        <activity android:name=".profile"></activity>
+        <activity android:name=".Profile"></activity>
         <activity
             android:name=".SignUp"
             android:parentActivityName=".Login" />

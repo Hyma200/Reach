@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 //import android.widget.ImageView;
 import android.os.Bundle;
 
-public class profile extends AppCompatActivity {
+public class Profile extends AppCompatActivity {
     //private TextView name;
     //private ImageView image;
 //comment
