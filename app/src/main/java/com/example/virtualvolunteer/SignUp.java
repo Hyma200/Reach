@@ -42,6 +42,7 @@ public class SignUp extends AppCompatActivity {
         signUp.setOnClickListener(
                 view -> {
                     String fEmail = email.getText().toString();
+                    String storeEmail = fEmail.replace('.', '_');
                     String fPassword = password.getText().toString();
                     String fName = name.getText().toString();
                     mAuth.createUserWithEmailAndPassword(fEmail, fPassword)
@@ -50,10 +51,9 @@ public class SignUp extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
-
-
                                         Log.d(TAG, "createUserWithEmail:success");
-                                        myRef.child(fName).child("email").setValue(fEmail);
+                                        myRef.child(storeEmail).child("email").setValue(fEmail);
+                                        myRef.child(storeEmail).child("name").setValue(fName);
                                         Toast toast = Toast.makeText(SignUp.this, "Account Created Successfully",
                                                 Toast.LENGTH_SHORT);
                                         toast.setGravity(Gravity.CENTER, 0, 0);
