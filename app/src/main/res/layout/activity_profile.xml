@@ -34,6 +34,16 @@
                 android:gravity="center"
                 android:text="firstName lastName"
                 android:textColor="#FFFFFF"
+                android:textSize="35sp" />
+
+            <TextView
+                android:id="@+id/emailProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30px"
+                android:gravity="center"
+                android:text="Email"
+                android:textColor="#FFFFFF"
                 android:textSize="24sp" />
 
             <ImageView
@@ -57,6 +67,7 @@
                 android:id="@+id/profileAge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30px"
                 android:gravity="center"
                 android:text="Age: "
                 android:textColor="#FFFFFF"
@@ -66,6 +77,7 @@
                 android:id="@+id/hoursProfile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30px"
                 android:gravity="center"
                 android:text="Hours volunteered:"
                 android:textColor="#FFFFFF"
