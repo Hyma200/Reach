@@ -88,7 +88,6 @@
                 android:ems="10"
                 android:foregroundTint="#fff"
                 android:hint="Date"
-                android:inputType="date"
                 android:textColor="@color/dark_purple"
                 android:textColorHighlight="#D1BBEC"
                 android:textColorHint="#FFFFFF"

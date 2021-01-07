@@ -89,7 +89,7 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot){
                 Long value = snapshot.getValue(Long.class);
-                hoursOutput.setText(value.toString() + "Hours");
+                hoursOutput.setText(value.toString() + " Hours");
                 if (value == null)
                     hoursOutput.setText("0");
             }
