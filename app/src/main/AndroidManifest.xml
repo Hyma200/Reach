@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.virtualvolunteer">
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -8,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.VirtualVolunteer">
-        <activity android:name=".Profile"></activity>
+        <activity android:name=".Profile" />
         <activity
             android:name=".SignUp"
             android:parentActivityName=".Login" />
@@ -20,21 +21,14 @@
         </activity>
         <activity
             android:name=".Home"
-            android:parentActivityName=".Login"></activity>
+            android:parentActivityName=".Login" />
         <activity
             android:name=".Search"
             android:parentActivityName=".Home" />
         <activity
             android:name=".Log"
-            android:parentActivityName=".Home" >
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data
-                    android:host="example.com"
-                    android:scheme="https"/>
-            </intent-filter>
+            android:parentActivityName=".Home">
+
         </activity>
         <activity
             android:name=".Saved"
