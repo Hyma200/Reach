@@ -1,6 +1,7 @@
 package com.example.virtualvolunteer;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -21,20 +22,26 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Random;
+
 public class Log extends AppCompatActivity {
 
     private Button submitBtn;
     private EditText organization;
     private EditText event;
     private EditText date;
+    private EditText verifyEmail;
+    private String name = "";
     private EditText hours;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     DatabaseReference myRef = database.getReference("Hours");
-    DatabaseReference hoursRef = database.getReference("Users");
+    DatabaseReference usersRef = database.getReference("Users");
+    String email = mAuth.getCurrentUser().getEmail().replace('.', '_');
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        hoursRef = hoursRef.child(mAuth.getCurrentUser().getEmail().replace('.', '_')).child("hours");
+        DatabaseReference hoursRef = usersRef.child(email).child("hours");
+        DatabaseReference nameRef = usersRef.child(email).child("name");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log);
 
@@ -43,6 +50,7 @@ public class Log extends AppCompatActivity {
         event = findViewById(R.id.event);
         date = findViewById(R.id.date);
         hours = findViewById(R.id.hours);
+        verifyEmail = findViewById(R.id.verifyEmail);
 
         BottomNavigationView navView = findViewById(R.id.Bottom_navigation_icon);
         Navigation.enableNavigationClick(this, navView);
@@ -59,6 +67,16 @@ public class Log extends AppCompatActivity {
             myRef.child("Date").setValue(date.getText().toString());
             myRef.child("Hours").setValue(Integer.parseInt(hours.getText().toString()));
             myRef.child("Email").setValue(mAuth.getCurrentUser().getEmail());
+            nameRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    name = snapshot.getValue(String.class);
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+
             hoursRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot){
@@ -69,15 +87,14 @@ public class Log extends AppCompatActivity {
                     else{
                         hoursRef.setValue(Integer.parseInt(hours.getText().toString()));
                     }
+                    startEmail();
                     Toast toast = Toast.makeText(Log.this, "Hours Successfully Added",
                             Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
                 }
-
                 @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                }
+                public void onCancelled(@NonNull DatabaseError error) {}
             });
             reload();
         });
@@ -86,6 +103,23 @@ public class Log extends AppCompatActivity {
     public void reload(){
         Intent intent = new Intent(this, Log.class);
         startActivity(intent);
+    }
+
+    public void startEmail(){
+        int num = new Random().nextInt(999999);
+        String random = String.format("%06d", num);
+        myRef.child("Verification").setValue(random);
+        myRef.child("Verified").setValue(false);
+        Intent email = new Intent (Intent.ACTION_SENDTO, Uri.fromParts("mailto", verifyEmail.getText().toString(), null));
+        email.setData(Uri.parse("mailto:"));
+        email.putExtra(Intent.EXTRA_EMAIL, new String[]{verifyEmail.getText().toString()});
+        email.putExtra(Intent.EXTRA_SUBJECT, "Verify Volunteer Hours");
+        email.putExtra(Intent.EXTRA_TEXT, "Please confirm that " + name + " has finished " + hours.getText().toString() + " hours at your organization. " +
+                "Please input the following code under their user profile\n" + random + ".");
+        email.putExtra(Intent.ACTION_MEDIA_BUTTON, "Verify");
+        if (email.resolveActivity(getPackageManager()) != null){
+            startActivity(Intent.createChooser(email, "Send Email"));
+        }
     }
 
 }
