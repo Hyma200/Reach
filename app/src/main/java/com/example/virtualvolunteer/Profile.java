@@ -33,7 +33,6 @@ public class Profile extends AppCompatActivity {
     DatabaseReference hoursRef = myRef.child("hours");
     DatabaseReference ageRef = myRef.child("age");
     private TextView nameOutput;
-    private TextView ageOutput;
     private TextView locationOutput;
     private TextView hoursOutput;
     private static final String TAG = "Database";
@@ -48,9 +47,9 @@ public class Profile extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(0);
         menuItem.setChecked(true);
         nameOutput = (TextView) findViewById(R.id.profileName);
-        ageOutput = (TextView) findViewById(R.id.profileAge);
-        locationOutput = (TextView) findViewById(R.id.location);
         hoursOutput = (TextView) findViewById(R.id.hoursProfile);
+        locationOutput = (TextView) findViewById(R.id.location);
+
 
         //Sets value of name on profile page
         nameRef.addValueEventListener(new ValueEventListener() {
@@ -105,14 +104,14 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot){
                 String value = snapshot.getValue(String.class);
-                ageOutput.setText(value);
-                if (value == null)
-                    ageOutput.setText("Please enter your date of birth");
+                //ageOutput.setText(value);
+             //   if (value == null)
+              //      ageOutput.setText("Please enter your date of birth");
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                ageOutput.setText("ERROR: " + error.toException());
+               // ageOutput.setText("ERROR: " + error.toException());
             }
         });
     }
