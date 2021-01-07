@@ -12,18 +12,21 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <include layout="@layout/layout_view_pager_center" />
 
-            <TextView
-                android:id="@+id/location"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="132dp"
-                android:layout_marginTop="100dp"
-                android:text="Home"
-                android:textSize="30sp" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"/>
 
         </RelativeLayout>
 
