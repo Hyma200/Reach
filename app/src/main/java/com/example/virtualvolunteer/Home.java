@@ -23,42 +23,23 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
+public class Home extends AppCompatActivity {
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    DatabaseReference myRef = database.getReference("Users").child(user.getEmail().replace('.', '_')).child("name");
 
-    public class Home extends AppCompatActivity {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference myRef = database.getReference("Users").child(user.getEmail().replace('.', '_')).child("name");
-        private TextView output;
-        private Button button;
-        private static final String TAG = "Database";
+    private static final String TAG = "Database";
 
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_home);
-            BottomNavigationView navView = findViewById(R.id.Bottom_navigation_icon);
-            Navigation.enableNavigationClick(this, navView);
-            Menu menu = navView.getMenu();
-            MenuItem menuItem = menu.getItem(0);
-            menuItem.setChecked(true);
-            output = (TextView) findViewById(R.id.home_name);
-            button = (Button) findViewById(R.id.button);
-            button.setOnClickListener(
-                    view -> {
-                        myRef.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                String value = snapshot.getValue(String.class);
-                                output.setText(value);
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                                output.setText("ERROR: " + error.toException());
-                            }
-                        });
-                    });
-        }
-
-
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+        BottomNavigationView navView = findViewById(R.id.Bottom_navigation_icon);
+        Navigation.enableNavigationClick(this, navView);
+        Menu menu = navView.getMenu();
+        MenuItem menuItem = menu.getItem(0);
+        menuItem.setChecked(true);
     }
+
+
+}

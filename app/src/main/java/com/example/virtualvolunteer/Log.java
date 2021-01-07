@@ -28,7 +28,6 @@ public class Log extends AppCompatActivity {
     private EditText event;
     private EditText date;
     private EditText hours;
-    private TextView debug;
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     DatabaseReference myRef = database.getReference("Hours");
@@ -44,7 +43,6 @@ public class Log extends AppCompatActivity {
         event = findViewById(R.id.event);
         date = findViewById(R.id.date);
         hours = findViewById(R.id.hours);
-        debug = findViewById(R.id.debug);
 
         BottomNavigationView navView = findViewById(R.id.Bottom_navigation_icon);
         Navigation.enableNavigationClick(this, navView);
@@ -79,7 +77,6 @@ public class Log extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    debug.setText("ERROR: " + error.toException());
                 }
             });
             reload();
