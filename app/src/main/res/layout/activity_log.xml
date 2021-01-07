@@ -119,14 +119,6 @@
                 android:text="Submit"
                 android:textColor="@color/dark_purple" />
 
-            <TextView
-                android:id="@+id/debug"
-                android:layout_width="300dp"
-                android:layout_height="100dp"
-                android:layout_marginTop="20dp"
-                android:text="debug label"
-                android:textColor="@color/white" />
-
 
         </LinearLayout>
 
