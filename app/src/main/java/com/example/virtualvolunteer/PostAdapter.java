@@ -1,8 +1,10 @@
 package com.example.virtualvolunteer;
 
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,10 +13,10 @@ import java.util.ArrayList;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
-    private ArrayList<String> items;
+    private ArrayList<Post> posts;
 
-    public PostAdapter(ArrayList<String> items, Home home) {
-        this.items = items;
+    public PostAdapter(ArrayList<Post> items, Home home) {
+        this.posts = items;
     }
 
     /**
@@ -22,14 +24,27 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
      * (custom ViewHolder).
      */
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private final TextView textView;
 
-        public ViewHolder(View view) {
-            super(view);
-            textView = (TextView) view.findViewById(R.id.title);
+        private View itemView;
+        private TextView post_username;
+        private TextView post_description;
+        private ImageView post_image;
+        private TextView post_relative_time;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            itemView = itemView.findViewById(R.id.title);
+            post_username = itemView.findViewById(R.id.post_username);
+            post_description = itemView.findViewById(R.id.post_description);
+            post_image = itemView.findViewById(R.id.post_image);
+            post_relative_time = itemView.findViewById(R.id.post_relative_time);
         }
-        public TextView getTextView() {
-            return textView;
+
+        public void bind(Post post) {
+            post_username.setText(post.getUser());
+            post_description.setText(post.getDescription());
+            // kotlin... Glide.with(context).load(post.imageUrl).into(itemView.ivPost)
+            post_relative_time.setText(DateUtils.getRelativeTimeSpanString(post.getCreationTime()));
         }
     }
 
@@ -46,11 +61,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        viewHolder.getTextView().setText(items.get(position));
+        viewHolder.bind(posts.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return posts.size();
     }
 }

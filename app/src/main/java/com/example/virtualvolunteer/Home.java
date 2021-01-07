@@ -48,17 +48,18 @@ public class Home extends AppCompatActivity {
 
         RecyclerView rView = findViewById(R.id.rView);
         rView.setLayoutManager(new LinearLayoutManager(this));
-        ArrayList<String> items = fetchData();
-        rView.setAdapter(new PostAdapter(items, this));
+        rView.setAdapter(new PostAdapter(generatePosts(), this));
     }
 
-    private ArrayList<String> fetchData(){
-        ArrayList<String> list = new ArrayList<String>();
-        for(int i = 0; i < 10; i++){
-            list.add("Item " + i);
-        }
-        return list;
+    public ArrayList<Post> generatePosts(){  //temporary generation for testing
+        ArrayList<Post> posts = new ArrayList<Post>();
+        Post p1 = new Post("andi", "blah blah", "", 1237645L);
+        Post p2 = new Post("leela", "blah blah", "", 1482345L);
+        Post p3 = new Post("brenda", "blah blah", "", 1312578L);
+        posts.add(p1);
+        posts.add(p2);
+        posts.add(p3);
+        return posts;
     }
-
 
 }
