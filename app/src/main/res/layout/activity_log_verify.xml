@@ -37,34 +37,64 @@
             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
             <TextView
-                android:id="@+id/location"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginTop="0dp"
                 android:gravity="center"
-                android:text="Log Volunteer Hours"
+                android:text="Verify Volunteer Hours"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
 
-            <Button
-                android:id="@+id/submit_option"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="148dp"
-                android:background="#FFFFFF"
-                android:backgroundTint="#FFFFFF"
-                android:text="Submit"
-                android:textColor="@color/dark_purple" />
+                android:layout_marginTop="0dp"
+                android:gravity="center"
+                android:text="Organizers - check your email for any volunteer hour verification requests from volunteers."
+                android:textColor="@color/white" />
+
+            <EditText
+                android:id="@+id/verification_code"
+                android:layout_width="348dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:autofillHints=""
+                android:backgroundTint="#fff"
+                android:ems="10"
+                android:foregroundTint="#fff"
+                android:hint="6-Digit Verification Code"
+                android:inputType="number"
+                android:textColor="@color/dark_purple"
+                android:textColorHighlight="#D1BBEC"
+                android:textColorHint="#FFFFFF"
+                android:textColorLink="@color/teal" />
+
+            <EditText
+                android:id="@+id/verification_email"
+                android:layout_width="348dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:autofillHints=""
+                android:backgroundTint="#fff"
+                android:ems="10"
+                android:foregroundTint="#fff"
+                android:hint="Volunteer's Email"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/dark_purple"
+                android:textColorHighlight="#D1BBEC"
+                android:textColorHint="#FFFFFF"
+                android:textColorLink="@color/teal" />
 
             <Button
-                android:id="@+id/verify_option"
+                android:id="@+id/verify_hours"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="12dp"
                 android:background="#FFFFFF"
                 android:backgroundTint="#FFFFFF"
                 android:text="Verify"
                 android:textColor="@color/dark_purple" />
+
 
         </LinearLayout>
 
