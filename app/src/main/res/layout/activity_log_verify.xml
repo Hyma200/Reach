@@ -69,6 +69,22 @@
                 android:textColorHint="#FFFFFF"
                 android:textColorLink="@color/teal" />
 
+            <EditText
+                android:id="@+id/verification_email"
+                android:layout_width="348dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:autofillHints=""
+                android:backgroundTint="#fff"
+                android:ems="10"
+                android:foregroundTint="#fff"
+                android:hint="Volunteer's Email"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/dark_purple"
+                android:textColorHighlight="#D1BBEC"
+                android:textColorHint="#FFFFFF"
+                android:textColorLink="@color/teal" />
+
             <Button
                 android:id="@+id/verify_hours"
                 android:layout_width="match_parent"

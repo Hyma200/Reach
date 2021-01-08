@@ -25,6 +25,7 @@ public class LogVerify extends AppCompatActivity {
 
     private Button verifyBtn;
     private EditText verificationCode;
+    private EditText verificationEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +34,14 @@ public class LogVerify extends AppCompatActivity {
 
         verifyBtn = findViewById(R.id.verify_hours);
         verificationCode = findViewById(R.id.verification_code);
+        verificationEmail = findViewById(R.id.verification_email);
 
         BottomNavigationView navView = findViewById(R.id.Bottom_navigation_icon);
         Navigation.enableNavigationClick(this, navView);
 
         verifyBtn.setOnClickListener(v -> {
             String fVerificationCode = verificationCode.getText().toString();
+            String fVerificationEmail = verificationEmail.getText().toString();
             // add the hours to the user's profile
             Toast toast = Toast.makeText(LogVerify.this, "Hours Successfully Verified",
                     Toast.LENGTH_SHORT);
