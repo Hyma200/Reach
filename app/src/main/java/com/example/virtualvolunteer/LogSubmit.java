@@ -35,6 +35,7 @@ public class LogSubmit extends AppCompatActivity {
     DatabaseReference myRef = database.getReference("Hours");
     DatabaseReference usersRef = database.getReference("Users");
     String email = mAuth.getCurrentUser().getEmail().replace('.', '_');
+    private Hour hour;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         DatabaseReference hoursRef = usersRef.child(email).child("hours");
@@ -55,11 +56,8 @@ public class LogSubmit extends AppCompatActivity {
         submitBtn.setOnClickListener(v -> {
             String key = myRef.push().getKey();
             myRef = myRef.child(key);
-            myRef.child("Organization").setValue(organization.getText().toString());
-            myRef.child("Event").setValue(event.getText().toString());
-            myRef.child("Date").setValue(date.getText().toString());
-            myRef.child("Hours").setValue(Integer.parseInt(hours.getText().toString()));
-            myRef.child("Email").setValue(mAuth.getCurrentUser().getEmail());
+            hour = new Hour(organization.getText().toString(), Integer.parseInt(hours.getText().toString()),event.getText().toString(),mAuth.getCurrentUser().getEmail(),date.getText().toString(), "0", false);
+            myRef.child(key).setValue(hour);
             nameRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -101,8 +99,9 @@ public class LogSubmit extends AppCompatActivity {
     public void startEmail(){
         int num = new Random().nextInt(999999);
         String random = String.format("%06d", num);
-        myRef.child("Verification").setValue(random);
-        myRef.child("Verified").setValue(false);
+        //myRef.child("Verification").setValue(random);
+        hour.setVerification(random);
+        myRef.setValue(hour);
         Intent email = new Intent (Intent.ACTION_SENDTO, Uri.fromParts("mailto", verifyEmail.getText().toString(), null));
         email.setData(Uri.parse("mailto:"));
         email.putExtra(Intent.EXTRA_EMAIL, new String[]{verifyEmail.getText().toString()});
