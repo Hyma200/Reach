@@ -62,52 +62,29 @@
                 android:textColorHint="#FFFFFF"
                 android:textColorLink="@color/teal" />
 
-            <TableLayout
+            <Button
+                android:id="@+id/new_post_image_picker"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="upload image" />
 
-                <TableRow>
+            <ImageView
+                android:id="@+id/new_post_image"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginTop="12dp"
+                app:srcCompat="@drawable/profile_pic_logo" />
 
-                    <Button
-                        android:id="@+id/post_image_picker"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:text="choose image" />
-
-                    <Button
-                        android:id="@+id/post_button_upload"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:text="Upload" />
-
-                </TableRow>
-
-                <TableRow>
-
-                    <ImageView
-                        android:id="@+id/post_image"
-                        android:layout_width="0dp"
-                        android:layout_height="128dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="20dp"
-                        app:srcCompat="@drawable/profile_pic_logo" />
-                </TableRow>
-
-                <TableRow>
-
-                    <Button
-                        android:id="@+id/new_post_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:background="#FFFFFF"
-                        android:backgroundTint="#FFFFFF"
-                        android:text="Post"
-                        android:textColor="@color/dark_purple" />
-                </TableRow>
-            </TableLayout>
+            <Button
+                android:id="@+id/new_post_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:background="#FFFFFF"
+                android:backgroundTint="#FFFFFF"
+                android:text="Post"
+                android:textColor="@color/dark_purple" />
 
         </LinearLayout>
 
