@@ -8,125 +8,125 @@
     android:fitsSystemWindows="true">
 
     <RelativeLayout
+        android:id="@+id/parent"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ScrollView
-            android:layout_height="match_parent"
-            android:layout_width="match_parent">
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="355dp"
-            android:layout_height="560dp"
-            android:layout_marginStart="34dp"
-            android:layout_marginTop="34dp"
-            android:layout_marginEnd="34dp"
-            android:layout_marginBottom="34dp"
-            android:foregroundGravity="center"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.489"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8">
-
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/profileName"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="100px">
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="firstName lastName"
-                android:textColor="#FFFFFF"
-                android:textSize="35sp" />
-
-            <TextView
-                android:id="@+id/emailProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30px"
-                android:gravity="center"
-                android:text="Email"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
-
-            <EditText
-                android:id="@+id/file_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_toEndOf="@+id/image_picker"
-                android:hint="Enter file name" />
-
-            <Button
-                android:id="@+id/image_picker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="270px"
-                android:text="Choose file" />
-
-            <ProgressBar
-                android:id="@+id/progress_bar"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/button_upload"
-                android:layout_alignParentStart="true"
-                android:layout_marginBottom="16dp" />
-
-            <Button
-                android:id="@+id/button_upload"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="300px"
-                android:text="Upload" />
-
-            <ImageView
-                android:id="@+id/image"
-                android:layout_width="match_parent"
-                android:layout_height="128dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                app:srcCompat="@drawable/profile_pic_logo" />
+                android:foregroundGravity="center"
+                android:isScrollContainer="true"
+                android:orientation="vertical"
+                android:scrollbars="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView8">
 
-            <TextView
-                android:id="@+id/location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="homeTown, State"
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+                <TextView
+                    android:id="@+id/profileName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="300px"
+                    android:gravity="center"
+                    android:text="Name"
+                    android:textColor="#FFFFFF"
+                    android:textSize="35sp" />
 
-            <TextView
-                android:id="@+id/hoursProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30px"
-                android:gravity="center"
-                android:text="Hours volunteered: "
-                android:textColor="#FFFFFF"
-                android:textSize="24sp" />
+                <TextView
+                    android:id="@+id/emailProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30px"
+                    android:gravity="center"
+                    android:text="Email"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp" />
+
+                <Button
+                    android:id="@+id/image_picker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="500px"
+                    android:layout_marginTop="50px"
+                    android:text="Choose file" />
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/button_upload"
+                    android:layout_alignParentStart="true"
+                    android:layout_margin="50px"
+                    android:layout_marginBottom="16dp" />
+
+                <Button
+                    android:id="@+id/button_upload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="500px"
+                    android:text="Upload" />
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="281dp"
+                    android:layout_marginLeft="270px"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="200px"
+                    android:layout_marginBottom="20dp"
+                    android:foregroundGravity="left"
+                    app:srcCompat="@drawable/profile_pic_logo" />
+
+                <TextView
+                    android:id="@+id/location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="homeTown, State"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/hoursProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30px"
+                    android:gravity="center"
+                    android:text="Hours volunteered: "
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp" />
 
 
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="146dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
-                android:layout_marginTop="30px"
-                android:gravity="center"
-                android:text="Edit Profile" />
+                <Button
+                    android:id="@+id/editProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="500px"
+                    android:layout_marginTop="30px"
+                    android:gravity="center"
+                    android:text="Edit Profile" />
 
-        </LinearLayout>
-    </ScrollView>
+            </LinearLayout>
+        </ScrollView>
+
         <include
+            android:id = "@+id/navigation"
             layout="@layout/layout_bottom_navigation_toolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
     </RelativeLayout>
 
 

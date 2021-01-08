@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.renderscript.Sampler;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -41,6 +42,8 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 
 public class Profile extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -50,12 +53,13 @@ public class Profile extends AppCompatActivity {
     private TextView nameOutput;
     private TextView locationOutput;
     private TextView hoursOutput;
+    private TextView email;
     private static final String TAG = "Database";
     private Button chooseImage;
     private Button uploadImage;
-    private EditText fileName;
     private ImageView image;
     private ProgressBar progressBar;
+    private Button editProfile;
     private Uri imageUri;
     private static final int PICK_IMAGE_REQUEST = 1;
     private StorageReference storageRef = FirebaseStorage.getInstance().getReference("uploads");
@@ -75,20 +79,21 @@ public class Profile extends AppCompatActivity {
         locationOutput = (TextView) findViewById(R.id.location);
         chooseImage = (Button) findViewById(R.id.image_picker);
         uploadImage = (Button) findViewById(R.id.button_upload);
-        fileName = (EditText) findViewById(R.id.file_name);
         image = (ImageView) findViewById(R.id.image);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-
+        editProfile = (Button) findViewById(R.id.editProfile);
+        email = (TextView) findViewById(R.id.emailProfile);
+        email.setText(user.getEmail());
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 profileUser = snapshot.getValue(User.class);
                 nameOutput.setText(profileUser.getName());
-                hoursOutput.setText(String.valueOf(profileUser.getHours()));
+                hoursOutput.setText(String.valueOf(profileUser.getHours()) + " Hours");
                 locationOutput.setText(profileUser.getLocation());
                 Upload upload = profileUser.getUpload();
                 if (upload != null)
-                    Picasso.with(Profile.this).load(upload.getImageUrl()).fit().centerCrop().into(image);
+                    Picasso.with(Profile.this).load(upload.getImageUrl()).resize(200, 200).centerCrop().into(image);
             }
 
             @Override
@@ -142,7 +147,7 @@ public class Profile extends AppCompatActivity {
                         result.addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                Upload upload = new Upload(fileName.getText().toString().trim(), uri.toString());
+                                Upload upload = new Upload("No Name", uri.toString());
                                 profileUser.setUpload(upload);
                                 myRef.setValue(profileUser);
                             }
