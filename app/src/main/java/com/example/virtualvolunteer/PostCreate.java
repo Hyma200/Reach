@@ -40,6 +40,12 @@ public class PostCreate extends AppCompatActivity {
 
         postBtn.setOnClickListener(v -> {
             String fDescription = description.getText().toString();
+            if (fDescription.isEmpty()) {
+                Toast toast = Toast.makeText(PostCreate.this, "Description cannot be empty",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
             Toast toast = Toast.makeText(PostCreate.this, "Successfully Made New Post",
                     Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
