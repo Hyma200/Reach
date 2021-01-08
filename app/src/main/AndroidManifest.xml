@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.virtualvolunteer">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
@@ -21,8 +22,7 @@
         </activity>
         <activity
             android:name=".Home"
-            android:parentActivityName=".Login">
-        </activity>
+            android:parentActivityName=".Login"></activity>
         <activity
             android:name=".Search"
             android:parentActivityName=".Home" />
@@ -37,6 +37,9 @@
             android:parentActivityName=".Log" />
         <activity
             android:name=".Saved"
+            android:parentActivityName=".Home" />
+        <activity
+            android:name=".PostCreate"
             android:parentActivityName=".Home" />
     </application>
 
