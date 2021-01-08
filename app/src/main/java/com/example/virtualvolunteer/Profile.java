@@ -59,7 +59,6 @@ public class Profile extends AppCompatActivity {
     private Uri imageUri;
     private static final int PICK_IMAGE_REQUEST = 1;
     private StorageReference storageRef = FirebaseStorage.getInstance().getReference("uploads");
-    private DatabaseReference databaseRef = myRef.child("image");
     private StorageTask uploadTask;
 
     @Override
