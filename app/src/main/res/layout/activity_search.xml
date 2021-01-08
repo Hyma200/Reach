@@ -1,60 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <TextView
-        android:id="@+id/location"
-        android:layout_width="182dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="88dp"
-        android:gravity="center"
-        android:text="Search"
-        android:textSize="30sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="11dp"
-        android:ems="10"
-        android:gravity="center"
-        android:hint="Enter User"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/search_activity"
-        android:layout_width="42dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="84dp"
-        android:clickable="true"
-        app:layout_constraintStart_toEndOf="@+id/user"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/search_asset" />
-
-    <TextView
-        android:id="@+id/debug"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user" />
-
-    <include
-        layout="@layout/layout_bottom_navigation_toolbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+            <include layout="@layout/layout_view_pager_center" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="355dp"
+            android:layout_height="532dp"
+            android:layout_marginStart="34dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="34dp"
+            android:layout_marginBottom="34dp"
+            android:foregroundGravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.489"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="0dp"
+                android:gravity="center"
+                android:text="Search"
+                android:textColor="@color/dark_purple"
+                android:textSize="30sp" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableRow>
+
+                    <EditText
+                        android:id="@+id/query"
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:ems="10"
+                        android:hint="Enter User"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/dark_purple" />
+
+                    <ImageView
+                        android:id="@+id/search_activity"
+                        android:layout_width="42dp"
+                        android:layout_height="42dp"
+                        android:clickable="true"
+                        app:srcCompat="@drawable/search_asset" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/debug"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="35dp"
+                        android:text="TextView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/user" />
+                </TableRow>
+            </TableLayout>
+
+
+        </LinearLayout>
+
+        <include layout="@layout/layout_bottom_navigation_toolbar" />
+
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
