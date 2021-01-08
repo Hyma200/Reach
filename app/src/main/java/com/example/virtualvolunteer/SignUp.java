@@ -52,8 +52,8 @@ public class SignUp extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "createUserWithEmail:success");
-                                        myRef.child(storeEmail).child("email").setValue(fEmail);
-                                        myRef.child(storeEmail).child("name").setValue(fName);
+                                        User user = new User (fName, fEmail, null, "", 0);
+                                        myRef.child(storeEmail).setValue(user);
                                         Toast toast = Toast.makeText(SignUp.this, "Account Created Successfully",
                                                 Toast.LENGTH_SHORT);
                                         toast.setGravity(Gravity.CENTER, 0, 0);

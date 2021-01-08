@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.renderscript.Sampler;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -45,11 +46,7 @@ public class Profile extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     DatabaseReference myRef = database.getReference("Users").child(user.getEmail().replace('.', '_'));
-    DatabaseReference nameRef = myRef.child("name");
-    DatabaseReference locationRef = myRef.child("location");
-    DatabaseReference hoursRef = myRef.child("hours");
-    DatabaseReference ageRef = myRef.child("age");
-    DatabaseReference imageRef = myRef.child("image");
+    private User profileUser;
     private TextView nameOutput;
     private TextView locationOutput;
     private TextView hoursOutput;
@@ -83,88 +80,21 @@ public class Profile extends AppCompatActivity {
         image = (ImageView) findViewById(R.id.image);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
-        imageRef.addValueEventListener(new ValueEventListener() {
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    Upload upload = snapshot.getValue(Upload.class);
-                    Picasso.with(Profile.this)
-                            .load(upload.getImageUrl())
-                            .fit()
-                            .centerCrop().into(image);
-                }
-
+                profileUser = snapshot.getValue(User.class);
+                nameOutput.setText(profileUser.getName());
+                hoursOutput.setText(String.valueOf(profileUser.getHours()));
+                locationOutput.setText(profileUser.getLocation());
+                Upload upload = profileUser.getUpload();
+                if (upload != null)
+                    Picasso.with(Profile.this).load(upload.getImageUrl()).fit().centerCrop().into(image);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(Profile.this, error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
 
-        //Sets value of name on profile page
-        nameRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot){
-                String value = snapshot.getValue(String.class);
-                nameOutput.setText(value);
-                if (value == null)
-                    nameOutput.setText("Add Your Name to Your Profile");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                nameOutput.setText("ERROR: " + error.toException());
-            }
-        });
-
-        //Sets location on profile page
-        locationRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot){
-                String value = snapshot.getValue(String.class);
-                locationOutput.setText(value);
-                if (value == null)
-                    locationOutput.setText("Add Your Location");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                locationOutput.setText("ERROR: " + error.toException());
-            }
-        });
-
-        //Sets hours on profile page
-        hoursRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot){
-                Long value = snapshot.getValue(Long.class);
-                if (value == null)
-                    hoursOutput.setText("0 Hours");
-                else
-                    hoursOutput.setText(value.toString() + " Hours");
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                hoursOutput.setText("ERROR: " + error.toException());
-            }
-        });
-
-        //Sets age on profile page
-        ageRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot){
-                String value = snapshot.getValue(String.class);
-                //ageOutput.setText(value);
-             //   if (value == null)
-              //      ageOutput.setText("Please enter your date of birth");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-               // ageOutput.setText("ERROR: " + error.toException());
             }
         });
 
@@ -214,7 +144,8 @@ public class Profile extends AppCompatActivity {
                             @Override
                             public void onSuccess(Uri uri) {
                                 Upload upload = new Upload(fileName.getText().toString().trim(), uri.toString());
-                                databaseRef.setValue(upload);
+                                profileUser.setUpload(upload);
+                                myRef.setValue(profileUser);
                             }
                         });
                     }
