@@ -37,7 +37,6 @@
             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
             <TextView
-                android:id="@+id/location"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginTop="0dp"
@@ -63,42 +62,52 @@
                 android:textColorHint="#FFFFFF"
                 android:textColorLink="@color/teal" />
 
-            <Button
-                android:id="@+id/image_picker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="270px"
-                android:layout_marginTop="24dp"
-                android:text="Choose file" />
-
-            <ProgressBar
-                android:id="@+id/progress_bar"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/button_upload"
-                android:layout_alignParentStart="true"
-                android:layout_marginBottom="16dp" />
+                android:layout_height="match_parent">
 
-            <Button
-                android:id="@+id/button_upload"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="300px"
-                android:text="Upload" />
+                <TableRow>
 
-            <Button
-                android:id="@+id/new_post_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="#FFFFFF"
-                android:backgroundTint="#FFFFFF"
-                android:text="Post"
-                android:textColor="@color/dark_purple" />
+                    <Button
+                        android:id="@+id/post_image_picker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:text="choose image" />
 
+                    <Button
+                        android:id="@+id/post_button_upload"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:text="Upload" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <ImageView
+                        android:id="@+id/post_image"
+                        android:layout_width="0dp"
+                        android:layout_height="128dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        app:srcCompat="@drawable/profile_pic_logo" />
+                </TableRow>
+
+                <TableRow>
+
+                    <Button
+                        android:id="@+id/new_post_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#FFFFFF"
+                        android:text="Post"
+                        android:textColor="@color/dark_purple" />
+                </TableRow>
+            </TableLayout>
 
         </LinearLayout>
 
