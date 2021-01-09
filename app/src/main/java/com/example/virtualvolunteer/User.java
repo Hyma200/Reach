@@ -1,11 +1,11 @@
 package com.example.virtualvolunteer;
 
 public class User {
-    private String name;
-    private String email;
-    private Upload upload;
-    private String location;
-    private int hours;
+    public String name;
+    public String email;
+    public Upload upload;
+    public String location;
+    public int hours;
 
     public User (){}
     public User (String name, String email, Upload upload, String location, int hours){
@@ -33,7 +33,10 @@ public class User {
         return hours;
     }
 
-    public void setUpload(Upload upload){
-        this.upload = upload;
-    }
+    public void setName(String name){this.name = name;}
+    public void setEmail(String email){this.email = email;}
+    public void setUpload(Upload upload){this.upload = upload;}
+    public void setHours(int hours){this.hours = hours;}
+    public void setLocation(String location){this.location = location;}
+
 }

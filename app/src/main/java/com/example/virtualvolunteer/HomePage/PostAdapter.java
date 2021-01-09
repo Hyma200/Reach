@@ -10,23 +10,33 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.virtualvolunteer.Login;
+import com.example.virtualvolunteer.ProfilePage.Profile;
 import com.example.virtualvolunteer.R;
+import com.example.virtualvolunteer.Upload;
+import com.example.virtualvolunteer.User;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 
 import java.util.ArrayList;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
-
+    DatabaseReference usersRef;
     private ArrayList<Post> posts;
     private Context home;
 
     public PostAdapter(ArrayList<Post> items, Context home) {
         this.posts = items;
         this.home = home;
+        usersRef  = FirebaseDatabase.getInstance().getReference("Users");
     }
 
     /**
@@ -62,10 +72,28 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         }
 
         public void bind(Post post) {
-            post_username.setText(post.getEmail());
-            post_description.setText(post.getDescription());
-            Picasso.with(home).load(post.getImageURL()).resize(200, 200).centerCrop().into(post_image);
-            post_relative_time.setText(DateUtils.getRelativeTimeSpanString(post.getCreationTime()));
+            String newEmail = post.getEmail().replace('.', '_');
+            usersRef = usersRef.child(newEmail);
+            usersRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()){
+                        User user = snapshot.getValue(User.class);
+                        post_username.setText(user.getName());
+                        usersRef.removeEventListener(this);
+                    }
+                    post_description.setText(post.getDescription());
+                    Picasso.with(home).load(post.getImageURL()).resize(200, 200).centerCrop().into(post_image);
+                    post_relative_time.setText(DateUtils.getRelativeTimeSpanString(post.getCreationTime()));
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
         }
     }
 
@@ -86,6 +114,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+        usersRef  = FirebaseDatabase.getInstance().getReference("Users");
         viewHolder.bind(posts.get(position));
     }
 
