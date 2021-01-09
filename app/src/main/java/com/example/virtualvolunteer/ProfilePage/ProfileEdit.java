@@ -85,6 +85,12 @@ public class ProfileEdit extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
                     user = snapshot.getValue(User.class);
+                    Upload upload = user.getUpload();
+                    if (upload != null)
+                        Picasso.with(ProfileEdit.this).load(upload.getImageUrl()).resize(200, 200).centerCrop().into(image);
+                    name.setText(user.getName());
+                    location.setText(user.getLocation());
+
                 }
             }
             @Override
@@ -132,12 +138,8 @@ public class ProfileEdit extends AppCompatActivity {
                         result.addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                // TODO: store profile data changes to firebase
                                 user.setUpload(new Upload("new name", uri.toString()));
                                 usersRef.setValue(user);
-                            /*Post post = new Post(user.getEmail(), description, uri.toString(), System.currentTimeMillis());
-                            String key = postRef.push().getKey();
-                            postRef.child(key).setValue(post);*/
                             }
                         });
                     }

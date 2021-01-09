@@ -1,6 +1,8 @@
 package com.example.virtualvolunteer.ProfilePage;
 
 import android.content.Intent;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -65,6 +67,7 @@ public class Profile extends AppCompatActivity {
         editBtn = (Button) findViewById(R.id.profile_edit_button);
 
         email.setText(user.getEmail());
+        email.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override

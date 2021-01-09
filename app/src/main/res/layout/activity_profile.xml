@@ -57,7 +57,8 @@
                     android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:text="Email"
-                    android:textColor="@color/white"
+                    android:autoLink="web|email"
+                    android:textColor="@color/dark_purple"
                     android:textSize="18sp" />
 
 
