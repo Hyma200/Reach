@@ -18,10 +18,10 @@
         android:layout_marginBottom="8dp"
         android:foregroundGravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/textView8"
