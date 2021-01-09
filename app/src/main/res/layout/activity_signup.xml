@@ -7,24 +7,38 @@
     android:background="@drawable/gradient"
     android:padding="8dp"
     tools:ignore="HardcodedText">
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="68dp"
-        android:layout_marginBottom="27dp"
-        android:fontFamily="sans-serif-condensed"
-        android:foregroundGravity="center"
-        android:gravity="center"
-        android:text="@string/create_account"
-        android:textAllCaps="true"
-        android:textColor="#FFFFFF"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
+
+    <LinearLayout
+        android:layout_width="346dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:foregroundGravity="center"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:fontFamily="sans-serif-condensed"
+            android:foregroundGravity="center"
+            android:gravity="center"
+            android:text="@string/create_account"
+            android:textAllCaps="true"
+            android:textColor="#FFFFFF"
+            android:textSize="38sp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -39,8 +53,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8">
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:id="@+id/imageView"
@@ -103,7 +116,7 @@
             android:id="@+id/sign_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="20dp"
             android:background="#FFFFFF"
             android:backgroundTint="#FFFFFF"
             android:text="@string/sign_up"

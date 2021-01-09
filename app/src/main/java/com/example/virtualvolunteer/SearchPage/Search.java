@@ -38,7 +38,7 @@ public class Search extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        name = (EditText) findViewById(R.id.user);
+        name = (EditText) findViewById(R.id.query);
         image = (ImageView) findViewById(R.id.search_activity);
         debug = (TextView) findViewById(R.id.debug);
 

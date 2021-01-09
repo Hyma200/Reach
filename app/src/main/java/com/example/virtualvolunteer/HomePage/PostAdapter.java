@@ -2,14 +2,17 @@ package com.example.virtualvolunteer.HomePage;
 
 import android.content.Context;
 import android.text.format.DateUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.virtualvolunteer.Login;
 import com.example.virtualvolunteer.R;
 import com.squareup.picasso.Picasso;
 
@@ -37,6 +40,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         private TextView post_description;
         private ImageView post_image;
         private TextView post_relative_time;
+        private ImageView post_saved;
         private Context context;
 
         public ViewHolder(View itemView) {
@@ -46,6 +50,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             post_description = itemView.findViewById(R.id.post_description);
             post_image = itemView.findViewById(R.id.post_image);
             post_relative_time = itemView.findViewById(R.id.post_relative_time);
+            post_saved = itemView.findViewById(R.id.post_save_button);
+
+            post_saved.setOnClickListener(v -> {
+                Toast toast = Toast.makeText(home, "Post saved",
+                        Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                savePost();
+            });
         }
 
         public void bind(Post post) {
@@ -54,6 +67,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             Picasso.with(home).load(post.getImageURL()).resize(200, 200).centerCrop().into(post_image);
             post_relative_time.setText(DateUtils.getRelativeTimeSpanString(post.getCreationTime()));
         }
+    }
+
+    private void savePost() {
+        // TODO:  save post to firebase (use time as unique identifier)
     }
 
     @Override

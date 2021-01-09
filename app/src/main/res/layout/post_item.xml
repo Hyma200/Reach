@@ -15,21 +15,44 @@
         android:layout_margin="8dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/post_username"
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/dark_purple"
-            android:textSize="18sp"
-            tools:text="andi" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/post_relative_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/dark_purple"
-            android:textSize="18sp"
-            tools:text="15 minutes ago" />
+            <TableRow>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/post_username"
+                        android:layout_width="336dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_purple"
+                        android:textSize="18sp"
+                        tools:text="andi" />
+
+                    <TextView
+                        android:id="@+id/post_relative_time"
+                        android:layout_width="336dp"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dark_purple"
+                        android:textSize="18sp"
+                        tools:text="15 minutes ago" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/post_save_button"
+                    android:layout_width="36dp"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:foregroundTint="@color/dark_purple"
+                    app:srcCompat="@drawable/ic_post_save" />
+            </TableRow>
+        </TableLayout>
+
 
         <ImageView
             android:id="@+id/post_image"
