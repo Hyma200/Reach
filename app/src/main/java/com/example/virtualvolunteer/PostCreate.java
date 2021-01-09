@@ -64,6 +64,12 @@ public class PostCreate extends AppCompatActivity {
                 toast.show();
                 return;
             }
+            if (imageUri == null) {
+                Toast toast = Toast.makeText(PostCreate.this, "No photo selected",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
             storePost(description.getText().toString());
             Toast toast = Toast.makeText(PostCreate.this, "Successfully made new post",
                     Toast.LENGTH_SHORT);
