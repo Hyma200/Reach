@@ -1,4 +1,4 @@
-package com.example.virtualvolunteer;
+package com.example.virtualvolunteer.LoggingPage;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.virtualvolunteer.Navigation;
+import com.example.virtualvolunteer.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Log extends AppCompatActivity {

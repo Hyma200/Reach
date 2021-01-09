@@ -1,4 +1,4 @@
-package com.example.virtualvolunteer;
+package com.example.virtualvolunteer.HomePage;
 
 public class Post {
     // POJO for post data

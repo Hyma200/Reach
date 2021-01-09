@@ -1,4 +1,4 @@
-package com.example.virtualvolunteer;
+package com.example.virtualvolunteer.ProfilePage;
 
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -18,12 +18,13 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.virtualvolunteer.Navigation;
+import com.example.virtualvolunteer.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.storage.FirebaseStorage;
@@ -37,6 +38,8 @@ public class ProfileEdit extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     private EditText name;
     private EditText location;
+    private EditText bio;
+    private EditText skills;
     private Button imagePicker;
     private ImageView image;
     private ProgressBar progressBar;
@@ -60,6 +63,8 @@ public class ProfileEdit extends AppCompatActivity {
 
         name = findViewById(R.id.profileName);
         location = findViewById(R.id.location);
+        bio = findViewById(R.id.bio);
+        skills = findViewById(R.id.skills);
         imagePicker = findViewById(R.id.image_picker);
         image = findViewById(R.id.image);
         progressBar = findViewById(R.id.progress_bar);
@@ -71,7 +76,7 @@ public class ProfileEdit extends AppCompatActivity {
 
         saveBtn.setOnClickListener(v -> {
             // TODO: implement storeChanges and uncomment below
-            // storeChanges(name.getText().toString(), location.getText().toString());
+            // storeChanges(name.getText().toString(), location.getText().toString(), bio.getText().toString(), skills.getText().toString());
             Toast toast = Toast.makeText(ProfileEdit.this, "Successfully edited profile",
                     Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
@@ -88,7 +93,7 @@ public class ProfileEdit extends AppCompatActivity {
         }
     }
 
-    public void storeChanges(String name, String location) {
+    public void storeChanges(String name, String location, String bio, String skills) {
         StorageReference photoRef = storageRef.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
         uploadTask = photoRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override

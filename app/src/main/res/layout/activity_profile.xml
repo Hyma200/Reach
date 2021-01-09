@@ -37,6 +37,7 @@
                     android:id="@+id/profile_image"
                     android:layout_width="match_parent"
                     android:layout_height="132dp"
+                    android:layout_marginTop="36dp"
                     app:srcCompat="@drawable/ic_profile" />
 
                 <TextView
@@ -71,12 +72,43 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/profile_hours"
+                    android:id="@+id/profile_bio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
+                    android:text="Bio"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
+
+
+                <TextView
+                    android:id="@+id/profile_skills"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="Skills"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/profile_hours"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="48dp"
+                    android:gravity="center"
                     android:text="Hours Volunteered"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/profile_orgs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="Organizations"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />
 
@@ -84,7 +116,7 @@
                     android:id="@+id/profile_edit_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="48dp"
+                    android:layout_marginTop="84dp"
                     android:background="@color/white"
                     android:backgroundTint="@color/white"
                     android:text="Edit Profile"

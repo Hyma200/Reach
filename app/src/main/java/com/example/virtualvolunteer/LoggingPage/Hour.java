@@ -1,4 +1,4 @@
-package com.example.virtualvolunteer;
+package com.example.virtualvolunteer.LoggingPage;
 
 public class Hour {
     private String org;

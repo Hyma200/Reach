@@ -6,6 +6,11 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 
+import com.example.virtualvolunteer.HomePage.Home;
+import com.example.virtualvolunteer.LoggingPage.Log;
+import com.example.virtualvolunteer.ProfilePage.Profile;
+import com.example.virtualvolunteer.SavedPage.Saved;
+import com.example.virtualvolunteer.SearchPage.Search;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Navigation {

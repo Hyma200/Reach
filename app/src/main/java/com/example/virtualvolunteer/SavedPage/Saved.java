@@ -1,4 +1,4 @@
-package com.example.virtualvolunteer;
+package com.example.virtualvolunteer.SavedPage;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -6,6 +6,8 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.virtualvolunteer.Navigation;
+import com.example.virtualvolunteer.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Saved extends AppCompatActivity {

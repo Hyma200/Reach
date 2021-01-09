@@ -1,4 +1,4 @@
-package com.example.virtualvolunteer;
+package com.example.virtualvolunteer.ProfilePage;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.virtualvolunteer.Navigation;
+import com.example.virtualvolunteer.R;
+import com.example.virtualvolunteer.Upload;
+import com.example.virtualvolunteer.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,9 +34,12 @@ public class Profile extends AppCompatActivity {
 
     private User profileUser;
     private TextView name;
-    private TextView location;
-    private TextView hours;
     private TextView email;
+    private TextView location;
+    private TextView bio;
+    private TextView skills;
+    private TextView hours;
+    private TextView orgs;
     private ImageView image;
     private Button editBtn;
 
@@ -49,18 +56,23 @@ public class Profile extends AppCompatActivity {
 
         name = (TextView) findViewById(R.id.profile_name);
         email = (TextView) findViewById(R.id.profile_email);
-        hours = (TextView) findViewById(R.id.profile_hours);
         location = (TextView) findViewById(R.id.profile_location);
+        bio = (TextView) findViewById(R.id.profile_bio);
+        skills = (TextView) findViewById(R.id.profile_skills);
+        hours = (TextView) findViewById(R.id.profile_hours);
+        orgs = (TextView) findViewById(R.id.profile_orgs);
         image = (ImageView) findViewById(R.id.profile_image);
         editBtn = (Button) findViewById(R.id.profile_edit_button);
 
         email.setText(user.getEmail());
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 profileUser = snapshot.getValue(User.class);
                 name.setText(profileUser.getName());
-                hours.setText(profileUser.getHours() + " Hours");
+                String h = (profileUser.getHours() != 1) ? " Hours" : " Hour";
+                hours.setText(profileUser.getHours() + h);
                 location.setText(profileUser.getLocation());
                 Upload upload = profileUser.getUpload();
                 if (upload != null)

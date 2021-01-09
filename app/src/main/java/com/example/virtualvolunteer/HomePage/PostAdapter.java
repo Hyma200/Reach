@@ -1,4 +1,4 @@
-package com.example.virtualvolunteer;
+package com.example.virtualvolunteer.HomePage;
 
 import android.content.Context;
 import android.text.format.DateUtils;
@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.util.Log;
+
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.virtualvolunteer.R;
 import com.squareup.picasso.Picasso;
 
 
