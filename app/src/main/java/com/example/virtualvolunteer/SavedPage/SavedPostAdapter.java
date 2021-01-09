@@ -1,7 +1,6 @@
-package com.example.virtualvolunteer.HomePage;
+package com.example.virtualvolunteer.SavedPage;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.text.format.DateUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,10 +13,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.virtualvolunteer.Login;
-import com.example.virtualvolunteer.ProfilePage.Profile;
+import com.example.virtualvolunteer.HomePage.Post;
 import com.example.virtualvolunteer.R;
-import com.example.virtualvolunteer.Upload;
 import com.example.virtualvolunteer.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,15 +23,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
-
 import java.util.ArrayList;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
+public class SavedPostAdapter extends RecyclerView.Adapter<SavedPostAdapter.ViewHolder> {
     DatabaseReference usersRef;
     private ArrayList<Post> posts;
     private Context home;
 
-    public PostAdapter(ArrayList<Post> items, Context home) {
+    public SavedPostAdapter(ArrayList<Post> items, Context home) {
         this.posts = items;
         this.home = home;
         usersRef  = FirebaseDatabase.getInstance().getReference("Users");
@@ -50,9 +46,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         private TextView post_username;
         private TextView post_description;
         private ImageView post_image;
-        private ImageView post_profile_image;
         private TextView post_relative_time;
-        private ImageView post_saved;
         private Context context;
 
         public ViewHolder(View itemView) {
@@ -61,20 +55,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             post_username = itemView.findViewById(R.id.post_username);
             post_description = itemView.findViewById(R.id.post_description);
             post_image = itemView.findViewById(R.id.post_image);
-            post_profile_image = itemView.findViewById(R.id.post_profile_image);
             post_relative_time = itemView.findViewById(R.id.post_relative_time);
-            post_saved = itemView.findViewById(R.id.post_save_button);
-
-
-            post_username.setTypeface(null, Typeface.BOLD);
-
-            post_saved.setOnClickListener(v -> {
-                Toast toast = Toast.makeText(home, "Post saved",
-                        Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
-                savePost();
-            });
         }
 
         public void bind(Post post) {
@@ -86,9 +67,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     if (snapshot.exists()){
                         User user = snapshot.getValue(User.class);
                         post_username.setText(user.getName());
-                        Upload upload = user.getUpload();
-                        if (upload != null)
-                            Picasso.with(home).load(upload.getImageUrl()).resize(200, 200).centerCrop().into(post_profile_image);
                         usersRef.removeEventListener(this);
                     }
                     post_description.setText(post.getDescription());
@@ -104,13 +82,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             });
 
         }
-    }
-
-    private void savePost() {
-        // TODO:  save post to firebase (use time as unique identifier)
-        // each user will have a list of postID's (use post time) of posts that were saved "savedPosts"
-        // this method will grab the postID and append it to the user's savedPosts
-        // then in Saved.java the posts sent to the SavedPostAdapter will be grabbed from the user's savedPosts
     }
 
     @Override
