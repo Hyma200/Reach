@@ -87,8 +87,9 @@
 
             <Button
                 android:id="@+id/verify_hours"
-                android:layout_width="match_parent"
+                android:layout_width="222dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="12dp"
                 android:background="#FFFFFF"
                 android:backgroundTint="#FFFFFF"

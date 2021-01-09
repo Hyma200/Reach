@@ -10,8 +10,10 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.virtualvolunteer.Navigation;
@@ -41,9 +43,14 @@ public class Profile extends AppCompatActivity {
     private TextView bio;
     private TextView skills;
     private TextView hours;
-    private TextView orgs;
+    private ListView orgs;
+    private TextView orgTitle;
     private ImageView image;
     private Button editBtn;
+    private ArrayAdapter<String> adapter;
+
+    String[] data = {"SPCA NOVA", "SPCA Bethesda", "SPCA Richmond", "SPCA Virginia Beach", "Food Pantry", "CrisisLink", "Food Donors"};
+    //temporary data array
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,12 +69,18 @@ public class Profile extends AppCompatActivity {
         bio = (TextView) findViewById(R.id.profile_bio);
         skills = (TextView) findViewById(R.id.profile_skills);
         hours = (TextView) findViewById(R.id.profile_hours);
-        orgs = (TextView) findViewById(R.id.profile_orgs);
+        orgTitle = findViewById(R.id.profile_org_title);
+        orgs = (ListView) findViewById(R.id.profile_orgs);
         image = (ImageView) findViewById(R.id.profile_image);
         editBtn = (Button) findViewById(R.id.profile_edit_button);
 
+        adapter = new ArrayAdapter<String>(this, R.layout.profile_org_item, R.id.profile_org_item, data);
+        orgs.setAdapter(adapter);
+
         email.setText(user.getEmail());
         email.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+        name.setTypeface(null, Typeface.BOLD);
+        orgTitle.setTypeface(null, Typeface.BOLD);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -75,7 +88,7 @@ public class Profile extends AppCompatActivity {
                 profileUser = snapshot.getValue(User.class);
                 name.setText(profileUser.getName());
                 String h = (profileUser.getHours() != 1) ? " Hours" : " Hour";
-                hours.setText(profileUser.getHours() + h);
+                hours.setText(profileUser.getHours() + h + " Volunteered");
                 location.setText(profileUser.getLocation());
                 Upload upload = profileUser.getUpload();
                 if (upload != null)

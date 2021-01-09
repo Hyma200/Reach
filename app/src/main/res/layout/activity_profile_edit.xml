@@ -43,19 +43,14 @@
 
                 <Button
                     android:id="@+id/image_picker"
-                    android:layout_width="match_parent"
+                    android:layout_width="222dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_gravity="center"
                     android:background="@color/white"
                     android:backgroundTint="@color/white"
                     android:text="Change photo"
                     android:textColor="@color/dark_purple" />
-
-                <ProgressBar
-                    android:id="@+id/progress_bar"
-                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp" />
 
                 <EditText
                     android:id="@+id/profileName"
@@ -125,8 +120,9 @@
 
                 <Button
                     android:id="@+id/profile_edit_save"
-                    android:layout_width="match_parent"
+                    android:layout_width="222dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginTop="48dp"
                     android:background="@color/white"
                     android:backgroundTint="@color/white"

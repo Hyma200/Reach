@@ -40,7 +40,7 @@
                 android:id="@+id/location"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginTop="114dp"
                 android:gravity="center"
                 android:text="Log Volunteer Hours"
                 android:textColor="@color/white"
@@ -48,9 +48,10 @@
 
             <Button
                 android:id="@+id/submit_option"
-                android:layout_width="match_parent"
+                android:layout_width="222dp"
+                android:layout_gravity="center"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="148dp"
+                android:layout_marginTop="48dp"
                 android:background="#FFFFFF"
                 android:backgroundTint="#FFFFFF"
                 android:text="Submit"
@@ -58,7 +59,8 @@
 
             <Button
                 android:id="@+id/verify_option"
-                android:layout_width="match_parent"
+                android:layout_width="222dp"
+                android:layout_gravity="center"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:background="#FFFFFF"
