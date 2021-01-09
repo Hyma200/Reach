@@ -1,6 +1,7 @@
 package com.example.virtualvolunteer.HomePage;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.text.format.DateUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -49,6 +50,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         private TextView post_username;
         private TextView post_description;
         private ImageView post_image;
+        private ImageView post_profile_image;
         private TextView post_relative_time;
         private ImageView post_saved;
         private Context context;
@@ -59,8 +61,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             post_username = itemView.findViewById(R.id.post_username);
             post_description = itemView.findViewById(R.id.post_description);
             post_image = itemView.findViewById(R.id.post_image);
+            post_profile_image = itemView.findViewById(R.id.post_profile_image);
             post_relative_time = itemView.findViewById(R.id.post_relative_time);
             post_saved = itemView.findViewById(R.id.post_save_button);
+
+
+            post_username.setTypeface(null, Typeface.BOLD);
 
             post_saved.setOnClickListener(v -> {
                 Toast toast = Toast.makeText(home, "Post saved",
@@ -80,6 +86,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     if (snapshot.exists()){
                         User user = snapshot.getValue(User.class);
                         post_username.setText(user.getName());
+                        Upload upload = user.getUpload();
+                        if (upload != null)
+                            Picasso.with(home).load(upload.getImageUrl()).resize(200, 200).centerCrop().into(post_profile_image);
                         usersRef.removeEventListener(this);
                     }
                     post_description.setText(post.getDescription());
