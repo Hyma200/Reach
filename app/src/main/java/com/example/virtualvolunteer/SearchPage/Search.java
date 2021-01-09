@@ -1,12 +1,14 @@
 package com.example.virtualvolunteer.SearchPage;
 
-import android.media.Image;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,15 +23,17 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import org.w3c.dom.Text;
 
 public class Search extends AppCompatActivity {
 
-    private EditText name;
-    private ImageView image;
+    private EditText query;
+    private ListView results;
+    private ImageView searchBtn;
     private TextView debug;
+    private ArrayAdapter<String> adapter;
+
+    String[] data = {"SPCA NOVA", "SPCA Bethesda", "SPCA Richmond", "SPCA Virginia Beach", "Food Pantry", "CrisisLink", "Food Donors"};
+    //temporary data array
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference users = database.getReference("Users");
@@ -38,8 +42,12 @@ public class Search extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        name = (EditText) findViewById(R.id.query);
-        image = (ImageView) findViewById(R.id.search_activity);
+        query = (EditText) findViewById(R.id.query);
+        results = findViewById(R.id.search_list);
+        adapter = new ArrayAdapter<String>(this, R.layout.search_item, R.id.search_name, data);
+        results.setAdapter(adapter);
+
+        searchBtn = (ImageView) findViewById(R.id.search_activity);
         debug = (TextView) findViewById(R.id.debug);
 
         BottomNavigationView navView = findViewById(R.id.Bottom_navigation_icon);
@@ -49,7 +57,25 @@ public class Search extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(1);
         menuItem.setChecked(true);
 
-        image.setOnClickListener(v -> users.orderByChild("name").equalTo(name.getText().toString()).addChildEventListener(new ChildEventListener() {
+        query.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Search.this.adapter.getFilter().filter(s);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
+        searchBtn.setOnClickListener(v -> users.orderByChild("name").equalTo(query.getText().toString()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 debug.append(snapshot.toString());

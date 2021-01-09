@@ -22,7 +22,7 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="355dp"
-            android:layout_height="532dp"
+            android:layout_height="628dp"
             android:layout_marginStart="34dp"
             android:layout_marginTop="34dp"
             android:layout_marginEnd="34dp"
@@ -60,6 +60,15 @@
                         app:srcCompat="@drawable/search_asset" />
                 </TableRow>
             </TableLayout>
+
+
+            <ListView
+                android:id="@+id/search_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="12dp">
+
+            </ListView>
 
             <TextView
                 android:id="@+id/debug"
