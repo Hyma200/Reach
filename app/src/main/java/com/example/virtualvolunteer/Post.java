@@ -4,13 +4,13 @@ public class Post {
     // POJO for post data
 
     private static final long serialVersionUID = -3760445487636086034L;
-    private String email;
+    private String email = "";
     private String description;
     private String imageURL;
     private Long creationTime;
 
     public Post() {
-        this.email = null;
+        this.email = "";
         this.description = "";
         this.imageURL = "";
         this.creationTime = 0L;
@@ -39,7 +39,7 @@ public class Post {
         return this.creationTime;
     }
 
-    public void setEmail(String user) {
+    public void setEmail(String email) {
         this.email = email;
     }
 

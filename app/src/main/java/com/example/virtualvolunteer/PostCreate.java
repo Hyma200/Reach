@@ -92,7 +92,7 @@ public class PostCreate extends AppCompatActivity {
                     result.addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            Post post = new Post(user.getDisplayName(), description, uri.toString(), System.currentTimeMillis());
+                            Post post = new Post(user.getEmail(), description, uri.toString(), System.currentTimeMillis());
                             String key = postRef.push().getKey();
                             postRef.child(key).setValue(post);
                         }

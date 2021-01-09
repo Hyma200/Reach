@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:layout_margin="10dp"
+    android:clipToPadding="false"
+    android:padding="20dp">
 
     <LinearLayout
         android:id="@+id/title"
@@ -19,7 +21,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/dark_purple"
             android:textSize="18sp"
-            tools:text="andi"/>
+            tools:text="andi" />
 
         <TextView
             android:id="@+id/post_relative_time"
@@ -27,7 +29,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/dark_purple"
             android:textSize="18sp"
-            tools:text="15 minutes ago"/>
+            tools:text="15 minutes ago" />
 
         <ImageView
             android:id="@+id/post_image"
@@ -35,16 +37,16 @@
             android:layout_height="300dp"
             android:layout_marginTop="4dp"
             android:scaleType="centerCrop"
-            tools:srcCompat="@tools:sample/cities"/>
+            tools:srcCompat="@tools:sample/cities" />
 
         <TextView
             android:id="@+id/post_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/dark_purple"
             android:layout_marginTop="8dp"
+            android:textColor="@color/dark_purple"
             android:textSize="18sp"
-            tools:text="what's good"/>
+            tools:text="what's good" />
 
 
     </LinearLayout>

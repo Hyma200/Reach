@@ -1,35 +1,41 @@
 package com.example.virtualvolunteer;
 
+import android.content.Context;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import android.util.Log;
 import androidx.recyclerview.widget.RecyclerView;
+import com.squareup.picasso.Picasso;
+
 
 import java.util.ArrayList;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     private ArrayList<Post> posts;
+    private Context home;
 
-    public PostAdapter(ArrayList<Post> items, Home home) {
+    public PostAdapter(ArrayList<Post> items, Context home) {
         this.posts = items;
+        this.home = home;
     }
 
     /**
      * Provide a reference to the type of views that you are using
      * (custom ViewHolder).
      */
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private View itemView;
         private TextView post_username;
         private TextView post_description;
         private ImageView post_image;
         private TextView post_relative_time;
+        private Context context;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -41,9 +47,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         }
 
         public void bind(Post post) {
-            post_username.setText(post.getUser());
+            post_username.setText(post.getEmail());
             post_description.setText(post.getDescription());
-            // kotlin... Glide.with(context).load(post.imageUrl).into(itemView.ivPost)
+            Picasso.with(home).load(post.getImageURL()).resize(200, 200).centerCrop().into(post_image);
             post_relative_time.setText(DateUtils.getRelativeTimeSpanString(post.getCreationTime()));
         }
     }
