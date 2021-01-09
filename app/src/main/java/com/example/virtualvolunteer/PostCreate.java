@@ -33,7 +33,6 @@ public class PostCreate extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    DatabaseReference myRef = database.getReference("Users").child(user.getEmail().replace('.', '_'));
     DatabaseReference postRef = database.getReference("Posts");
     private EditText description;
     private Button postBtn;
@@ -111,8 +110,6 @@ public class PostCreate extends AppCompatActivity {
                 Toast.makeText(PostCreate.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
 
     }
 

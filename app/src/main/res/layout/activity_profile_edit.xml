@@ -33,62 +33,73 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView8">
 
+
                 <ImageView
-                    android:id="@+id/profile_image"
+                    android:id="@+id/image"
                     android:layout_width="match_parent"
                     android:layout_height="132dp"
                     app:srcCompat="@drawable/ic_profile" />
 
-                <TextView
-                    android:id="@+id/profile_name"
+                <Button
+                    android:id="@+id/image_picker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:gravity="center"
-                    android:text="Name"
-                    android:textColor="@color/white"
-                    android:textSize="30sp" />
+                    android:background="@color/white"
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/dark_purple"
+                    android:text="Change photo"
+                    />
 
-                <TextView
-                    android:id="@+id/profile_email"
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:text="Email"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
+                    android:layout_marginBottom="16dp" />
 
-
-                <TextView
-                    android:id="@+id/profile_location"
+                <EditText
+                    android:id="@+id/profileName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:text="Location"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:autofillHints=""
+                    android:backgroundTint="#fff"
+                    android:ems="10"
+                    android:foregroundTint="#fff"
+                    android:hint="Name"
+                    android:inputType="text"
+                    android:textColor="@color/dark_purple"
+                    android:textColorHighlight="#D1BBEC"
+                    android:textColorHint="#FFFFFF"
+                    android:textColorLink="@color/teal" />
 
-                <TextView
-                    android:id="@+id/profile_hours"
+
+                <EditText
+                    android:id="@+id/location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:text="Hours Volunteered"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:autofillHints=""
+                    android:backgroundTint="#fff"
+                    android:ems="10"
+                    android:foregroundTint="#fff"
+                    android:hint="Location"
+                    android:inputType="text"
+                    android:textColor="@color/dark_purple"
+                    android:textColorHighlight="#D1BBEC"
+                    android:textColorHint="#FFFFFF"
+                    android:textColorLink="@color/teal"  />
+
 
                 <Button
-                    android:id="@+id/profile_edit_button"
+                    android:id="@+id/profile_edit_save"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="48dp"
                     android:background="@color/white"
                     android:backgroundTint="@color/white"
-                    android:text="Edit Profile"
-                    android:textColor="@color/dark_purple" />
+                    android:textColor="@color/dark_purple"
+                    android:text="Save changes" />
 
             </LinearLayout>
         </ScrollView>
