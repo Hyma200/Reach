@@ -50,48 +50,93 @@
                     android:textColor="@color/white"
                     android:textSize="30sp" />
 
-                <TextView
-                    android:id="@+id/profile_email"
+                <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:text="Email"
-                    android:autoLink="web|email"
-                    android:textColor="@color/dark_purple"
-                    android:textSize="18sp" />
+                    android:layout_height="match_parent">
 
+                    <TableRow
+                        android:layout_marginTop="8dp">
 
-                <TextView
-                    android:id="@+id/profile_location"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:text="Location"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                        <ImageView
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:clickable="true"
+                            app:srcCompat="@drawable/ic_email" />
 
-                <TextView
-                    android:id="@+id/profile_bio"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:text="Bio"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                        <TextView
+                            android:id="@+id/profile_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="8dp"
+                            android:autoLink="web|email"
+                            android:text="Email"
+                            android:textColor="@color/dark_purple"
+                            android:textSize="18sp" />
+                    </TableRow>
 
+                    <TableRow
+                        android:layout_marginTop="8dp">
 
-                <TextView
-                    android:id="@+id/profile_skills"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:text="Skills"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                        <ImageView
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:clickable="true"
+                            app:srcCompat="@drawable/ic_location" />
+
+                        <TextView
+                            android:id="@+id/profile_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="8dp"
+                            android:gravity="center"
+                            android:text="Location"
+                            android:textColor="#FFFFFF"
+                            android:textSize="18sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_marginTop="8dp">
+
+                        <ImageView
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:clickable="true"
+                            app:srcCompat="@drawable/ic_bio" />
+
+                        <TextView
+                            android:id="@+id/profile_bio"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="12dp"
+
+                            android:text="Bio"
+                            android:textColor="#FFFFFF"
+                            android:textSize="18sp" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_marginTop="8dp">
+
+                        <ImageView
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:clickable="true"
+                            app:srcCompat="@drawable/ic_skills" />
+
+                        <TextView
+                            android:id="@+id/profile_skills"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginStart="12dp"
+                            android:text="Skills"
+                            android:textColor="#FFFFFF"
+                            android:textSize="18sp" />
+                    </TableRow>
+                </TableLayout>
 
                 <TextView
                     android:id="@+id/profile_hours"

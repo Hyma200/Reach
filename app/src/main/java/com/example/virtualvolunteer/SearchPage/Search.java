@@ -29,7 +29,6 @@ public class Search extends AppCompatActivity {
     private EditText query;
     private ListView results;
     private ImageView searchBtn;
-    private TextView debug;
     private ArrayAdapter<String> adapter;
 
     String[] data = {"SPCA NOVA", "SPCA Bethesda", "SPCA Richmond", "SPCA Virginia Beach", "Food Pantry", "CrisisLink", "Food Donors"};
@@ -48,7 +47,6 @@ public class Search extends AppCompatActivity {
         results.setAdapter(adapter);
 
         searchBtn = (ImageView) findViewById(R.id.search_activity);
-        debug = (TextView) findViewById(R.id.debug);
 
         BottomNavigationView navView = findViewById(R.id.Bottom_navigation_icon);
         Navigation.enableNavigationClick(this, navView);
@@ -78,9 +76,9 @@ public class Search extends AppCompatActivity {
         searchBtn.setOnClickListener(v -> users.orderByChild("name").equalTo(query.getText().toString()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                debug.append(snapshot.toString());
+                /*debug.append(snapshot.toString());
                 debug.append(snapshot.child("email").getValue().toString());
-                debug.append(snapshot.child("name").getValue().toString());
+                debug.append(snapshot.child("name").getValue().toString());*/
             }
 
             @Override
@@ -99,7 +97,6 @@ public class Search extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                debug.append(error.toString());
             }
         }));
     }
