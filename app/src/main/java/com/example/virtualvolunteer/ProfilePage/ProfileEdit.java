@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.format.DateUtils;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,22 +21,29 @@ import android.widget.Toast;
 
 import com.example.virtualvolunteer.Navigation;
 import com.example.virtualvolunteer.R;
+import com.example.virtualvolunteer.Upload;
+import com.example.virtualvolunteer.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 
 public class ProfileEdit extends AppCompatActivity {
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+   DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("Users");
+    FirebaseUser userAuth = FirebaseAuth.getInstance().getCurrentUser();
     private EditText name;
     private EditText location;
     private EditText bio;
@@ -43,6 +51,7 @@ public class ProfileEdit extends AppCompatActivity {
     private Button imagePicker;
     private ImageView image;
     private ProgressBar progressBar;
+    private User user;
     private Button saveBtn;
     private Uri imageUri;
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -70,13 +79,32 @@ public class ProfileEdit extends AppCompatActivity {
         progressBar = findViewById(R.id.progress_bar);
         saveBtn = findViewById(R.id.profile_edit_save);
 
+        usersRef = usersRef.child(userAuth.getEmail().replace('.', '_'));
+        usersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    user = snapshot.getValue(User.class);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
         imagePicker.setOnClickListener(v -> {
             openFileChooser();
         });
 
         saveBtn.setOnClickListener(v -> {
             // TODO: implement storeChanges and uncomment below
-            // storeChanges(name.getText().toString(), location.getText().toString(), bio.getText().toString(), skills.getText().toString());
+            if (!name.getText().toString().equals(""))
+                user.setName(name.getText().toString());
+            if (!location.getText().toString().equals(""))
+                user.setLocation(location.getText().toString());
+            usersRef.setValue(user);
+            storeChanges();
+
             Toast toast = Toast.makeText(ProfileEdit.this, "Successfully edited profile",
                     Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
@@ -93,30 +121,34 @@ public class ProfileEdit extends AppCompatActivity {
         }
     }
 
-    public void storeChanges(String name, String location, String bio, String skills) {
-        StorageReference photoRef = storageRef.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
-        uploadTask = photoRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                if (taskSnapshot.getMetadata() != null) {
-                    Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
-                    result.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            // TODO: store profile data changes to firebase
+    public void storeChanges() {
+        if (imageUri != null){
+            StorageReference photoRef = storageRef.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
+            uploadTask = photoRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    if (taskSnapshot.getMetadata() != null) {
+                        Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
+                        result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                // TODO: store profile data changes to firebase
+                                user.setUpload(new Upload("new name", uri.toString()));
+                                usersRef.setValue(user);
                             /*Post post = new Post(user.getEmail(), description, uri.toString(), System.currentTimeMillis());
                             String key = postRef.push().getKey();
                             postRef.child(key).setValue(post);*/
-                        }
-                    });
+                            }
+                        });
+                    }
                 }
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(ProfileEdit.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(ProfileEdit.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     private String getFileExtension(Uri uri) {
