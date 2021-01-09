@@ -16,14 +16,12 @@
 
             <include layout="@layout/layout_view_pager_center" />
 
-            <TextView
-                android:id="@+id/location"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="132dp"
-                android:layout_marginTop="100dp"
-                android:text="Saved"
-                android:textSize="30sp" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/saved_rView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64dp"
+                android:layout_marginBottom="90dp" />
 
         </RelativeLayout>
 
