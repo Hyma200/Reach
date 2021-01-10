@@ -88,7 +88,8 @@ public class ProfileEdit extends AppCompatActivity {
                         Picasso.with(ProfileEdit.this).load(upload.getImageUrl()).resize(200, 200).centerCrop().into(image);
                     name.setText(user.getName());
                     location.setText(user.getLocation());
-
+                    bio.setText(user.getBio());
+                    skills.setText(user.getSkills());
                 }
             }
 
@@ -102,15 +103,14 @@ public class ProfileEdit extends AppCompatActivity {
         });
 
         saveBtn.setOnClickListener(v -> {
-            // TODO: implement storeChanges and uncomment below
             if (!name.getText().toString().equals(""))
                 user.setName(name.getText().toString());
             if (!location.getText().toString().equals(""))
                 user.setLocation(location.getText().toString());
             if (!bio.getText().toString().equals(""))
-                user.setSkills(bio.getText().toString());
+                user.setBio(bio.getText().toString());
             if(!skills.getText().toString().equals(""))
-                user.setBio(skills.getText().toString());
+                user.setSkills(skills.getText().toString());
             usersRef.setValue(user);
             storeChanges();
 

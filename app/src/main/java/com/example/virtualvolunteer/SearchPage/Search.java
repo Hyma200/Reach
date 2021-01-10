@@ -45,7 +45,7 @@ public class Search extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference users = database.getReference("Users");
-    private List<String> data = new ArrayList(Arrays.asList("SPCA NOVA", "SPCA Bethesda", "SPCA Richmond", "SPCA Virginia Beach", "Food Pantry", "CrisisLink", "Food Donors"));
+    private List<String> data = new ArrayList();
 
     //temporary data array
     @Override
