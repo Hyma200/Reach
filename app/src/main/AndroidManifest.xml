@@ -6,7 +6,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Virtual Volunteer"
+        android:label="Reach"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.VirtualVolunteer">
@@ -46,5 +46,4 @@
             android:name=".ProfilePage.ProfileEdit"
             android:parentActivityName=".ProfilePage.Profile" />
     </application>
-
 </manifest>
