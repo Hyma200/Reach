@@ -33,31 +33,37 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Search extends AppCompatActivity {
+public class Search extends AppCompatActivity implements TextWatcher {
 
     private EditText query;
     private ListView results;
     private ImageView searchBtn;
-    private ArrayAdapter<String> adapter;
-    private TextView debug;
-
-
+    private SearchAdapter adapter;
+    private ArrayList<SearchResult> data = new ArrayList();
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference users = database.getReference("Users");
-    private List<String> data = new ArrayList();
 
-    //temporary data array
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_search);
+
+        query = findViewById(R.id.query);
+        results = findViewById(R.id.search_list);
+        searchBtn = findViewById(R.id.search_activity);
+
+        data = new ArrayList<>();
+        query.addTextChangedListener(this);
 
         users.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     User user = dataSnapshot.getValue(User.class);
-                    String bio = user.getBio();
-                    data.add(user.getName());
+                    SearchResult searchResult = new SearchResult(user.getName(), user.getBio(), user.getUpload());
+                    data.add(searchResult);
                 }
             }
 
@@ -67,14 +73,8 @@ public class Search extends AppCompatActivity {
             }
         });
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
-        query = (EditText) findViewById(R.id.query);
-        debug = (TextView) findViewById(R.id.debug_search);
-        results = findViewById(R.id.search_list);
-        adapter = new ArrayAdapter<String>(this, R.layout.search_item, R.id.search_name, data);
+        adapter = new SearchAdapter(this, data);
         results.setAdapter(adapter);
-        searchBtn = (ImageView) findViewById(R.id.search_activity);
 
         BottomNavigationView navView = findViewById(R.id.Bottom_navigation_icon);
         Navigation.enableNavigationClick(this, navView);
@@ -82,23 +82,21 @@ public class Search extends AppCompatActivity {
         Menu menu = navView.getMenu();
         MenuItem menuItem = menu.getItem(1);
         menuItem.setChecked(true);
+    }
 
-        query.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
+    }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Search.this.adapter.getFilter().filter(s);
-            }
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        this.adapter.getFilter().filter(s);
 
+    }
 
-            @Override
-            public void afterTextChanged(Editable s) {
+    @Override
+    public void afterTextChanged(Editable s) {
 
-            }
-        });
     }
 }

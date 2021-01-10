@@ -19,7 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <TableRow>
+            <TableRow
+                android:id="@+id/search_result"
+                android:clickable="true">
 
                 <ImageView
                     android:id="@+id/search_profile_image"
