@@ -74,6 +74,8 @@ public class Profile extends AppCompatActivity {
                 String h = (profileUser.getHours() != 1) ? " Hours" : " Hour";
                 hours.setText(profileUser.getHours() + h);
                 location.setText(profileUser.getLocation());
+                bio.setText(profileUser.getBio());
+                skills.setText(profileUser.getSkills());
                 Upload upload = profileUser.getUpload();
                 if (upload != null)
                     Picasso.with(Profile.this).load(upload.getImageUrl()).resize(200, 200).centerCrop().into(image);

@@ -102,6 +102,10 @@ public class ProfileEdit extends AppCompatActivity {
                 user.setName(name.getText().toString());
             if (!location.getText().toString().equals(""))
                 user.setLocation(location.getText().toString());
+            if (!bio.getText().toString().equals(""))
+                user.setSkills(bio.getText().toString());
+            if(!skills.getText().toString().equals(""))
+                user.setBio(skills.getText().toString());
             usersRef.setValue(user);
             storeChanges();
 
