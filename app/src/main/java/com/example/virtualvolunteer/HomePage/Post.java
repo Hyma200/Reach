@@ -11,7 +11,7 @@ public class Post {
     private String description;
     private String imageURL;
     private Long creationTime;
-    private String name;
+    private String key;
 
     public Post() {
         this.email = "";
@@ -43,9 +43,11 @@ public class Post {
         return this.creationTime;
     }
 
+
     public void setEmail(String email) {
         this.email = email;
     }
+
 
     public void setDescription(String description) {
         this.description = description;

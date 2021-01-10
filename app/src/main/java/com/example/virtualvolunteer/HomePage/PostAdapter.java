@@ -3,6 +3,7 @@ package com.example.virtualvolunteer.HomePage;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.renderscript.Sampler;
 import android.text.format.DateUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import com.example.virtualvolunteer.ProfilePage.Profile;
 import com.example.virtualvolunteer.R;
 import com.example.virtualvolunteer.Upload;
 import com.example.virtualvolunteer.User;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,6 +34,8 @@ import java.util.ArrayList;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     DatabaseReference usersRef;
+    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getEmail().replace('.', '_');
+    DatabaseReference currentUserRef = FirebaseDatabase.getInstance().getReference("Users").child(currentUser);
     private ArrayList<Post> posts;
     private Context home;
 
@@ -73,24 +77,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 // TODO: when user clicks post author username, they can view the author's profile page
                 viewProfile();
             });
-
-            post_saved.setOnClickListener(v -> {
-                Toast toast = Toast.makeText(home, "Post saved",
-                        Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
-                //savePost();
-            });
         }
 
         public void bind(Post post) {
             String newEmail = post.getEmail().replace('.', '_');
             usersRef = usersRef.child(newEmail);
             usersRef.addValueEventListener(new ValueEventListener() {
+                User user;
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
-                        User user = snapshot.getValue(User.class);
+                        user = snapshot.getValue(User.class);
                         post_username.setText(user.getName());
                         Upload upload = user.getUpload();
                         if (upload != null)
@@ -100,7 +97,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     post_description.setText(post.getDescription());
                     Picasso.with(home).load(post.getImageURL()).resize(200, 200).centerCrop().into(post_image);
                     post_relative_time.setText(DateUtils.getRelativeTimeSpanString(post.getCreationTime()));
-
                 }
 
                 @Override
@@ -109,10 +105,32 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 }
             });
 
+            post_saved.setOnClickListener(v -> {
+                currentUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if (snapshot.exists()){
+                            User user = snapshot.getValue(User.class);
+                            String result =user.addPost(post.getCreationTime());
+                            currentUserRef.setValue(user);
+                            Toast toast = Toast.makeText(home, result,
+                                    Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            });
+
         }
     }
 
     private void savePost() {
+
         // TODO:  save post to firebase (use time as unique identifier)
         // each user will have a list of postID's (use post time) of posts that were saved "savedPosts"
         // this method will grab the postID and append it to the user's savedPosts
@@ -133,6 +151,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         usersRef = FirebaseDatabase.getInstance().getReference("Users");
+        currentUserRef = FirebaseDatabase.getInstance().getReference("Users").child(currentUser);
         viewHolder.bind(posts.get(position));
     }
 
