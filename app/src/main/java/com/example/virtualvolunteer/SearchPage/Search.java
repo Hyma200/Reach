@@ -17,12 +17,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.virtualvolunteer.Navigation;
 import com.example.virtualvolunteer.R;
+import com.example.virtualvolunteer.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Search extends AppCompatActivity {
 
@@ -30,22 +39,41 @@ public class Search extends AppCompatActivity {
     private ListView results;
     private ImageView searchBtn;
     private ArrayAdapter<String> adapter;
+    private TextView debug;
 
-    String[] data = {"SPCA NOVA", "SPCA Bethesda", "SPCA Richmond", "SPCA Virginia Beach", "Food Pantry", "CrisisLink", "Food Donors"};
-    //temporary data array
+
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference users = database.getReference("Users");
+    private List<String> data = new ArrayList(Arrays.asList("SPCA NOVA", "SPCA Bethesda", "SPCA Richmond", "SPCA Virginia Beach", "Food Pantry", "CrisisLink", "Food Donors"));
 
+    //temporary data array
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        users.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    User user = dataSnapshot.getValue(User.class);
+                    String bio = user.getBio();
+                    data.add(user.getName());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         query = (EditText) findViewById(R.id.query);
+        debug = (TextView) findViewById(R.id.debug_search);
         results = findViewById(R.id.search_list);
         adapter = new ArrayAdapter<String>(this, R.layout.search_item, R.id.search_name, data);
         results.setAdapter(adapter);
-
         searchBtn = (ImageView) findViewById(R.id.search_activity);
 
         BottomNavigationView navView = findViewById(R.id.Bottom_navigation_icon);
@@ -66,38 +94,11 @@ public class Search extends AppCompatActivity {
                 Search.this.adapter.getFilter().filter(s);
             }
 
+
             @Override
             public void afterTextChanged(Editable s) {
 
             }
         });
-
-
-        searchBtn.setOnClickListener(v -> users.orderByChild("name").equalTo(query.getText().toString()).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                /*debug.append(snapshot.toString());
-                debug.append(snapshot.child("email").getValue().toString());
-                debug.append(snapshot.child("name").getValue().toString());*/
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        }));
     }
 }
