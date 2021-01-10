@@ -111,7 +111,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()){
                             User user = snapshot.getValue(User.class);
-                            String result =user.addPost(post.getCreationTime());
+                            String result = user.addPost(post.getCreationTime());
+                            if(result.contains("Deleted")){
+                                result = "Post Unsaved";
+                                post_saved.setImageResource(R.drawable.ic_post_save);
+                            }
+                            else{
+                                post_saved.setImageResource(R.drawable.ic_post_saved);
+                            }
                             currentUserRef.setValue(user);
                             Toast toast = Toast.makeText(home, result,
                                     Toast.LENGTH_SHORT);
