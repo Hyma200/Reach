@@ -27,6 +27,14 @@
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/ic_profile_post" />
 
+                <ImageView
+                    android:id="@+id/post_save_button"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:foregroundTint="@color/purple_200"
+                    app:srcCompat="@drawable/ic_post_save" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -35,29 +43,22 @@
 
                     <TextView
                         android:id="@+id/post_username"
-                        android:layout_width="264dp"
+                        android:layout_width="244dp"
                         android:layout_height="wrap_content"
+                        android:clickable="true"
                         android:textColor="@color/dark_purple"
                         android:textSize="18sp"
-                        android:clickable="true"
                         tools:text="andi" />
 
                     <TextView
                         android:id="@+id/post_relative_time"
-                        android:layout_width="264dp"
+                        android:layout_width="244dp"
                         android:layout_height="wrap_content"
                         android:textColor="@color/dark_purple"
                         android:textSize="18sp"
                         tools:text="15 minutes ago" />
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/post_save_button"
-                    android:layout_width="36dp"
-                    android:layout_height="match_parent"
-                    android:clickable="true"
-                    android:foregroundTint="@color/dark_purple"
-                    app:srcCompat="@drawable/ic_post_save" />
             </TableRow>
         </TableLayout>
 

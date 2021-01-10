@@ -40,29 +40,36 @@ public class Login extends AppCompatActivity {
                 view -> {
                     String fEmail = email.getText().toString();
                     String fPassword = password.getText().toString();
-                    mAuth.signInWithEmailAndPassword(fEmail, fPassword)
-                            .addOnCompleteListener(this, task -> {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d(TAG, "signInWithEmail:success");
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    Toast toast = Toast.makeText(Login.this, "Authentication Success",
-                                            Toast.LENGTH_SHORT);
-                                    toast.setGravity(Gravity.CENTER, 0, 0);
-                                    toast.show();
-                                    openHome();
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                    Toast toast = Toast.makeText(Login.this, "Authentication Failure. Please Try Again.",
-                                            Toast.LENGTH_SHORT);
-                                    toast.setGravity(Gravity.CENTER, 0, 0);
-                                    toast.show();
-                                }
-                            });
-                }
-        );
+                    if (fEmail == "" || fPassword == ""){
+                        Toast toast = Toast.makeText(Login.this, "Authentication Success",
+                                Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                    }
+                    else{
+                        mAuth.signInWithEmailAndPassword(fEmail, fPassword)
+                                .addOnCompleteListener(this, task -> {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d(TAG, "signInWithEmail:success");
+                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        Toast toast = Toast.makeText(Login.this, "Authentication Success",
+                                                Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
+                                        openHome();
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                        Toast toast = Toast.makeText(Login.this, "Authentication Failure. Please Try Again.",
+                                                Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
+                                    }
+                                });
+                    }
 
+                });
         signUpBtn.setOnClickListener(v -> openSignUp());
     }
 
