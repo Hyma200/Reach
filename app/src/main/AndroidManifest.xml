@@ -27,6 +27,7 @@
             android:parentActivityName=".HomePage.Home" />
         <activity
             android:name=".SearchPage.Search"
+            android:windowSoftInputMode="stateHidden"
             android:parentActivityName=".HomePage.Home" />
         <activity
             android:name=".LoggingPage.Log"

@@ -39,6 +39,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/dark_purple"
                         android:textSize="18sp"
+                        android:clickable="true"
                         tools:text="andi" />
 
                     <TextView

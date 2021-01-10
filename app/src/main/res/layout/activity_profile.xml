@@ -14,7 +14,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="1000dp"
             android:layout_marginBottom="100px">
 
             <LinearLayout
@@ -26,12 +26,8 @@
                 android:layout_marginEnd="34dp"
                 android:layout_marginBottom="34dp"
                 android:foregroundGravity="center"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.489"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView8">
+                android:orientation="vertical">
+
 
                 <ImageView
                     android:id="@+id/profile_image"
@@ -50,77 +46,128 @@
                     android:textColor="@color/white"
                     android:textSize="30sp" />
 
-                <TextView
-                    android:id="@+id/profile_email"
-                    android:layout_width="match_parent"
+
+                <Button
+                    android:id="@+id/profile_edit_button"
+                    android:layout_width="84dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:text="Email"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
+                    android:background="@color/white"
+                    android:backgroundTint="@color/white"
+                    android:text="Edit"
+                    android:textColor="@color/dark_purple" />
 
-
-                <TextView
-                    android:id="@+id/profile_location"
+                <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:text="Location"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp">
 
-                <TextView
-                    android:id="@+id/profile_bio"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:text="Bio"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    <TableRow android:layout_marginTop="8dp">
 
+                        <ImageView
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:clickable="true"
+                            app:srcCompat="@drawable/ic_email" />
 
-                <TextView
-                    android:id="@+id/profile_skills"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:text="Skills"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                        <TextView
+                            android:id="@+id/profile_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="18dp"
+                            android:layout_marginTop="8dp"
+                            android:autoLink="web|email"
+                            android:text="Email"
+                            android:textColor="@color/dark_purple"
+                            android:textSize="18sp" />
+                    </TableRow>
+
+                    <TableRow android:layout_marginTop="8dp">
+
+                        <ImageView
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:clickable="true"
+                            app:srcCompat="@drawable/ic_location" />
+
+                        <TextView
+                            android:id="@+id/profile_location"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="18dp"
+                            android:layout_marginTop="8dp"
+                            android:text="Location"
+                            android:textColor="#FFFFFF"
+                            android:textSize="18sp" />
+                    </TableRow>
+
+                    <TableRow android:layout_marginTop="8dp">
+
+                        <ImageView
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:clickable="true"
+                            app:srcCompat="@drawable/ic_bio" />
+
+                        <TextView
+                            android:id="@+id/profile_bio"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="18dp"
+                            android:layout_marginTop="8dp"
+
+                            android:text="Bio"
+                            android:textColor="#FFFFFF"
+                            android:textSize="18sp" />
+                    </TableRow>
+
+                    <TableRow android:layout_marginTop="8dp">
+
+                        <ImageView
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:clickable="true"
+                            app:srcCompat="@drawable/ic_skills" />
+
+                        <TextView
+                            android:id="@+id/profile_skills"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="18dp"
+                            android:layout_marginTop="8dp"
+                            android:text="Skills"
+                            android:textColor="#FFFFFF"
+                            android:textSize="18sp" />
+                    </TableRow>
+                </TableLayout>
+
 
                 <TextView
                     android:id="@+id/profile_hours"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="48dp"
+                    android:layout_marginTop="24dp"
                     android:gravity="center"
                     android:text="Hours Volunteered"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:textSize="22sp" />
 
                 <TextView
-                    android:id="@+id/profile_orgs"
+                    android:id="@+id/profile_org_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="24dp"
                     android:gravity="center"
                     android:text="Organizations"
                     android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
+                    android:textSize="22sp" />
 
-                <Button
-                    android:id="@+id/profile_edit_button"
+                <ListView
+                    android:id="@+id/profile_orgs"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="84dp"
-                    android:background="@color/white"
-                    android:backgroundTint="@color/white"
-                    android:text="Edit Profile"
-                    android:textColor="@color/dark_purple" />
+                    android:layout_height="800dp"
+                    android:layout_marginTop="12dp" />
 
             </LinearLayout>
         </ScrollView>

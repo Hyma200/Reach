@@ -42,7 +42,7 @@ import com.squareup.picasso.Picasso;
 
 
 public class ProfileEdit extends AppCompatActivity {
-   DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("Users");
+    DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("Users");
     FirebaseUser userAuth = FirebaseAuth.getInstance().getCurrentUser();
     private EditText name;
     private EditText location;
@@ -50,7 +50,6 @@ public class ProfileEdit extends AppCompatActivity {
     private EditText skills;
     private Button imagePicker;
     private ImageView image;
-    private ProgressBar progressBar;
     private User user;
     private Button saveBtn;
     private Uri imageUri;
@@ -76,17 +75,23 @@ public class ProfileEdit extends AppCompatActivity {
         skills = findViewById(R.id.skills);
         imagePicker = findViewById(R.id.image_picker);
         image = findViewById(R.id.image);
-        progressBar = findViewById(R.id.progress_bar);
         saveBtn = findViewById(R.id.profile_edit_save);
 
         usersRef = usersRef.child(userAuth.getEmail().replace('.', '_'));
         usersRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
+                if (snapshot.exists()) {
                     user = snapshot.getValue(User.class);
+                    Upload upload = user.getUpload();
+                    if (upload != null)
+                        Picasso.with(ProfileEdit.this).load(upload.getImageUrl()).resize(200, 200).centerCrop().into(image);
+                    name.setText(user.getName());
+                    location.setText(user.getLocation());
+
                 }
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
@@ -126,7 +131,7 @@ public class ProfileEdit extends AppCompatActivity {
     }
 
     public void storeChanges() {
-        if (imageUri != null){
+        if (imageUri != null) {
             StorageReference photoRef = storageRef.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
             uploadTask = photoRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -136,12 +141,8 @@ public class ProfileEdit extends AppCompatActivity {
                         result.addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                // TODO: store profile data changes to firebase
                                 user.setUpload(new Upload("new name", uri.toString()));
                                 usersRef.setValue(user);
-                            /*Post post = new Post(user.getEmail(), description, uri.toString(), System.currentTimeMillis());
-                            String key = postRef.push().getKey();
-                            postRef.child(key).setValue(post);*/
                             }
                         });
                     }
@@ -176,51 +177,4 @@ public class ProfileEdit extends AppCompatActivity {
         }
     }
 
-    /*
-    private void uploadFile(){
-        if (imageUri != null){
-            StorageReference fileReference = storageRef.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
-            uploadTask = fileReference.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressBar.setProgress(0);
-                        }
-                    }, 500);
-
-                    Toast.makeText(Profile.this, "Upload successful",Toast.LENGTH_LONG).show();
-                    String downloadUrl = "";
-                    if(taskSnapshot.getMetadata() != null){
-                        Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
-                        result.addOnSuccessListener(new OnSuccessListener<Uri>() {
-                            @Override
-                            public void onSuccess(Uri uri) {
-                                Upload upload = new Upload("No Name", uri.toString());
-                                profileUser.setUpload(upload);
-                                myRef.setValue(profileUser);
-                            }
-                        });
-                    }
-
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(Profile.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                    progressBar.setProgress((int) progress);
-                }
-            });
-        }
-        else
-            Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
-    }
-     */
 }

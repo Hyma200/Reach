@@ -1,6 +1,7 @@
 package com.example.virtualvolunteer.HomePage;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.text.format.DateUtils;
 import android.view.Gravity;
@@ -37,7 +38,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public PostAdapter(ArrayList<Post> items, Context home) {
         this.posts = items;
         this.home = home;
-        usersRef  = FirebaseDatabase.getInstance().getReference("Users");
+        usersRef = FirebaseDatabase.getInstance().getReference("Users");
     }
 
     /**
@@ -68,6 +69,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
             post_username.setTypeface(null, Typeface.BOLD);
 
+            post_username.setOnClickListener(v -> {
+                // TODO: when user clicks post author username, they can view the author's profile page
+                viewProfile();
+            });
+
             post_saved.setOnClickListener(v -> {
                 Toast toast = Toast.makeText(home, "Post saved",
                         Toast.LENGTH_SHORT);
@@ -83,7 +89,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             usersRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()){
+                    if (snapshot.exists()) {
                         User user = snapshot.getValue(User.class);
                         post_username.setText(user.getName());
                         Upload upload = user.getUpload();
@@ -126,12 +132,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        usersRef  = FirebaseDatabase.getInstance().getReference("Users");
+        usersRef = FirebaseDatabase.getInstance().getReference("Users");
         viewHolder.bind(posts.get(position));
     }
 
     @Override
     public int getItemCount() {
         return posts.size();
+    }
+
+    public void viewProfile() {
+        Intent intent = new Intent(home, Profile.class);
+        home.startActivity(intent);
     }
 }
