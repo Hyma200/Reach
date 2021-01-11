@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ public class SignUp extends AppCompatActivity {
     private EditText password;
     private EditText name;
     private FirebaseAuth mAuth;
+    private CheckBox isOrganizer;
     private static final String TAG = "EmailPassword";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +37,11 @@ public class SignUp extends AppCompatActivity {
         DatabaseReference myRef = database.getReference("Users");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        signUp = (Button) findViewById(R.id.sign_up);
-        email = (EditText) findViewById(R.id.new_email);
-        password = (EditText) findViewById(R.id.new_password);
-        name = (EditText) findViewById(R.id.new_name);
+        signUp = findViewById(R.id.sign_up);
+        email = findViewById(R.id.new_email);
+        password = findViewById(R.id.new_password);
+        name = findViewById(R.id.new_name);
+        isOrganizer = findViewById(R.id.is_organizer);
 
         signUp.setOnClickListener(
                 view -> {
