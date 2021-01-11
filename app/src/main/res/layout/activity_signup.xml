@@ -58,11 +58,11 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="260dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="4dp"
             android:contentDescription="@string/app_name"
-            app:srcCompat="@drawable/volunteer" />
+            app:srcCompat="@drawable/reach_hand" />
 
         <EditText
             android:id="@+id/new_name"
@@ -114,7 +114,8 @@
 
         <Button
             android:id="@+id/sign_up"
-            android:layout_width="match_parent"
+            android:layout_width="264dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="#FFFFFF"

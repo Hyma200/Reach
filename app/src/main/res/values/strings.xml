@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Virtual Volunteer</string>
+    <string name="app_name">Reach</string>
     <string name="login_email">Email</string>
     <string name="sign_up">Sign Up</string>
     <string name="create_account">Create An Account</string>

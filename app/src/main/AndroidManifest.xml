@@ -5,9 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
-        android:icon="@drawable/volunteer"
+        android:icon="@drawable/reach_icon"
         android:label="Reach"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/reach_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.VirtualVolunteer">
         <activity android:name=".Login">
