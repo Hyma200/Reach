@@ -49,7 +49,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/dark_purple"
                         android:textSize="18sp"
-                        android:maxLines="2"
+                        android:maxLines="1"
                         android:text="The Society for the Prevention of Cruelty to Animals of Northern Virginia (SPCA NOVA) is a volunteer-based, non-profit, private organization" />
                 </LinearLayout>
 
