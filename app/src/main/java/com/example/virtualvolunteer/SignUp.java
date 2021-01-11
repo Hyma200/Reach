@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.virtualvolunteer.LoggingPage.LogVerify;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -45,6 +46,25 @@ public class SignUp extends AppCompatActivity {
                     String storeEmail = fEmail.replace('.', '_');
                     String fPassword = password.getText().toString();
                     String fName = name.getText().toString();
+                    if (email.getText().toString().isEmpty()) {
+                        Toast toast = Toast.makeText(SignUp.this, "Email description cannot be empty",
+                                Toast.LENGTH_SHORT);
+                        toast.show();
+                        return;
+                    }
+                    if (password.getText().toString().isEmpty()) {
+                        Toast toast = Toast.makeText(SignUp.this, "Password description cannot be empty",
+                                Toast.LENGTH_SHORT);
+                        toast.show();
+                        return;
+                    }
+                    if (name.getText().toString().isEmpty()) {
+                        Toast toast = Toast.makeText(SignUp.this, "Name description cannot be empty",
+                                Toast.LENGTH_SHORT);
+                        toast.show();
+                        return;
+                    }
+
                     mAuth.createUserWithEmailAndPassword(fEmail, fPassword)
                             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                                 @Override
