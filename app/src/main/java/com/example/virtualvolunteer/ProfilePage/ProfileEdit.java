@@ -164,6 +164,9 @@ public class ProfileEdit extends AppCompatActivity {
 
     public void reload() {
         Intent intent = new Intent(this, Profile.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("Email", FirebaseAuth.getInstance().getCurrentUser().getEmail().replace('.', '_'));
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 
