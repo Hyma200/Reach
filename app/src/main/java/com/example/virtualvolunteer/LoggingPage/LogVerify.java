@@ -2,6 +2,7 @@ package com.example.virtualvolunteer.LoggingPage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.view.Gravity;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.virtualvolunteer.Navigation;
 import com.example.virtualvolunteer.R;
+import com.example.virtualvolunteer.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,9 +27,11 @@ public class LogVerify extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     DatabaseReference hoursRef = database.getReference("Hours");
+    DatabaseReference usersRef = database.getReference("Users");
     private Button verifyBtn;
     private EditText verificationCode;
     private EditText verificationEmail;
+    private User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +60,7 @@ public class LogVerify extends AppCompatActivity {
                 toast.show();
                 return;
             }
+            usersRef = usersRef.child(fVerificationEmail.replace('.', '_'));
 
             // add the hours to the user's profile
             hoursRef.orderByChild("verify").equalTo(fVerificationCode).addValueEventListener(new ValueEventListener() {
@@ -69,30 +74,43 @@ public class LogVerify extends AppCompatActivity {
                                     Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
-                            reload();
+                            return;
                         }
                         else if (hour.getVerified()){
-                            Toast toast = Toast.makeText(LogVerify.this, "Hours Have Already Been Verified",
+                            Toast toast = Toast.makeText(LogVerify.this, "Hours Have Been Verified",
                                     Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
-                            reload();
+                            return;
                         }
                         else if (hour.getEmail().equals(fVerificationEmail)){
                             hour.setVerified();
-                            hoursRef.child(key).setValue(hour);
+                            usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    currentUser = snapshot.getValue(User.class);
+                                    currentUser.setValidHours(currentUser.getValidHours() + hour.getHours());
+                                    usersRef.setValue(currentUser);
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
                             Toast toast = Toast.makeText(LogVerify.this, "Hours Successfully Verified",
                                     Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
-                            reload();
+                            hoursRef.child(key).setValue(hour);
+                            return;
                         }
                         else{
                             Toast toast = Toast.makeText(LogVerify.this, "Error Processing Request. Error may be due to invalid code.",
                                     Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.CENTER, 0, 0);
                             toast.show();
-                            reload();
+                            return;
                         }
 
                     }
@@ -104,10 +122,5 @@ public class LogVerify extends AppCompatActivity {
             });
         });
 }
-
-    public void reload() {
-        Intent intent = new Intent(this, LogVerify.class);
-        startActivity(intent);
-    }
 
 }

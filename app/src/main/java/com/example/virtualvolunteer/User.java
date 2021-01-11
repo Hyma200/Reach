@@ -12,7 +12,9 @@ public class User {
     private int hours;
     private String bio;
     private String skills;
+    private int validHours;
     private static ArrayList<Long> posts = new ArrayList<>();
+    private static ArrayList<String> orgs = new ArrayList<>();
 
     public User (){}
     public User (String name, String email, Upload upload, String location, int hours){
@@ -33,15 +35,17 @@ public class User {
         this.skills = skills;
     }
 
-    public User (String name, String email, Upload upload, String location, int hours, String bio, String skills, ArrayList<Long> posts){
+    public User (String name, String email, Upload upload, String location, int hours, String bio, String skills, ArrayList<Long> posts, ArrayList<String> orgs, int validHours){
         this.name = name;
         this.email = email;
         this.upload = upload;
         this.location = location;
         this.hours = hours;
         this.bio = bio;
+        this.validHours = validHours;
         this.skills = skills;
         this.posts = new ArrayList<Long>();
+        this.orgs = new ArrayList<String>();
     }
 
     public String getName(){
@@ -50,7 +54,6 @@ public class User {
     public String getEmail(){
         return email;
     }
-
     public Upload getUpload(){
         return upload;
     }
@@ -60,9 +63,13 @@ public class User {
     public int getHours(){
         return hours;
     }
+    public int getValidHours(){return validHours;}
     public String getSkills(){return skills;}
     public String getBio(){return bio;}
     public ArrayList<Long> getPosts(){return posts;}
+    public ArrayList<String> getOrgs(){return orgs;}
+    public void addOrg(String org){this.orgs.add(org);}
+    public void setValidHours(int hours){this.validHours = hours;}
     public String addPost(long post){
         if (posts.contains(post)){
             posts.remove(post);

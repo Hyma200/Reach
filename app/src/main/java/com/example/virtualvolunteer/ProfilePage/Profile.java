@@ -31,6 +31,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 
 public class Profile extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -50,8 +52,7 @@ public class Profile extends AppCompatActivity {
     private Button editBtn;
     private ArrayAdapter<String> adapter;
 
-    String[] data = {"SPCA NOVA", "SPCA Bethesda", "SPCA Richmond", "SPCA Virginia Beach", "Food Pantry", "CrisisLink", "Food Donors"};
-    //temporary data array
+    ArrayList<String> data = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +77,6 @@ public class Profile extends AppCompatActivity {
         image = (ImageView) findViewById(R.id.profile_image);
         editBtn = (Button) findViewById(R.id.profile_edit_button);
 
-        adapter = new ArrayAdapter<String>(this, R.layout.profile_org_item, R.id.profile_org_item, data);
-        orgs.setAdapter(adapter);
-
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -92,6 +90,8 @@ public class Profile extends AppCompatActivity {
                 bio.setText(newLineBuff(profileUser.getBio()));
                 skills.setText(newLineBuff(profileUser.getSkills()));
                 Upload upload = profileUser.getUpload();
+                adapter = new ArrayAdapter<String>(Profile.this, R.layout.profile_org_item, R.id.profile_org_item, profileUser.getOrgs());
+                orgs.setAdapter(adapter);
                 if (upload != null)
                     Picasso.with(Profile.this).load(upload.getImageUrl()).resize(200, 200).centerCrop().into(image);
             }
