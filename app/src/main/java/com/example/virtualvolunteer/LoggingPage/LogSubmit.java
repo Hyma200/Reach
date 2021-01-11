@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.virtualvolunteer.HomePage.PostCreate;
 import com.example.virtualvolunteer.Navigation;
 import com.example.virtualvolunteer.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -56,6 +57,36 @@ public class LogSubmit extends AppCompatActivity {
         Navigation.enableNavigationClick(this, navView);
 
         submitBtn.setOnClickListener(v -> {
+            if (organization.getText().toString().isEmpty()) {
+                Toast toast = Toast.makeText(LogSubmit.this, "Organization description cannot be empty",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
+            if (event.getText().toString().isEmpty()) {
+                Toast toast = Toast.makeText(LogSubmit.this, "Event description cannot be empty",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
+            if (date.getText().toString().isEmpty()) {
+                Toast toast = Toast.makeText(LogSubmit.this, "Date description cannot be empty",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
+            if (verifyEmail.getText().toString().isEmpty()) {
+                Toast toast = Toast.makeText(LogSubmit.this, "  Verify email description cannot be empty",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
+            if (hours.getText().toString().isEmpty()) {
+                Toast toast = Toast.makeText(LogSubmit.this, "  Hours description cannot be empty",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
             String key = myRef.push().getKey();
             myRef = myRef.child(key);
             hour = new Hour(organization.getText().toString(), Integer.parseInt(hours.getText().toString()),event.getText().toString(),mAuth.getCurrentUser().getEmail(),date.getText().toString(), "0", false);
