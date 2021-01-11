@@ -95,7 +95,7 @@
                 android:textColorHint="#FFFFFF"
                 android:textColorLink="@color/teal" />
 
-            <EditText
+            <TextView
                 android:id="@+id/date"
                 android:layout_width="349dp"
                 android:layout_height="wrap_content"

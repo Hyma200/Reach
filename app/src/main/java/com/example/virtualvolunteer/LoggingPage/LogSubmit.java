@@ -1,11 +1,17 @@
 package com.example.virtualvolunteer.LoggingPage;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,6 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
 import java.util.Random;
 
 public class LogSubmit extends AppCompatActivity {
@@ -29,7 +36,13 @@ public class LogSubmit extends AppCompatActivity {
     private Button submitBtn;
     private EditText organization;
     private EditText event;
-    private EditText date;
+    //private TextView date;
+    //
+    private static final String TAG = "LogSubmit";
+    private TextView date;
+    private DatePickerDialog.OnDateSetListener dateSetListener;
+
+    //
     private EditText verifyEmail;
     private String name = "";
     private EditText hours;
@@ -55,6 +68,30 @@ public class LogSubmit extends AppCompatActivity {
 
         BottomNavigationView navView = findViewById(R.id.Bottom_navigation_icon);
         Navigation.enableNavigationClick(this, navView);
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(LogSubmit.this,
+                        android.R.style.Widget_Holo_ActionBar_Solid, dateSetListener, year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
+                dialog.show();
+            }
+        });
+        dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month + 1;
+                String displayDate = month + "/" + dayOfMonth + "/" + year;
+                date.setText(displayDate);
+            }
+        };
+
 
         submitBtn.setOnClickListener(v -> {
             if (organization.getText().toString().isEmpty()) {
