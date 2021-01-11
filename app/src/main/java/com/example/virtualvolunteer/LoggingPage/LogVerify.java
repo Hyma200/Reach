@@ -50,6 +50,12 @@ public class LogVerify extends AppCompatActivity {
                 toast.show();
                 return;
             }
+            if ((verificationCode.getText().toString().length() > 6) || (verificationCode.getText().toString().length() < 6)) {
+                Toast toast = Toast.makeText(LogVerify.this, "Verification code description must be 6 numbers",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
             if (verificationEmail.getText().toString().isEmpty()) {
                 Toast toast = Toast.makeText(LogVerify.this, "Verification email description cannot be empty",
                         Toast.LENGTH_SHORT);
