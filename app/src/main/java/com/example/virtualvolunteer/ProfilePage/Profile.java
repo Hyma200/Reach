@@ -46,7 +46,6 @@ public class Profile extends AppCompatActivity {
     private TextView skills;
     private TextView hours;
     private ListView orgs;
-    private TextView orgTitle;
     private ImageView image;
     private Button editBtn;
     private ArrayAdapter<String> adapter;
@@ -73,7 +72,6 @@ public class Profile extends AppCompatActivity {
         bio = (TextView) findViewById(R.id.profile_bio);
         skills = (TextView) findViewById(R.id.profile_skills);
         hours = (TextView) findViewById(R.id.profile_hours);
-        orgTitle = findViewById(R.id.profile_org_title);
         orgs = (ListView) findViewById(R.id.profile_orgs);
         image = (ImageView) findViewById(R.id.profile_image);
         editBtn = (Button) findViewById(R.id.profile_edit_button);
@@ -83,8 +81,6 @@ public class Profile extends AppCompatActivity {
 
         email.setText(user.getEmail());
         email.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
-        name.setTypeface(null, Typeface.BOLD);
-        orgTitle.setTypeface(null, Typeface.BOLD);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override

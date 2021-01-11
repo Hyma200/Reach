@@ -11,7 +11,7 @@
 
     <LinearLayout
         android:layout_width="346dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -28,16 +28,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="64dp"
-            android:fontFamily="sans-serif-condensed"
+            android:fontFamily="sans-serif-condensed-medium"
             android:foregroundGravity="center"
             android:gravity="center"
-            android:text="@string/create_account"
-            android:textAllCaps="true"
+            android:text="Create An Account"
             android:textColor="#FFFFFF"
-            android:textSize="38sp"
+            android:textSize="40sp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif-condensed-light"
+            android:foregroundGravity="center"
+            android:gravity="center"
+            android:singleLine="false"
+            android:text="Start networking and building your \n volunteer profile today."
+            android:textColor="@color/dark_purple"
+            android:textSize="22sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -59,7 +70,7 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="260dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="26dp"
             android:layout_marginBottom="4dp"
             android:contentDescription="@string/app_name"
             app:srcCompat="@drawable/reach_hand" />
@@ -115,8 +126,8 @@
         <Button
             android:id="@+id/sign_up"
             android:layout_width="264dp"
-            android:layout_gravity="center"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="#FFFFFF"
             android:backgroundTint="#FFFFFF"

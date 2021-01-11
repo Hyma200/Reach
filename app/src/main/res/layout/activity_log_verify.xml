@@ -42,6 +42,7 @@
                 android:layout_marginTop="0dp"
                 android:gravity="center"
                 android:text="Verify Volunteer Hours"
+                android:fontFamily="sans-serif-condensed-medium"
                 android:textColor="@color/white"
                 android:textSize="30sp" />
 
@@ -51,7 +52,7 @@
                 android:layout_marginTop="0dp"
                 android:gravity="center"
                 android:text="Organizers - check your email for any volunteer hour verification requests from volunteers."
-                android:textColor="@color/white" />
+                android:textColor="@color/dark_purple" />
 
             <EditText
                 android:id="@+id/verification_code"
