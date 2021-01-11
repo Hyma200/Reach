@@ -90,8 +90,8 @@ public class Profile extends AppCompatActivity {
                 String h = (profileUser.getHours() != 1) ? " Hours" : " Hour";
                 hours.setText(profileUser.getHours() + h + " Volunteered");
                 location.setText(profileUser.getLocation());
-                bio.setText(profileUser.getBio());
-                skills.setText(profileUser.getSkills());
+                bio.setText(newLineBuff(profileUser.getBio()));
+                skills.setText(newLineBuff(profileUser.getSkills()));
                 Upload upload = profileUser.getUpload();
                 if (upload != null)
                     Picasso.with(Profile.this).load(upload.getImageUrl()).resize(200, 200).centerCrop().into(image);
@@ -102,7 +102,7 @@ public class Profile extends AppCompatActivity {
 
             }
         });
-        if (!FirebaseAuth.getInstance().getCurrentUser().getEmail().replace('.', '_').equals(intentEmail)){
+        if (!FirebaseAuth.getInstance().getCurrentUser().getEmail().replace('.', '_').equals(intentEmail)) {
             editBtn.setVisibility(View.INVISIBLE);
         }
         editBtn.setOnClickListener(v -> {
@@ -114,6 +114,18 @@ public class Profile extends AppCompatActivity {
     public void openProfileEdit() {
         Intent intent = new Intent(this, ProfileEdit.class);
         startActivity(intent);
+    }
+
+    private String newLineBuff(String s) {
+        StringBuilder sb = new StringBuilder(s);
+        int i = 0;
+        while((i + 31) < sb.length()){
+            i = sb.substring(i, i + 32).lastIndexOf(" ") + i;
+            System.out.println(i);
+            sb.replace(i, i + 1, "\n");
+            i++;
+        }
+        return sb.toString();
     }
 
 }

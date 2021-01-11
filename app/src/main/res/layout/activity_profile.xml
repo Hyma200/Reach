@@ -44,6 +44,7 @@
                     android:gravity="center"
                     android:fontFamily="sans-serif-condensed-medium"
                     android:text="Name"
+                    android:singleLine="false"
                     android:textColor="@color/white"
                     android:textSize="30sp" />
 
@@ -99,6 +100,8 @@
                             android:layout_marginStart="18dp"
                             android:layout_marginTop="8dp"
                             android:text="Location"
+                            android:maxLines="2"
+                            android:singleLine="false"
                             android:textColor="#FFFFFF"
                             android:textSize="18sp" />
                     </TableRow>
@@ -117,7 +120,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="18dp"
                             android:layout_marginTop="8dp"
-
+                            android:singleLine="false"
                             android:text="Bio"
                             android:textColor="#FFFFFF"
                             android:textSize="18sp" />
@@ -138,6 +141,7 @@
                             android:layout_marginStart="18dp"
                             android:layout_marginTop="8dp"
                             android:text="Skills"
+                            android:singleLine="false"
                             android:textColor="#FFFFFF"
                             android:textSize="18sp" />
                     </TableRow>
