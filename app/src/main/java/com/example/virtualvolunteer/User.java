@@ -66,7 +66,7 @@ public class User {
     public String addPost(long post){
         if (posts.contains(post)){
             posts.remove(post);
-            return "Post Deleted";
+            return "Post Unsaved";
         }
         else {
             posts.add(post);

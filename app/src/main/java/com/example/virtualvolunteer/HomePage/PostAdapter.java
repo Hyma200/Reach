@@ -2,8 +2,10 @@ package com.example.virtualvolunteer.HomePage;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.renderscript.Sampler;
 import android.text.format.DateUtils;
 import android.view.Gravity;
@@ -15,11 +17,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.virtualvolunteer.Login;
 import com.example.virtualvolunteer.ProfilePage.Profile;
 import com.example.virtualvolunteer.R;
+import com.example.virtualvolunteer.SavedPage.Saved;
 import com.example.virtualvolunteer.Upload;
 import com.example.virtualvolunteer.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,18 +39,39 @@ import com.squareup.picasso.Picasso;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     DatabaseReference usersRef;
-    String currentUser = FirebaseAuth.getInstance().getCurrentUser().getEmail().replace('.', '_');
-    DatabaseReference currentUserRef = FirebaseDatabase.getInstance().getReference("Users").child(currentUser);
+    String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().replace('.', '_');
+    DatabaseReference currentUserRef = FirebaseDatabase.getInstance().getReference("Users").child(email);
     private ArrayList<Post> posts;
     private Context home;
+    private User currentUser;
+    private MutableLiveData<User> userLiveData = new MutableLiveData<>();
+    private MutableLiveData<User> getData(){
+        currentUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            String result = "";
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    currentUser = snapshot.getValue(User.class);
+                    userLiveData.setValue(currentUser);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return userLiveData;
+    }
 
     public PostAdapter(ArrayList<Post> items, Context home) {
         this.posts = items;
         this.home = home;
         usersRef = FirebaseDatabase.getInstance().getReference("Users");
+        currentUser = new User();
     }
 
     /**
@@ -77,6 +105,24 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         public void bind(Post post) {
             String newEmail = post.getEmail().replace('.', '_');
             usersRef = usersRef.child(newEmail);
+
+            post_saved.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String result = currentUser.addPost(post.getCreationTime());
+                    if(result.contains("Unsaved")){
+                        post_saved.setImageResource(R.drawable.ic_post_save);
+                    }
+                    else{
+                        post_saved.setImageResource(R.drawable.ic_post_saved);
+                    }
+                    currentUserRef.setValue(currentUser);
+                    Toast toast = Toast.makeText(home, result,
+                            Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
+            });
             usersRef.addValueEventListener(new ValueEventListener() {
                 User user;
                 String key = "";
@@ -97,44 +143,24 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     post_username.setOnClickListener(v -> {
                         viewProfile(key);
                     });
+                    getData().observe((LifecycleOwner) home, new Observer<User>() {
+                        @Override
+                        public void onChanged(User user) {
+                            if (user.getPosts().contains(post.getCreationTime()))
+                                post_saved.setImageResource(R.drawable.ic_post_saved);
+                            else
+                                post_saved.setImageResource(R.drawable.ic_post_save);
+                        }
+                    });
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 
                 }
             });
-
-            post_saved.setOnClickListener(v -> {
-                currentUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()){
-                            User currentUser = snapshot.getValue(User.class);
-                            String result = currentUser.addPost(post.getCreationTime());
-                            if(result.contains("Deleted")){
-                                result = "Post Unsaved";
-                                post_saved.setImageResource(R.drawable.ic_post_save);
-                            }
-                            else{
-                                post_saved.setImageResource(R.drawable.ic_post_saved);
-                            }
-                            currentUserRef.setValue(currentUser);
-                            Toast toast = Toast.makeText(home, result,
-                                    Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
-                        }
-                    }
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-            });
-
         }
     }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
@@ -150,7 +176,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         usersRef = FirebaseDatabase.getInstance().getReference("Users");
-        currentUserRef = FirebaseDatabase.getInstance().getReference("Users").child(currentUser);
+        currentUserRef = FirebaseDatabase.getInstance().getReference("Users").child(email);
         viewHolder.bind(posts.get(position));
     }
 
