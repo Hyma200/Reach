@@ -44,6 +44,19 @@ public class LogVerify extends AppCompatActivity {
         verifyBtn.setOnClickListener(v -> {
             String fVerificationCode = verificationCode.getText().toString();
             String fVerificationEmail = verificationEmail.getText().toString();
+            if (verificationCode.getText().toString().isEmpty()) {
+                Toast toast = Toast.makeText(LogVerify.this, "Verification code description cannot be empty",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
+            if (verificationEmail.getText().toString().isEmpty()) {
+                Toast toast = Toast.makeText(LogVerify.this, "Verification email description cannot be empty",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
+
             // add the hours to the user's profile
             hoursRef.orderByChild("verify").equalTo(fVerificationCode).addValueEventListener(new ValueEventListener() {
                 @Override
