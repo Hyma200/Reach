@@ -2,6 +2,7 @@ package com.example.virtualvolunteer;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -12,6 +13,7 @@ import com.example.virtualvolunteer.ProfilePage.Profile;
 import com.example.virtualvolunteer.SavedPage.Saved;
 import com.example.virtualvolunteer.SearchPage.Search;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class Navigation {
 
@@ -34,7 +36,11 @@ public class Navigation {
                         context.startActivity(new Intent(context, Saved.class));
                         break;
                     case R.id.profile:
-                        context.startActivity(new Intent(context, Profile.class));
+                        Intent intent = new Intent(context, Profile.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("Email", FirebaseAuth.getInstance().getCurrentUser().getEmail().replace('.', '_'));
+                        intent.putExtras(bundle);
+                        context.startActivity(intent);
                 }
                 return false;
             }

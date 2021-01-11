@@ -47,7 +47,6 @@ public class Saved extends AppCompatActivity {
                         User user = dataSnapshot.getValue(User.class);
                         ArrayList<Long> postTimes = user.getPosts();
                         DatabaseReference postsReference = FirebaseDatabase.getInstance().getReference("Posts");
-
                         for (Long time: postTimes){
                             postsReference.orderByChild("creationTime").equalTo(time).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override

@@ -34,7 +34,8 @@ import com.squareup.picasso.Picasso;
 public class Profile extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    DatabaseReference myRef = database.getReference("Users").child(user.getEmail().replace('.', '_'));
+
+    DatabaseReference myRef;
 
     private User profileUser;
     private TextView name;
@@ -56,6 +57,8 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        String intentEmail = getIntent().getExtras().getString("Email");
+        myRef = database.getReference("Users").child(intentEmail);
 
         BottomNavigationView navView = findViewById(R.id.Bottom_navigation_icon);
         Navigation.enableNavigationClick(this, navView);

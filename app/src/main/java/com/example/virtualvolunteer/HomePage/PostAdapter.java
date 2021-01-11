@@ -3,6 +3,7 @@ package com.example.virtualvolunteer.HomePage;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.renderscript.Sampler;
 import android.text.format.DateUtils;
 import android.view.Gravity;
@@ -70,13 +71,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             post_relative_time = itemView.findViewById(R.id.post_relative_time);
             post_saved = itemView.findViewById(R.id.post_save_button);
 
-
             post_username.setTypeface(null, Typeface.BOLD);
-
-            post_username.setOnClickListener(v -> {
-                // TODO: when user clicks post author username, they can view the author's profile page
-                viewProfile();
-            });
         }
 
         public void bind(Post post) {
@@ -84,9 +79,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             usersRef = usersRef.child(newEmail);
             usersRef.addValueEventListener(new ValueEventListener() {
                 User user;
+                String key = "";
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
+                        key = snapshot.getKey();
                         user = snapshot.getValue(User.class);
                         post_username.setText(user.getName());
                         Upload upload = user.getUpload();
@@ -94,9 +91,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                             Picasso.with(home).load(upload.getImageUrl()).resize(200, 200).centerCrop().into(post_profile_image);
                         usersRef.removeEventListener(this);
                     }
-                    post_description.setText(post.getDescription());
+                    post_description.setText(post.getDescription());;
                     Picasso.with(home).load(post.getImageURL()).resize(200, 200).centerCrop().into(post_image);
                     post_relative_time.setText(DateUtils.getRelativeTimeSpanString(post.getCreationTime()));
+                    post_username.setOnClickListener(v -> {
+                        viewProfile(key);
+                    });
                 }
 
                 @Override
@@ -110,8 +110,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()){
-                            User user = snapshot.getValue(User.class);
-                            String result = user.addPost(post.getCreationTime());
+                            User currentUser = snapshot.getValue(User.class);
+                            String result = currentUser.addPost(post.getCreationTime());
                             if(result.contains("Deleted")){
                                 result = "Post Unsaved";
                                 post_saved.setImageResource(R.drawable.ic_post_save);
@@ -119,7 +119,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                             else{
                                 post_saved.setImageResource(R.drawable.ic_post_saved);
                             }
-                            currentUserRef.setValue(user);
+                            currentUserRef.setValue(currentUser);
                             Toast toast = Toast.makeText(home, result,
                                     Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.CENTER, 0, 0);
@@ -134,14 +134,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             });
 
         }
-    }
-
-    private void savePost() {
-
-        // TODO:  save post to firebase (use time as unique identifier)
-        // each user will have a list of postID's (use post time) of posts that were saved "savedPosts"
-        // this method will grab the postID and append it to the user's savedPosts
-        // then in Saved.java the posts sent to the SavedPostAdapter will be grabbed from the user's savedPosts
     }
 
     @Override
@@ -167,8 +159,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return posts.size();
     }
 
-    public void viewProfile() {
+    public void viewProfile(String email) {
         Intent intent = new Intent(home, Profile.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("Email", email.replace('.', '_'));
+        intent.putExtras(bundle);
         home.startActivity(intent);
     }
 }

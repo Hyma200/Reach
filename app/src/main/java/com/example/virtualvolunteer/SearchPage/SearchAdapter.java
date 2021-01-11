@@ -3,6 +3,7 @@ package com.example.virtualvolunteer.SearchPage;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +52,8 @@ public class SearchAdapter extends BaseAdapter implements Filterable {
 
         result.setOnClickListener(v -> {
             // TODO: when user clicks search result box, view user's profile page
-            viewProfile();
+            viewProfile(searchResults.get(i).getEmail());
+
         });
 
         name.setText(searchResults.get(i).getName());
@@ -93,7 +95,7 @@ public class SearchAdapter extends BaseAdapter implements Filterable {
 
                 for (int i = 0; i < searchResults.size(); i++) {
                     if (searchResultsTemp.get(i).getName().toUpperCase().contains(constraint)) {
-                        SearchResult sr = new SearchResult(searchResultsTemp.get(i).getName(), searchResultsTemp.get(i).getBio(), searchResultsTemp.get(i).getImageURL());
+                        SearchResult sr = new SearchResult(searchResults.get(i).getEmail(), searchResultsTemp.get(i).getName(), searchResultsTemp.get(i).getBio(), searchResultsTemp.get(i).getImageURL());
                         filters.add(sr);
                     }
                 }
@@ -115,8 +117,11 @@ public class SearchAdapter extends BaseAdapter implements Filterable {
         }
     }
 
-    public void viewProfile() {
+    public void viewProfile(String email) {
         Intent intent = new Intent(context, Profile.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("Email", email);
+        intent.putExtras(bundle);
         context.startActivity(intent);
     }
 

@@ -62,7 +62,7 @@ public class Search extends AppCompatActivity implements TextWatcher {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     User user = dataSnapshot.getValue(User.class);
-                    SearchResult searchResult = new SearchResult(user.getName(), user.getBio(), user.getUpload());
+                    SearchResult searchResult = new SearchResult(dataSnapshot.getKey(), user.getName(), user.getBio(), user.getUpload());
                     data.add(searchResult);
                 }
             }
