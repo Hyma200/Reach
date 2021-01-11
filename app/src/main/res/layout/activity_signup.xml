@@ -66,20 +66,11 @@
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="260dp"
-            android:layout_marginTop="26dp"
-            android:layout_marginBottom="4dp"
-            android:contentDescription="@string/app_name"
-            app:srcCompat="@drawable/reach_hand" />
-
         <EditText
             android:id="@+id/new_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="64dp"
             android:autofillHints=""
             android:backgroundTint="#fff"
             android:ems="10"
@@ -122,6 +113,18 @@
             android:textColorHighlight="#D1BBEC"
             android:textColorHint="#FFFFFF"
             android:textColorLink="@color/teal" />
+
+
+        <CheckBox
+            android:id="@+id/is_organizer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:shadowColor="#FFFFFF"
+            android:text="  I am an organizer"
+            android:textColor="@color/white"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorLink="@color/white"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/sign_up"
