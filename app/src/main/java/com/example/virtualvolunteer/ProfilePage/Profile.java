@@ -79,9 +79,6 @@ public class Profile extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this, R.layout.profile_org_item, R.id.profile_org_item, data);
         orgs.setAdapter(adapter);
 
-        email.setText(user.getEmail());
-        email.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
-
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -89,6 +86,8 @@ public class Profile extends AppCompatActivity {
                 name.setText(profileUser.getName());
                 String h = (profileUser.getHours() != 1) ? " Hours" : " Hour";
                 hours.setText(profileUser.getHours() + h + " Volunteered");
+                email.setText(profileUser.getEmail());
+                email.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
                 location.setText(profileUser.getLocation());
                 bio.setText(newLineBuff(profileUser.getBio()));
                 skills.setText(newLineBuff(profileUser.getSkills()));
