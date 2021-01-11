@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -105,7 +106,9 @@ public class Profile extends AppCompatActivity {
 
             }
         });
-
+        if (!FirebaseAuth.getInstance().getCurrentUser().getEmail().replace('.', '_').equals(intentEmail)){
+            editBtn.setVisibility(View.INVISIBLE);
+        }
         editBtn.setOnClickListener(v -> {
             openProfileEdit();
         });
