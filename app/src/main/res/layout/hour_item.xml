@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="14dp"
+    android:clipToPadding="false"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:id="@+id/log_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/log_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/dark_purple"
+            android:textSize="22sp"
+            tools:text="Meal Packaging Event" />
+
+        <TextView
+            android:id="@+id/log_organization"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/dark_purple"
+            android:textSize="18sp"
+            android:clickable="true"
+            tools:text="Food Pantry" />
+
+        <TextView
+            android:id="@+id/log_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:autoLink="web|email"
+            android:textColor="@color/dark_purple"
+            android:textSize="18sp"
+            tools:text="foodpantry@gmail.com" />
+
+        <TextView
+            android:id="@+id/log_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/dark_purple"
+            android:textSize="18sp"
+            tools:text="12/31/2020" />
+
+        <TextView
+            android:id="@+id/log_hours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/teal"
+            android:textSize="22sp"
+            tools:text="2 hours" />
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

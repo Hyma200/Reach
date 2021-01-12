@@ -16,6 +16,7 @@ public class Log extends AppCompatActivity {
 
     private Button submitBtn;
     private Button verifyBtn;
+    private Button viewBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class Log extends AppCompatActivity {
 
         submitBtn = findViewById(R.id.submit_option);
         verifyBtn = findViewById(R.id.verify_option);
+        viewBtn = findViewById(R.id.view_option);
 
         BottomNavigationView navView = findViewById(R.id.Bottom_navigation_icon);
         Navigation.enableNavigationClick(this, navView);
@@ -40,6 +42,10 @@ public class Log extends AppCompatActivity {
             openVerify();
         });
 
+        viewBtn.setOnClickListener(v -> {
+            openView();
+        });
+
     }
 
     public void openSubmit() {
@@ -49,6 +55,11 @@ public class Log extends AppCompatActivity {
 
     public void openVerify() {
         Intent intent = new Intent(this, LogVerify.class);
+        startActivity(intent);
+    }
+
+    public void openView() {
+        Intent intent = new Intent(this, LogView.class);
         startActivity(intent);
     }
 }

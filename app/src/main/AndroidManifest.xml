@@ -39,6 +39,9 @@
             android:name=".LoggingPage.LogVerify"
             android:parentActivityName=".LoggingPage.Log" />
         <activity
+            android:name=".LoggingPage.LogView"
+            android:parentActivityName=".LoggingPage.Log" />
+        <activity
             android:name=".SavedPage.Saved"
             android:parentActivityName=".HomePage.Home" />
         <activity android:name=".ProfilePage.Profile" />

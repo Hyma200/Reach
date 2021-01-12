@@ -69,6 +69,17 @@
                 android:text="Verify"
                 android:textColor="@color/dark_purple" />
 
+            <Button
+                android:id="@+id/view_option"
+                android:layout_width="222dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="#FFFFFF"
+                android:backgroundTint="#FFFFFF"
+                android:text="View"
+                android:textColor="@color/dark_purple" />
+
         </LinearLayout>
 
         <include layout="@layout/layout_bottom_navigation_toolbar" />
