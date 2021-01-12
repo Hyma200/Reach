@@ -24,6 +24,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
+
 public class PostCreate extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -39,6 +41,7 @@ public class PostCreate extends AppCompatActivity {
     private CheckBox environmentalTag;
     private CheckBox recreationalTag;
     private CheckBox distributionTag;
+    private CheckBox experienceTag;
     private final int PICK_IMAGE_REQUEST = 123;
     private final StorageReference storageRef = FirebaseStorage.getInstance().getReference("uploads");
 
@@ -56,7 +59,8 @@ public class PostCreate extends AppCompatActivity {
         teachingTag = findViewById(R.id.new_post_teaching);
         environmentalTag = findViewById(R.id.new_post_environmental);
         recreationalTag = findViewById(R.id.new_post_recreational);
-
+        distributionTag = findViewById(R.id.new_post_distribution);
+        experienceTag = findViewById(R.id.new_post_experience);
         BottomNavigationView navView = findViewById(R.id.Bottom_navigation_icon);
         Navigation.enableNavigationClick(this, navView);
 
@@ -85,12 +89,19 @@ public class PostCreate extends AppCompatActivity {
 
     public void storePost(String description) {
         // TODO:  add tags to database, use isChecked()
+        ArrayList<String> tags = new ArrayList<String>();
+        if (opportunityTag.isChecked()) tags.add("Opportunity");
+        if (virtualTag.isChecked()) tags.add("Virtual");
+        if (teachingTag.isChecked()) tags.add("Teaching");
+        if (environmentalTag.isChecked()) tags.add("Environment");
+        if (recreationalTag.isChecked()) tags.add("Recreational");
+        if (experienceTag.isChecked()) tags.add("Experience");
         StorageReference photoRef = storageRef.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
         photoRef.putFile(imageUri).addOnSuccessListener(taskSnapshot -> {
             if (taskSnapshot.getMetadata() != null) {
                 Task<Uri> result = taskSnapshot.getStorage().getDownloadUrl();
                 result.addOnSuccessListener(uri -> {
-                    Post post = new Post(user.getEmail(), description, uri.toString(), System.currentTimeMillis());
+                    Post post = new Post(user.getEmail(), description, uri.toString(), System.currentTimeMillis(), tags);
                     String key = postRef.push().getKey();
                     postRef.child(key).setValue(post);
                 });

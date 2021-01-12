@@ -1,5 +1,7 @@
 package com.example.virtualvolunteer.HomePage;
 
+import java.util.ArrayList;
+
 public class Post {
 
     // POJO for post data
@@ -8,6 +10,7 @@ public class Post {
     private String description;
     private String imageURL;
     private Long creationTime;
+    private ArrayList<String> tags;
 
     public Post() {
         this.email = "";
@@ -16,11 +19,12 @@ public class Post {
         this.creationTime = 0L;
     }
 
-    public Post(String email, String description, String imageURL, Long creationTime) {
+    public Post(String email, String description, String imageURL, Long creationTime, ArrayList<String> tags) {
         this.email = email;
         this.description = description;
         this.imageURL = imageURL;
         this.creationTime = creationTime;
+        this.tags = tags;
     }
 
     public String getEmail() {
@@ -38,6 +42,8 @@ public class Post {
     public Long getCreationTime() {
         return this.creationTime;
     }
+
+    public ArrayList<String> getTags(){return this.tags;}
 
     public void setEmail(String email) {
         this.email = email;
