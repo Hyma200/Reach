@@ -2,7 +2,6 @@ package com.example.virtualvolunteer.ProfilePage;
 
 import android.content.Intent;
 import android.graphics.Paint;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.virtualvolunteer.LoggingPage.Hour;
 import com.example.virtualvolunteer.Navigation;
 import com.example.virtualvolunteer.R;
 import com.example.virtualvolunteer.Upload;
@@ -52,6 +50,7 @@ public class Profile extends AppCompatActivity {
     private TextView verifiedHours;
     private ImageView image;
     private Button editBtn;
+    private ImageView orgBadge;
     private ArrayAdapter<String> adapter;
 
     ArrayList<String> data = new ArrayList<String>();
@@ -78,6 +77,7 @@ public class Profile extends AppCompatActivity {
         orgs = findViewById(R.id.profile_orgs);
         image = findViewById(R.id.profile_image);
         editBtn = findViewById(R.id.profile_edit_button);
+        orgBadge = findViewById(R.id.profile_org_badge);
         verifiedHours = findViewById(R.id.profile_verified);
 
         myRef.addValueEventListener(new ValueEventListener() {
@@ -114,6 +114,10 @@ public class Profile extends AppCompatActivity {
         editBtn.setOnClickListener(v -> {
             openProfileEdit();
         });
+        /*  TODO:
+        if(!FirebaseAuth.getInstance().getCurrentUser().isOrganizer()){
+            orgBadge.setVisibility(View.INVISIBLE);
+        }*/
 
     }
 
@@ -125,7 +129,7 @@ public class Profile extends AppCompatActivity {
     private String newLineBuff(String s) {
         StringBuilder sb = new StringBuilder(s);
         int i = 0;
-        while((i + 31) < sb.length()){
+        while ((i + 31) < sb.length()) {
             i = sb.substring(i, i + 32).lastIndexOf(" ") + i;
             System.out.println(i);
             sb.replace(i, i + 1, "\n");

@@ -76,6 +76,7 @@ public class SignUp extends AppCompatActivity {
                                         // Sign in success, update UI with the signed-in user's information
                                         Log.d(TAG, "createUserWithEmail:success");
                                         User user = new User (fName, fEmail, null, "", 0, "", "", null, null, 0);
+                                        // TODO:  include in firebase isOrganizer.isChecked()
                                         myRef.child(storeEmail).setValue(user);
                                         Toast toast = Toast.makeText(SignUp.this, "Account Created Successfully",
                                                 Toast.LENGTH_SHORT);
