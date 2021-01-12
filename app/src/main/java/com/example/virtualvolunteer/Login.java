@@ -26,7 +26,6 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
         mAuth = FirebaseAuth.getInstance();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -76,8 +75,8 @@ public class Login extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        //Check if user is signed in
-        FirebaseUser user = mAuth.getCurrentUser();
+        if (FirebaseAuth.getInstance().getCurrentUser() != null)
+            openHome();
     }
 
     public void openSignUp() {
