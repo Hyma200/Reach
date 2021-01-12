@@ -69,14 +69,6 @@
 
             <TableRow>
 
-                <ImageView
-                    android:id="@+id/post_save_button"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="bottom"
-                    android:clickable="true"
-                    android:foregroundTint="@color/purple_200"
-                    app:srcCompat="@drawable/ic_post_save" />
 
                 <TextView
                     android:id="@+id/post_description"
@@ -88,6 +80,14 @@
                     android:textSize="18sp"
                     tools:text="what's good" />
 
+                <ImageView
+                    android:id="@+id/post_save_button"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="bottom"
+                    android:clickable="true"
+                    android:foregroundTint="@color/purple_200"
+                    app:srcCompat="@drawable/ic_post_save" />
 
             </TableRow>
         </TableLayout>
