@@ -4,4 +4,5 @@
     <item name="log" type="id" />
     <item name="saved" type="id" />
     <item name="profile" type="id" />
+    <item name="sign_out" type="id"/>
 </resources>

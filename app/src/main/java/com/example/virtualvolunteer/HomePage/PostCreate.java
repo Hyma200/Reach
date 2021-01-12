@@ -95,6 +95,7 @@ public class PostCreate extends AppCompatActivity {
         if (environmentalTag.isChecked()) tags.add("Environment");
         if (recreationalTag.isChecked()) tags.add("Recreational");
         if (experienceTag.isChecked()) tags.add("Experience");
+        if (distributionTag.isChecked()) tags.add("Distribution");
         StorageReference photoRef = storageRef.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
         photoRef.putFile(imageUri).addOnSuccessListener(taskSnapshot -> {
             if (taskSnapshot.getMetadata() != null) {

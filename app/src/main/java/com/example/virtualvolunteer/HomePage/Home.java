@@ -32,12 +32,19 @@ public class Home extends AppCompatActivity {
 
 
     private Button opportunityTag;
+    private boolean oppClicked = false;
     private Button virtualTag;
+    private boolean virClicked = false;
     private Button teachingTag;
+    private boolean teachClicked = false;
     private Button environmentalTag;
+    private boolean envClicked = false;
     private Button recreationalTag;
+    private boolean recClicked = false;
     private Button distributionTag;
+    private boolean disClicked = false;
     private Button experienceTag;
+    private boolean expClicked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,27 +69,41 @@ public class Home extends AppCompatActivity {
 
         opportunityTag.setOnClickListener(v -> {
             Toast.makeText(this, "opportunity tag", Toast.LENGTH_SHORT).show();
+            oppClicked = !oppClicked;
+            generatePosts("Opportunity");
         });
         experienceTag.setOnClickListener(v -> {
             Toast.makeText(this, "experience tag", Toast.LENGTH_SHORT).show();
+            expClicked = !expClicked;
+            generatePosts("Experience");
         });
         virtualTag.setOnClickListener(v -> {
             Toast.makeText(this, "virtual tag", Toast.LENGTH_SHORT).show();
+            virClicked = !virClicked;
+            generatePosts("Virtual");
         });
         teachingTag.setOnClickListener(v -> {
             Toast.makeText(this, "teaching tag", Toast.LENGTH_SHORT).show();
+            teachClicked = !teachClicked;
+            generatePosts("Teaching");
         });
         environmentalTag.setOnClickListener(v -> {
             Toast.makeText(this, "environmental tag", Toast.LENGTH_SHORT).show();
+            envClicked = !envClicked;
+            generatePosts("Environment");
         });
         recreationalTag.setOnClickListener(v -> {
             Toast.makeText(this, "recreational tag", Toast.LENGTH_SHORT).show();
+            recClicked = !recClicked;
+            generatePosts("Recreational");
         });
         distributionTag.setOnClickListener(v -> {
             Toast.makeText(this, "distribution tag", Toast.LENGTH_SHORT).show();
+            disClicked = !disClicked;
+            generatePosts("Distribution");
         });
-
-        generatePosts();
+        if (!oppClicked && !expClicked && !virClicked && !teachClicked && !envClicked && !recClicked && !disClicked)
+            generatePosts("");
         ImageView postCreateBtn = findViewById(R.id.create_post_button);
         postCreateBtn.setOnClickListener(v -> openPostCreate());
     }
@@ -92,15 +113,19 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void generatePosts() {
+    public void generatePosts(String tag) {
         ArrayList<Post> posts = new ArrayList<>();
+
         FirebaseDatabase.getInstance().getReference().child("Posts")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Post post = snapshot.getValue(Post.class);
-                            posts.add(post);
+                            if (post.getTags().contains(tag))
+                                posts.add(post);
+                            else if (tag.isEmpty())
+                                posts.add(post);
                         }
                         Collections.reverse(posts);
                         RecyclerView rView = findViewById(R.id.rView);
