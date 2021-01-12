@@ -126,6 +126,14 @@
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
+                <CheckBox
+                    android:id="@+id/new_post_experience"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="My Experiences"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
                 <Button
                     android:id="@+id/new_post_button"
                     android:layout_width="match_parent"
