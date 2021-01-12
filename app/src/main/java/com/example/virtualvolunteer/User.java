@@ -14,9 +14,9 @@ public class User {
     private String bio;
     private String skills;
     private int validHours;
-    private boolean isOrganizer;
+    private boolean organizer;
 
-    private static ArrayList<Long> savedPosts = new ArrayList<>();
+    private static ArrayList<Long> posts = new ArrayList<>();
     private static ArrayList<String> orgs = new ArrayList<>();
 
     public User() {
@@ -57,9 +57,9 @@ public class User {
         this.bio = bio;
         this.validHours = validHours;
         this.skills = skills;
-        this.savedPosts = new ArrayList<Long>();
+        this.posts = new ArrayList<Long>();
         this.orgs = new ArrayList<String>();
-        this.isOrganizer = isOrganizer;
+        this.organizer = isOrganizer;
     }
 
     public String getName() {
@@ -94,10 +94,10 @@ public class User {
         return bio;
     }
 
-    public boolean getOrganizer(){return isOrganizer;}
+    public boolean getOrganizer(){return organizer;}
 
     public ArrayList<Long> getPosts() {
-        return savedPosts;
+        return posts;
     }
 
     public ArrayList<String> getOrgs() {
@@ -141,11 +141,11 @@ public class User {
     }
 
     public String addPost(long post) {
-        if (savedPosts.contains(post)) {
-            savedPosts.remove(post);
+        if (posts.contains(post)) {
+            posts.remove(post);
             return "Post Unsaved";
         } else {
-            savedPosts.add(post);
+            posts.add(post);
             return "Post Saved";
         }
     }

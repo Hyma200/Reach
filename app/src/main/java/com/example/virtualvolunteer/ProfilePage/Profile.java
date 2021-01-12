@@ -101,6 +101,13 @@ public class Profile extends AppCompatActivity {
                 orgs.setAdapter(adapter);
                 if (upload != null)
                     Picasso.with(Profile.this).load(upload.getImageUrl()).resize(200, 200).centerCrop().into(image);
+
+                if (!profileUser.getOrganizer()) {
+                    orgBadge.setVisibility(View.INVISIBLE);
+                }
+                else{
+                    orgBadge.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
@@ -114,10 +121,7 @@ public class Profile extends AppCompatActivity {
         editBtn.setOnClickListener(v -> {
             openProfileEdit();
         });
-        /*  TODO:
-        if(!FirebaseAuth.getInstance().getCurrentUser().isOrganizer()){
-            orgBadge.setVisibility(View.INVISIBLE);
-        }*/
+
 
     }
 
