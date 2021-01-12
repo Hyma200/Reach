@@ -8,6 +8,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.renderscript.Sampler;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -82,6 +84,9 @@ public class LogSubmit extends AppCompatActivity {
 
         BottomNavigationView navView = findViewById(R.id.Bottom_navigation_icon);
         Navigation.enableNavigationClick(this, navView);
+        Menu menu = navView.getMenu();
+        MenuItem menuItem = menu.getItem(2);
+        menuItem.setChecked(true);
 
         date.setOnClickListener(new View.OnClickListener() {
             @Override

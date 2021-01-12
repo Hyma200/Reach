@@ -88,7 +88,6 @@ public class PostCreate extends AppCompatActivity {
     }
 
     public void storePost(String description) {
-        // TODO:  add tags to database, use isChecked()
         ArrayList<String> tags = new ArrayList<String>();
         if (opportunityTag.isChecked()) tags.add("Opportunity");
         if (virtualTag.isChecked()) tags.add("Virtual");
