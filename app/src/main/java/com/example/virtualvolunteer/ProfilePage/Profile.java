@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.virtualvolunteer.LoggingPage.Hour;
 import com.example.virtualvolunteer.Navigation;
 import com.example.virtualvolunteer.R;
 import com.example.virtualvolunteer.Upload;
@@ -48,6 +49,7 @@ public class Profile extends AppCompatActivity {
     private TextView skills;
     private TextView hours;
     private ListView orgs;
+    private TextView verifiedHours;
     private ImageView image;
     private Button editBtn;
     private ArrayAdapter<String> adapter;
@@ -67,15 +69,16 @@ public class Profile extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(4);
         menuItem.setChecked(true);
 
-        name = (TextView) findViewById(R.id.profile_name);
-        email = (TextView) findViewById(R.id.profile_email);
-        location = (TextView) findViewById(R.id.profile_location);
-        bio = (TextView) findViewById(R.id.profile_bio);
-        skills = (TextView) findViewById(R.id.profile_skills);
-        hours = (TextView) findViewById(R.id.profile_hours);
-        orgs = (ListView) findViewById(R.id.profile_orgs);
-        image = (ImageView) findViewById(R.id.profile_image);
-        editBtn = (Button) findViewById(R.id.profile_edit_button);
+        name = findViewById(R.id.profile_name);
+        email = findViewById(R.id.profile_email);
+        location = findViewById(R.id.profile_location);
+        bio = findViewById(R.id.profile_bio);
+        skills = findViewById(R.id.profile_skills);
+        hours = findViewById(R.id.profile_hours);
+        orgs = findViewById(R.id.profile_orgs);
+        image = findViewById(R.id.profile_image);
+        editBtn = findViewById(R.id.profile_edit_button);
+        verifiedHours = findViewById(R.id.profile_verified);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -84,6 +87,10 @@ public class Profile extends AppCompatActivity {
                 name.setText(profileUser.getName());
                 String h = (profileUser.getHours() != 1) ? " Hours" : " Hour";
                 hours.setText(profileUser.getHours() + h + " Volunteered");
+
+                String vh = (profileUser.getValidHours() != 1) ? " Hours" : " Hour";
+                verifiedHours.setText(profileUser.getValidHours() + " Verified" + vh);
+
                 email.setText(profileUser.getEmail());
                 email.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
                 location.setText(profileUser.getLocation());

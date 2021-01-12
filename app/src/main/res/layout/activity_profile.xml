@@ -160,6 +160,17 @@
                     android:textSize="22sp" />
 
                 <TextView
+                    android:id="@+id/profile_verified"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="Hours Volunteered"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:textColor="#FFFFFF"
+                    android:textSize="22sp" />
+
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
