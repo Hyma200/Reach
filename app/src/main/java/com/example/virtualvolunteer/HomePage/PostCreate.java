@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -32,6 +33,12 @@ public class PostCreate extends AppCompatActivity {
     private EditText description;
     private ImageView postImage;
     private Uri imageUri;
+    private CheckBox opportunityTag;
+    private CheckBox virtualTag;
+    private CheckBox teachingTag;
+    private CheckBox environmentalTag;
+    private CheckBox recreationalTag;
+    private CheckBox distributionTag;
     private final int PICK_IMAGE_REQUEST = 123;
     private final StorageReference storageRef = FirebaseStorage.getInstance().getReference("uploads");
 
@@ -44,6 +51,11 @@ public class PostCreate extends AppCompatActivity {
         Button postBtn = findViewById(R.id.new_post_button);
         Button postImagePicker = findViewById(R.id.new_post_image_picker);
         postImage = findViewById(R.id.new_post_image);
+        opportunityTag = findViewById(R.id.new_post_opportunity);
+        virtualTag = findViewById(R.id.new_post_virtual);
+        teachingTag = findViewById(R.id.new_post_teaching);
+        environmentalTag = findViewById(R.id.new_post_environmental);
+        recreationalTag = findViewById(R.id.new_post_recreational);
 
         BottomNavigationView navView = findViewById(R.id.Bottom_navigation_icon);
         Navigation.enableNavigationClick(this, navView);
@@ -72,6 +84,7 @@ public class PostCreate extends AppCompatActivity {
     }
 
     public void storePost(String description) {
+        // TODO:  add tags to database, use isChecked()
         StorageReference photoRef = storageRef.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
         photoRef.putFile(imageUri).addOnSuccessListener(taskSnapshot -> {
             if (taskSnapshot.getMetadata() != null) {

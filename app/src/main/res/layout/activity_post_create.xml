@@ -1,93 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
     android:fitsSystemWindows="true">
 
     <RelativeLayout
+        android:id="@+id/parent"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="100px">
 
-            <include layout="@layout/layout_view_pager_center" />
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="355dp"
+                android:layout_height="532dp"
+                android:layout_marginStart="34dp"
+                android:layout_marginTop="34dp"
+                android:layout_marginEnd="34dp"
+                android:layout_marginBottom="34dp"
+                android:foregroundGravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.489"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView8">
 
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="355dp"
-            android:layout_height="532dp"
-            android:layout_marginStart="34dp"
-            android:layout_marginTop="34dp"
-            android:layout_marginEnd="34dp"
-            android:layout_marginBottom="34dp"
-            android:foregroundGravity="center"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.489"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:layout_marginTop="0dp"
-                android:gravity="center"
-                android:text="New Post"
-                android:textColor="@color/white"
-                android:textSize="30sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="0dp"
+                    android:gravity="center"
+                    android:text="New Post"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:textColor="@color/white"
+                    android:textSize="30sp" />
 
 
-            <EditText
-                android:id="@+id/new_post_description"
-                android:layout_width="349dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:autofillHints=""
-                android:backgroundTint="#fff"
-                android:ems="10"
-                android:foregroundTint="#fff"
-                android:hint="Description"
-                android:inputType="text"
-                android:textColor="@color/dark_purple"
-                android:textColorHighlight="#D1BBEC"
-                android:textColorHint="#FFFFFF"
-                android:textColorLink="@color/teal" />
+                <EditText
+                    android:id="@+id/new_post_description"
+                    android:layout_width="349dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:autofillHints=""
+                    android:backgroundTint="#fff"
+                    android:ems="10"
+                    android:foregroundTint="#fff"
+                    android:hint="Description"
+                    android:inputType="text"
+                    android:textColor="@color/dark_purple"
+                    android:textColorHighlight="#D1BBEC"
+                    android:textColorHint="#FFFFFF"
+                    android:textColorLink="@color/teal" />
 
-            <Button
-                android:id="@+id/new_post_image_picker"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="upload image" />
+                <Button
+                    android:id="@+id/new_post_image_picker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="upload image" />
 
-            <ImageView
-                android:id="@+id/new_post_image"
-                android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:layout_marginTop="12dp" />
+                <ImageView
+                    android:id="@+id/new_post_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="12dp" />
 
-            <Button
-                android:id="@+id/new_post_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
-                android:background="#FFFFFF"
-                android:backgroundTint="#FFFFFF"
-                android:text="Post"
-                android:textColor="@color/dark_purple" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center"
+                    android:text="Tags"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:textColor="@color/white"
+                    android:textSize="24sp" />
 
-        </LinearLayout>
+                <CheckBox
+                    android:id="@+id/new_post_opportunity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Volunteer Opportunity"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+                <CheckBox
+                    android:id="@+id/new_post_virtual"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Virtual"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+                <CheckBox
+                    android:id="@+id/new_post_teaching"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Teaching"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+                <CheckBox
+                    android:id="@+id/new_post_environmental"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Environmental"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+                <CheckBox
+                    android:id="@+id/new_post_recreational"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Recreational"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+                <CheckBox
+                    android:id="@+id/new_post_distribution"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Distribution"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
-        <include layout="@layout/layout_bottom_navigation_toolbar" />
+                <Button
+                    android:id="@+id/new_post_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginBottom="84dp"
+                    android:background="#FFFFFF"
+                    android:backgroundTint="#FFFFFF"
+                    android:text="Post"
+                    android:textColor="@color/dark_purple" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <include
+            android:id="@+id/navigation"
+            layout="@layout/layout_bottom_navigation_toolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     </RelativeLayout>
 
