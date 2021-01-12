@@ -1,17 +1,13 @@
 package com.example.virtualvolunteer.HomePage;
 
-import android.provider.ContactsContract;
-
 public class Post {
+
     // POJO for post data
 
-
-    private static final long serialVersionUID = -3760445487636086034L;
     private String email = "";
     private String description;
     private String imageURL;
     private Long creationTime;
-    private String key;
 
     public Post() {
         this.email = "";
@@ -43,11 +39,9 @@ public class Post {
         return this.creationTime;
     }
 
-
     public void setEmail(String email) {
         this.email = email;
     }
-
 
     public void setDescription(String description) {
         this.description = description;

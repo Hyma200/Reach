@@ -4,29 +4,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.virtualvolunteer.LoggingPage.Hour;
-import com.example.virtualvolunteer.LoggingPage.LogView;
 import com.example.virtualvolunteer.ProfilePage.Profile;
 import com.example.virtualvolunteer.R;
-import com.example.virtualvolunteer.Upload;
 import com.example.virtualvolunteer.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -96,7 +89,6 @@ public class HourAdapter extends RecyclerView.Adapter<HourAdapter.ViewHolder> {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-
                 }
             });
         }
@@ -104,7 +96,6 @@ public class HourAdapter extends RecyclerView.Adapter<HourAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.hour_item, viewGroup, false);
         ViewHolder viewHolder = new ViewHolder(view);
@@ -112,7 +103,6 @@ public class HourAdapter extends RecyclerView.Adapter<HourAdapter.ViewHolder> {
         return viewHolder;
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         viewHolder.bind(hours.get(position));

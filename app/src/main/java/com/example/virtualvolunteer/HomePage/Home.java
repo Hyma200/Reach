@@ -15,8 +15,6 @@ import android.widget.ImageView;
 
 import com.example.virtualvolunteer.Navigation;
 import com.example.virtualvolunteer.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -28,30 +26,23 @@ import java.util.Collections;
 
 
 public class Home extends AppCompatActivity {
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-    private static final String TAG = "Database";
-    private ImageView postCreateBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
         BottomNavigationView navView = findViewById(R.id.Bottom_navigation_icon);
         Navigation.enableNavigationClick(this, navView);
         Menu menu = navView.getMenu();
         MenuItem menuItem = menu.getItem(0);
         menuItem.setChecked(true);
+
         generatePosts();
-
-        postCreateBtn = (ImageView) findViewById(R.id.create_post_button);
-
-        postCreateBtn.setOnClickListener(v -> {
-            openPostCreate();
-        });
-
+        ImageView postCreateBtn = findViewById(R.id.create_post_button);
+        postCreateBtn.setOnClickListener(v -> openPostCreate());
     }
 
     public void openPostCreate() {
@@ -59,14 +50,14 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void generatePosts() {  //temporary generation for testing
+    public void generatePosts() {
         ArrayList<Post> posts = new ArrayList<>();
         FirebaseDatabase.getInstance().getReference().child("Posts")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            Post post = (Post) snapshot.getValue(Post.class);
+                            Post post = snapshot.getValue(Post.class);
                             posts.add(post);
                         }
                         Collections.reverse(posts);
@@ -80,5 +71,4 @@ public class Home extends AppCompatActivity {
                     }
                 });
     }
-
 }

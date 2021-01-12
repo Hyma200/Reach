@@ -2,13 +2,9 @@ package com.example.virtualvolunteer.HomePage;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.renderscript.Sampler;
 import android.text.format.DateUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +15,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.virtualvolunteer.Login;
 import com.example.virtualvolunteer.ProfilePage.Profile;
 import com.example.virtualvolunteer.R;
-import com.example.virtualvolunteer.SavedPage.Saved;
 import com.example.virtualvolunteer.Upload;
 import com.example.virtualvolunteer.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -39,19 +31,17 @@ import com.squareup.picasso.Picasso;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     DatabaseReference usersRef;
     String email = FirebaseAuth.getInstance().getCurrentUser().getEmail().replace('.', '_');
     DatabaseReference currentUserRef = FirebaseDatabase.getInstance().getReference("Users").child(email);
-    private ArrayList<Post> posts;
-    private Context home;
+    private final ArrayList<Post> posts;
+    private final Context context;
     private User currentUser;
-    private MutableLiveData<User> userLiveData = new MutableLiveData<>();
+    private final MutableLiveData<User> userLiveData = new MutableLiveData<>();
     private MutableLiveData<User> getData(){
         currentUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            String result = "";
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()){
@@ -69,7 +59,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     public PostAdapter(ArrayList<Post> items, Context home) {
         this.posts = items;
-        this.home = home;
+        this.context = home;
         usersRef = FirebaseDatabase.getInstance().getReference("Users");
         currentUser = new User();
     }
@@ -80,14 +70,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
      */
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private View itemView;
-        private TextView post_username;
-        private TextView post_description;
-        private ImageView post_image;
-        private ImageView post_profile_image;
-        private TextView post_relative_time;
-        private ImageView post_saved;
-        private Context context;
+        private final TextView post_username;
+        private final TextView post_description;
+        private final ImageView post_image;
+        private final ImageView post_profile_image;
+        private final TextView post_relative_time;
+        private final ImageView post_saved;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -106,51 +94,45 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             String newEmail = post.getEmail().replace('.', '_');
             usersRef = usersRef.child(newEmail);
 
-            post_saved.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String result = currentUser.addPost(post.getCreationTime());
-                    if(result.contains("Unsaved")){
-                        post_saved.setImageResource(R.drawable.ic_post_save);
-                    }
-                    else{
-                        post_saved.setImageResource(R.drawable.ic_post_saved);
-                    }
-                    currentUserRef.setValue(currentUser);
-                    Toast toast = Toast.makeText(home, result,
-                            Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
+            post_saved.setOnClickListener(v -> {
+                String result = currentUser.addPost(post.getCreationTime());
+                if(result.contains("Unsaved")){
+                    post_saved.setImageResource(R.drawable.ic_post_save);
                 }
+                else{
+                    post_saved.setImageResource(R.drawable.ic_post_saved);
+                }
+                currentUserRef.setValue(currentUser);
+                Toast.makeText(PostAdapter.this.context, result, Toast.LENGTH_SHORT).show();
             });
+
             usersRef.addValueEventListener(new ValueEventListener() {
                 User user;
                 String key = "";
+
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                     if (snapshot.exists()) {
                         key = snapshot.getKey();
                         user = snapshot.getValue(User.class);
                         post_username.setText(user.getName());
                         Upload upload = user.getUpload();
                         if (upload != null)
-                            Picasso.with(home).load(upload.getImageUrl()).resize(200, 200).centerCrop().into(post_profile_image);
+                            Picasso.with(PostAdapter.this.context).load(upload.getImageUrl()).resize(200, 200).centerCrop().into(post_profile_image);
                         usersRef.removeEventListener(this);
                     }
-                    post_description.setText(post.getDescription());;
-                    Picasso.with(home).load(post.getImageURL()).resize(200, 200).centerCrop().into(post_image);
+
+                    post_description.setText(post.getDescription());
+                    Picasso.with(PostAdapter.this.context).load(post.getImageURL()).resize(200, 200).centerCrop().into(post_image);
                     post_relative_time.setText(DateUtils.getRelativeTimeSpanString(post.getCreationTime()));
-                    post_username.setOnClickListener(v -> {
-                        viewProfile(key);
-                    });
-                    getData().observe((LifecycleOwner) home, new Observer<User>() {
-                        @Override
-                        public void onChanged(User user) {
-                            if (user.getPosts().contains(post.getCreationTime()))
-                                post_saved.setImageResource(R.drawable.ic_post_saved);
-                            else
-                                post_saved.setImageResource(R.drawable.ic_post_save);
-                        }
+                    post_username.setOnClickListener(v -> viewProfile(key));
+
+                    getData().observe((LifecycleOwner) PostAdapter.this.context, user -> {
+                        if (user.getPosts().contains(post.getCreationTime()))
+                            post_saved.setImageResource(R.drawable.ic_post_saved);
+                        else
+                            post_saved.setImageResource(R.drawable.ic_post_save);
                     });
                 }
                 @Override
@@ -161,18 +143,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         }
     }
 
-
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.post_item, viewGroup, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         usersRef = FirebaseDatabase.getInstance().getReference("Users");
@@ -186,10 +164,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     }
 
     public void viewProfile(String email) {
-        Intent intent = new Intent(home, Profile.class);
+        Intent intent = new Intent(context, Profile.class);
         Bundle bundle = new Bundle();
         bundle.putString("Email", email.replace('.', '_'));
         intent.putExtras(bundle);
-        home.startActivity(intent);
+        context.startActivity(intent);
     }
 }
