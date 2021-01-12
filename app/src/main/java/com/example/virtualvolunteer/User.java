@@ -14,6 +14,7 @@ public class User {
     private String bio;
     private String skills;
     private int validHours;
+    private boolean isOrganizer;
 
     private static ArrayList<Long> savedPosts = new ArrayList<>();
     private static ArrayList<String> orgs = new ArrayList<>();
@@ -47,7 +48,7 @@ public class User {
         this.skills = skills;
     }
 
-    public User(String name, String email, Upload upload, String location, int hours, String bio, String skills, ArrayList<Long> posts, ArrayList<String> orgs, int validHours) {
+    public User(String name, String email, Upload upload, String location, int hours, String bio, String skills, ArrayList<Long> posts, ArrayList<String> orgs, int validHours, boolean isOrganizer) {
         this.name = name;
         this.email = email;
         this.upload = upload;
@@ -58,6 +59,7 @@ public class User {
         this.skills = skills;
         this.savedPosts = new ArrayList<Long>();
         this.orgs = new ArrayList<String>();
+        this.isOrganizer = isOrganizer;
     }
 
     public String getName() {
@@ -91,6 +93,8 @@ public class User {
     public String getBio() {
         return bio;
     }
+
+    public boolean getOrganizer(){return isOrganizer;}
 
     public ArrayList<Long> getPosts() {
         return savedPosts;
