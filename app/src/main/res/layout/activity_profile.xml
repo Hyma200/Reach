@@ -29,6 +29,18 @@
                 android:orientation="vertical">
 
 
+                <TextView
+                    android:id="@+id/logout_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="264dp"
+                    android:layout_marginTop="36dp"
+                    android:text="SIGN OUT"
+                    android:textSize="18sp"
+                    android:clickable="true"
+                    android:textColor="@color/white"/>
+
+
                 <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">

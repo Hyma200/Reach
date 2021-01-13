@@ -51,6 +51,7 @@ public class Profile extends AppCompatActivity {
     private ImageView image;
     private Button editBtn;
     private ImageView orgBadge;
+    private TextView logoutBtn;
     private ArrayAdapter<String> adapter;
 
     ArrayList<String> data = new ArrayList<String>();
@@ -79,6 +80,7 @@ public class Profile extends AppCompatActivity {
         editBtn = findViewById(R.id.profile_edit_button);
         orgBadge = findViewById(R.id.profile_org_badge);
         verifiedHours = findViewById(R.id.profile_verified);
+        logoutBtn = findViewById(R.id.logout_btn);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -120,6 +122,9 @@ public class Profile extends AppCompatActivity {
         }
         editBtn.setOnClickListener(v -> {
             openProfileEdit();
+        });
+        logoutBtn.setOnClickListener(v -> {
+            // TODO:  add logout functionality
         });
 
 
