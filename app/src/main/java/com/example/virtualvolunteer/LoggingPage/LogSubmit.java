@@ -40,14 +40,10 @@ public class LogSubmit extends AppCompatActivity {
     private Button submitBtn;
     private EditText organization;
     private EditText event;
-    //private TextView date;
-    //
-    private static final String TAG = "LogSubmit";
-    private TextView date;
-    private DatePickerDialog.OnDateSetListener dateSetListener;
-
-    //
     private EditText verifyEmail;
+    private EditText month;
+    private EditText day;
+    private EditText year;
     private String name = "";
     private EditText hours;
     private User currentUser;
@@ -78,7 +74,9 @@ public class LogSubmit extends AppCompatActivity {
         submitBtn = findViewById(R.id.submit_hours);
         organization = findViewById(R.id.organization);
         event = findViewById(R.id.event);
-        date = findViewById(R.id.date);
+        month = findViewById(R.id.month);
+        day = findViewById(R.id.day);
+        year = findViewById(R.id.year);
         hours = findViewById(R.id.hours);
         verifyEmail = findViewById(R.id.verifyEmail);
 
@@ -87,29 +85,6 @@ public class LogSubmit extends AppCompatActivity {
         Menu menu = navView.getMenu();
         MenuItem menuItem = menu.getItem(2);
         menuItem.setChecked(true);
-
-        date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog dialog = new DatePickerDialog(LogSubmit.this,
-                        android.R.style.Widget_Holo_ActionBar_Solid, dateSetListener, year, month, day);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
-                dialog.show();
-            }
-        });
-        dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                month = month + 1;
-                String displayDate = month + "/" + dayOfMonth + "/" + year;
-                date.setText(displayDate);
-            }
-        };
 
 
         submitBtn.setOnClickListener(v -> {
@@ -125,8 +100,20 @@ public class LogSubmit extends AppCompatActivity {
                 toast.show();
                 return;
             }
-            if (date.getText().toString().isEmpty()) {
+            if (month.getText().toString().isEmpty()) {
+                Toast toast = Toast.makeText(LogSubmit.this, "Month description cannot be empty",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
+            if (day.getText().toString().isEmpty()) {
                 Toast toast = Toast.makeText(LogSubmit.this, "Date description cannot be empty",
+                        Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
+            if (year.getText().toString().isEmpty()) {
+                Toast toast = Toast.makeText(LogSubmit.this, "Year description cannot be empty",
                         Toast.LENGTH_SHORT);
                 toast.show();
                 return;
@@ -145,7 +132,8 @@ public class LogSubmit extends AppCompatActivity {
             }
             String key = myRef.push().getKey();
             myRef = myRef.child(key);
-            hour = new Hour(organization.getText().toString(), Integer.parseInt(hours.getText().toString()),event.getText().toString(),mAuth.getCurrentUser().getEmail(),date.getText().toString(), "0", false);
+            String date = month.getText().toString() + "/" + day.getText().toString() + "/" + year.getText().toString();
+            hour = new Hour(organization.getText().toString(), Integer.parseInt(hours.getText().toString()),event.getText().toString(),mAuth.getCurrentUser().getEmail(),date, "0", false);
             myRef.setValue(hour);
             currentUser.addOrg(organization.getText().toString());
             currentUser.setHours(currentUser.getHours() + Integer.parseInt(hours.getText().toString()));

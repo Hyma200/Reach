@@ -95,20 +95,100 @@
                 android:textColorHint="#FFFFFF"
                 android:textColorLink="@color/teal" />
 
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="349dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:autofillHints=""
-                android:backgroundTint="#fff"
-                android:ems="10"
-                android:foregroundTint="#fff"
-                android:hint="Date"
-                android:textColor="@color/dark_purple"
-                android:textColorHighlight="#D1BBEC"
-                android:textColorHint="#FFFFFF"
-                android:textColorLink="@color/teal" />
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TableRow android:layout_marginStart="0dp">
+
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:backgroundTint="#fff"
+                        android:foregroundTint="#fff"
+                        android:text="Date: "
+                        android:textColor="@color/white"
+                        android:textColorHighlight="#D1BBEC"
+                        android:textColorHint="#FFFFFF"
+                        android:textColorLink="@color/teal"
+                        android:textSize="20sp" />
+
+                    <EditText
+                        android:id="@+id/month"
+                        android:layout_width="64dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:autofillHints=""
+                        android:backgroundTint="#fff"
+                        android:ems="10"
+                        android:foregroundTint="#fff"
+                        android:hint="Month"
+                        android:inputType="number"
+                        android:textColor="@color/dark_purple"
+                        android:textColorHighlight="#D1BBEC"
+                        android:textColorHint="#FFFFFF"
+                        android:textColorLink="@color/teal" />
+
+                    <TextView
+                        android:id="@+id/slash1"
+                        android:layout_width="23dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text=" / "
+                        android:textColor="@color/white"
+                        android:textColorHighlight="#D1BBEC"
+                        android:textColorHint="#FFFFFF"
+                        android:textColorLink="@color/teal"
+                        android:textSize="26sp" />
+
+                    <EditText
+                        android:id="@+id/day"
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:autofillHints=""
+                        android:backgroundTint="#fff"
+                        android:ems="10"
+                        android:foregroundTint="#fff"
+                        android:hint= "Day"
+                        android:inputType="number"
+                        android:textColor="@color/dark_purple"
+                        android:textColorHighlight="#D1BBEC"
+                        android:textColorHint="#FFFFFF"
+                        android:textColorLink="@color/teal" />
+
+                    <TextView
+                        android:id="@+id/slash2"
+                        android:layout_width="23dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text=" / "
+                        android:textColor="@color/white"
+                        android:textColorHighlight="#D1BBEC"
+                        android:textColorHint="#FFFFFF"
+                        android:textColorLink="@color/teal"
+                        android:textSize="26sp" />
+
+                    <EditText
+                        android:id="@+id/year"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:autofillHints=""
+                        android:backgroundTint="#fff"
+                        android:ems="10"
+                        android:foregroundTint="#fff"
+                        android:hint="Year"
+                        android:inputType="number"
+                        android:textColor="@color/dark_purple"
+                        android:textColorHighlight="#D1BBEC"
+                        android:textColorHint="#FFFFFF"
+                        android:textColorLink="@color/teal" />
+
+                </TableRow>
+
+            </TableLayout>
 
             <EditText
                 android:id="@+id/hours"
