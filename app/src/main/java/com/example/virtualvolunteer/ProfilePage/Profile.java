@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.virtualvolunteer.Login;
 import com.example.virtualvolunteer.Navigation;
 import com.example.virtualvolunteer.R;
 import com.example.virtualvolunteer.Upload;
@@ -125,6 +126,9 @@ public class Profile extends AppCompatActivity {
         });
         logoutBtn.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(this, Login.class);
+            startActivity(intent);
+
         });
     }
 
