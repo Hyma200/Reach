@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.virtualvolunteer.Navigation;
 import com.example.virtualvolunteer.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -103,7 +104,7 @@ public class Home extends AppCompatActivity {
         });
         if (!oppClicked && !expClicked && !virClicked && !teachClicked && !envClicked && !recClicked && !disClicked)
             generatePosts("");
-        ImageView postCreateBtn = findViewById(R.id.create_post_button);
+        FloatingActionButton postCreateBtn = findViewById(R.id.create_post_button);
         postCreateBtn.setOnClickListener(v -> openPostCreate());
     }
 
