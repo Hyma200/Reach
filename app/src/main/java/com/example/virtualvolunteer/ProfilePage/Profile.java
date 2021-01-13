@@ -124,10 +124,8 @@ public class Profile extends AppCompatActivity {
             openProfileEdit();
         });
         logoutBtn.setOnClickListener(v -> {
-            // TODO:  add logout functionality
+            FirebaseAuth.getInstance().signOut();
         });
-
-
     }
 
     public void openProfileEdit() {
