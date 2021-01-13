@@ -54,7 +54,7 @@ public class Profile extends AppCompatActivity {
     private ImageView image;
     private Button editBtn;
     private ImageView orgBadge;
-    private TextView logoutBtn;
+    private Button logoutBtn;
     private ArrayAdapter<String> adapter;
     private TextView orgsLabel;
 

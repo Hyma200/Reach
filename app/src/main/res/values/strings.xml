@@ -4,6 +4,7 @@
     <string name="sign_up">Sign Up</string>
     <string name="create_account">Create An Account</string>
     <string name="sign_up_u"><u>Sign Up</u></string>
+    <string name="sign_out_u"><u>Sign Out</u></string>
     <string name="login_password">Password</string>
     <string name="login_button">Login</string>
     <string name="login_debug">Debug</string>
