@@ -21,7 +21,6 @@
                 android:id="@+id/saved_rView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="64dp"
                 android:layout_marginBottom="48dp" />
 
         </RelativeLayout>

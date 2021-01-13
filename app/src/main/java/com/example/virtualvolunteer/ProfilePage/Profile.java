@@ -136,7 +136,7 @@ public class Profile extends AppCompatActivity {
         logoutBtn.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(this, Login.class);
-            Toast toast = Toast.makeText(Profile.this, "User logged out successfully",
+            Toast toast = Toast.makeText(Profile.this, "Successfully Logged Out",
                     Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
