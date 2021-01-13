@@ -3,6 +3,7 @@ package com.example.virtualvolunteer.ProfilePage;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -15,7 +16,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.virtualvolunteer.Login;
 import com.example.virtualvolunteer.Navigation;
 import com.example.virtualvolunteer.R;
 import com.example.virtualvolunteer.Upload;
@@ -51,8 +54,9 @@ public class Profile extends AppCompatActivity {
     private ImageView image;
     private Button editBtn;
     private ImageView orgBadge;
-    private TextView logoutBtn;
+    private Button logoutBtn;
     private ArrayAdapter<String> adapter;
+    private TextView orgsLabel;
 
     ArrayList<String> data = new ArrayList<String>();
 
@@ -81,7 +85,7 @@ public class Profile extends AppCompatActivity {
         orgBadge = findViewById(R.id.profile_org_badge);
         verifiedHours = findViewById(R.id.profile_verified);
         logoutBtn = findViewById(R.id.logout_btn);
-
+        orgsLabel = findViewById(R.id.orgsLabel);
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -109,7 +113,11 @@ public class Profile extends AppCompatActivity {
                 }
                 else{
                     orgBadge.setVisibility(View.VISIBLE);
+                    hours.setVisibility(View.INVISIBLE);
+                    verifiedHours.setVisibility(View.INVISIBLE);
+                    orgsLabel.setVisibility(View.INVISIBLE);
                 }
+
             }
 
             @Override
@@ -119,12 +127,20 @@ public class Profile extends AppCompatActivity {
         });
         if (!FirebaseAuth.getInstance().getCurrentUser().getEmail().replace('.', '_').equals(intentEmail)) {
             editBtn.setVisibility(View.INVISIBLE);
+            logoutBtn.setVisibility(View.INVISIBLE);
+
         }
         editBtn.setOnClickListener(v -> {
             openProfileEdit();
         });
         logoutBtn.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(this, Login.class);
+            Toast toast = Toast.makeText(Profile.this, "Successfully Logged Out",
+                    Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            startActivity(intent);
         });
     }
 

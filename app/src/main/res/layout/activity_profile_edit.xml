@@ -104,7 +104,7 @@
                     android:textColorLink="@color/teal" />
 
                 <EditText
-                    android:id="@+id/skills"
+                    android:id="@+id/skillsImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"

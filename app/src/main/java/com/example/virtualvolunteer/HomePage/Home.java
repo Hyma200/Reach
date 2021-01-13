@@ -64,44 +64,79 @@ public class Home extends AppCompatActivity {
         environmentalTag = findViewById(R.id.tag_environmental);
         recreationalTag = findViewById(R.id.tag_recreational);
         distributionTag = findViewById(R.id.tag_distribution);
-
+        ArrayList<String> tags = new ArrayList<String>();
         opportunityTag.setOnClickListener(v -> {
             Toast.makeText(this, "opportunity tag", Toast.LENGTH_SHORT).show();
             oppClicked = !oppClicked;
-            generatePosts("Opportunity");
+            if (oppClicked){
+                //TODO: Darken background color
+                //v.setBackgroundColor();
+                tags.add("Opportunity");
+            }
+            else{
+                //TODO: Revert background color
+                //v.setBackgroundColor();
+                tags.remove("Opportunity");
+            }
+
+            generatePosts(tags);
         });
         experienceTag.setOnClickListener(v -> {
             Toast.makeText(this, "experience tag", Toast.LENGTH_SHORT).show();
             expClicked = !expClicked;
-            generatePosts("Experience");
+            if (expClicked)
+                tags.add("Experience");
+            else
+                tags.remove("Experience");
+            generatePosts(tags);
         });
         virtualTag.setOnClickListener(v -> {
             Toast.makeText(this, "virtual tag", Toast.LENGTH_SHORT).show();
             virClicked = !virClicked;
-            generatePosts("Virtual");
+            if (virClicked)
+                tags.add("Virtual");
+            else
+                tags.remove("Virtual");
+            generatePosts(tags);
         });
         teachingTag.setOnClickListener(v -> {
             Toast.makeText(this, "teaching tag", Toast.LENGTH_SHORT).show();
             teachClicked = !teachClicked;
-            generatePosts("Teaching");
+            if (teachClicked)
+                tags.add("Teaching");
+            else
+                tags.remove("Teaching");
+            generatePosts(tags);
         });
         environmentalTag.setOnClickListener(v -> {
             Toast.makeText(this, "environmental tag", Toast.LENGTH_SHORT).show();
             envClicked = !envClicked;
-            generatePosts("Environment");
+            if (envClicked)
+                tags.add("Environment");
+            else
+                tags.remove("Environment");
+            generatePosts(tags);
         });
         recreationalTag.setOnClickListener(v -> {
             Toast.makeText(this, "recreational tag", Toast.LENGTH_SHORT).show();
             recClicked = !recClicked;
-            generatePosts("Recreational");
+            if (recClicked)
+                tags.add("Recreational");
+            else
+                tags.remove("Recreational");
+            generatePosts(tags);
         });
         distributionTag.setOnClickListener(v -> {
             Toast.makeText(this, "distribution tag", Toast.LENGTH_SHORT).show();
             disClicked = !disClicked;
-            generatePosts("Distribution");
+            if (disClicked)
+                tags.add("Distribution");
+            else
+                tags.remove("Distribution");
+            generatePosts(tags);
         });
         if (!oppClicked && !expClicked && !virClicked && !teachClicked && !envClicked && !recClicked && !disClicked)
-            generatePosts("");
+            generatePosts(null);
         ImageView postCreateBtn = findViewById(R.id.create_post_button);
         postCreateBtn.setOnClickListener(v -> openPostCreate());
     }
@@ -111,19 +146,22 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void generatePosts(String tag) {
+    public void generatePosts(ArrayList <String> tags) {
         ArrayList<Post> posts = new ArrayList<>();
-
         FirebaseDatabase.getInstance().getReference().child("Posts")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Post post = snapshot.getValue(Post.class);
-                            if (post.getTags().contains(tag))
+                            if (tags == null)
                                 posts.add(post);
-                            else if (tag.isEmpty())
-                                posts.add(post);
+                            else{
+                                for (String currentTag: tags){
+                                    if (post.getTags().contains(currentTag) && !posts.contains(post))
+                                        posts.add(post);
+                                }
+                            }
                         }
                         Collections.reverse(posts);
                         RecyclerView rView = findViewById(R.id.rView);

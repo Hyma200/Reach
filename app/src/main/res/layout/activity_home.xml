@@ -9,117 +9,140 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="148dp"
+        android:layout_height="96dp"
         android:background="@color/white">
 
-        <TableLayout
+        <LinearLayout
+            android:id="@+id/layout1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
 
-            <TableRow>
+            <Button
+                android:id="@+id/tag_opportunity"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_marginTop="6dp"
+                android:text="opportunity"
+                android:textSize="10sp" />
 
-                <ImageView
-                    android:id="@+id/create_post_button"
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginTop="12dp"
-                    android:clickable="true"
-                    app:srcCompat="@drawable/ic_add" />
-
-                <Button
-                    android:id="@+id/tag_opportunity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="42dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="12dp"
-                    android:text="opportunities"
-                    android:textSize="8sp" />
-
-                <Button
-                    android:id="@+id/tag_experience"
-                    android:layout_width="wrap_content"
-                    android:layout_height="42dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="12dp"
-                    android:text="experience"
-                    android:textSize="8sp" />
+            <Button
+                android:id="@+id/tag_experience"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="6dp"
+                android:text="experience"
+                android:textSize="10sp" />
 
 
-            </TableRow>
+            <Button
+                android:id="@+id/tag_virtual"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="6dp"
+                android:text="virtual"
+                android:minWidth="2dp"
+                android:textSize="10sp" />
 
-            <TableRow>
 
-                <Button
-                    android:id="@+id/tag_virtual"
-                    android:layout_width="wrap_content"
-                    android:layout_height="42dp"
-                    android:layout_marginStart="8dp"
-                    android:text="virtual"
-                    android:textSize="8sp" />
+            <Button
+                android:id="@+id/tag_teaching"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="6dp"
+                android:text="teaching"
+                android:minWidth="2dp"
+                android:textSize="10sp" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_below="@+id/layout1">
 
-                <Button
-                    android:id="@+id/tag_teaching"
-                    android:layout_width="wrap_content"
-                    android:layout_height="42dp"
-                    android:layout_marginStart="8dp"
-                    android:text="teaching"
-                    android:textSize="8sp" />
+            <Button
+                android:id="@+id/tag_environmental"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:text="environmental"
+                android:textSize="10sp" />
 
-                <Button
-                    android:id="@+id/tag_environmental"
-                    android:layout_width="wrap_content"
-                    android:layout_height="42dp"
-                    android:layout_marginStart="8dp"
-                    android:text="environmental"
-                    android:textSize="8sp" />
-            </TableRow>
+            <Button
+                android:id="@+id/tag_recreational"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_marginStart="8dp"
+                android:text="recreational"
+                android:textSize="10sp" />
 
-            <TableRow>
+            <Button
+                android:id="@+id/tag_distribution"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:layout_marginStart="8dp"
+                android:text="distribution"
+                android:textSize="10sp" />
+        </LinearLayout>
 
-                <Button
-                    android:id="@+id/tag_recreational"
-                    android:layout_width="wrap_content"
-                    android:layout_height="42dp"
-                    android:layout_marginStart="8dp"
-                    android:text="recreational"
-                    android:textSize="8sp" />
+    </RelativeLayout>
 
-                <Button
-                    android:id="@+id/tag_distribution"
-                    android:layout_width="wrap_content"
-                    android:layout_height="42dp"
-                    android:layout_marginStart="8dp"
-                    android:text="distribution"
-                    android:textSize="8sp" />
-            </TableRow>
-        </TableLayout>
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <include layout="@layout/layout_bottom_navigation_toolbar" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_anchor="@+id/relativeLayout"
+        app:layout_anchorGravity="center">
 
+        <include layout="@layout/layout_view_pager_center" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="96dp"
+            android:layout_marginBottom="50dp" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <include layout="@layout/layout_view_pager_center" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rView"
-                android:layout_width="match_parent"
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/create_post_button"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="148dp"
-                android:layout_marginBottom="50dp" />
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="12dp"
+                android:layout_marginBottom="64dp"
+                android:backgroundTint="@color/teal"
+                android:clickable="true"
+                app:maxImageSize="42dp"
+                app:srcCompat="@android:drawable/ic_input_add"
+                app:tint="@color/white" />
+
 
         </RelativeLayout>
-
-        <include layout="@layout/layout_bottom_navigation_toolbar" />
-
     </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
