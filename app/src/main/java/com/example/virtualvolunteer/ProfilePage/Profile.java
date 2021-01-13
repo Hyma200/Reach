@@ -3,6 +3,7 @@ package com.example.virtualvolunteer.ProfilePage;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.virtualvolunteer.Login;
 import com.example.virtualvolunteer.Navigation;
@@ -127,8 +129,11 @@ public class Profile extends AppCompatActivity {
         logoutBtn.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(this, Login.class);
+            Toast toast = Toast.makeText(Profile.this, "User logged out successfully",
+                    Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
             startActivity(intent);
-
         });
     }
 
