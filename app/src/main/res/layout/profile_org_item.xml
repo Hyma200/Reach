@@ -15,29 +15,16 @@
         android:layout_margin="8dp"
         android:orientation="vertical">
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <TableRow>
-
-                <ImageView
-                    android:layout_width="64dp"
-                    android:layout_height="48dp"
-                    app:srcCompat="@drawable/ic_profile_post" />
-
-                <TextView
-                    android:id="@+id/profile_org_item"
-                    android:layout_width="264dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="18dp"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@color/dark_purple"
-                    android:textSize="18sp"
-                    tools:text="SPCA NOVA" />
-
-            </TableRow>
-        </TableLayout>
+        <TextView
+            android:id="@+id/profile_org_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center"
+            android:textColor="@color/dark_purple"
+            android:textSize="18sp"
+            tools:text="SPCA NOVA" />
 
 
     </LinearLayout>
