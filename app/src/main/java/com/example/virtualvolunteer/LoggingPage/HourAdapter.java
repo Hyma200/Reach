@@ -43,7 +43,6 @@ public class HourAdapter extends RecyclerView.Adapter<HourAdapter.ViewHolder> {
         private View itemView;
         private TextView log_event;
         private TextView log_organization;
-        private TextView log_email;
         private TextView log_date;
         private TextView log_hours;
 
@@ -52,11 +51,10 @@ public class HourAdapter extends RecyclerView.Adapter<HourAdapter.ViewHolder> {
             itemView = itemView.findViewById(R.id.log_title);
             log_event = itemView.findViewById(R.id.log_event);
             log_organization = itemView.findViewById(R.id.log_organization);
-            log_email = itemView.findViewById(R.id.log_email);
             log_date = itemView.findViewById(R.id.log_date);
             log_hours = itemView.findViewById(R.id.log_hours);
 
-            log_organization.setTypeface(null, Typeface.BOLD);
+            log_event.setTypeface(null, Typeface.BOLD);
         }
 
         public void bind(Hour hour) {
@@ -65,7 +63,6 @@ public class HourAdapter extends RecyclerView.Adapter<HourAdapter.ViewHolder> {
 
             log_event.setText(hour.getEvent());
             log_organization.setText(hour.getOrg());
-            log_email.setText(hour.getEmail());
             log_date.setText(hour.getDate());
             String h = (hour.getHours() != 1) ? " Hours" : " Hour";
             log_hours.setText(hour.getHours() + h);

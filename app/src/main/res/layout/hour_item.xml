@@ -38,16 +38,6 @@
             tools:text="Food Pantry" />
 
         <TextView
-            android:id="@+id/log_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:autoLink="web|email"
-            android:textColor="@color/dark_purple"
-            android:textSize="18sp"
-            tools:text="foodpantry@gmail.com" />
-
-        <TextView
             android:id="@+id/log_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

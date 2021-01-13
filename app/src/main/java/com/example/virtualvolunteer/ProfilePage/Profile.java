@@ -86,6 +86,7 @@ public class Profile extends AppCompatActivity {
         verifiedHours = findViewById(R.id.profile_verified);
         logoutBtn = findViewById(R.id.logout_btn);
         orgsLabel = findViewById(R.id.orgsLabel);
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -96,6 +97,7 @@ public class Profile extends AppCompatActivity {
 
                 String vh = (profileUser.getValidHours() != 1) ? " Hours" : " Hour";
                 verifiedHours.setText(profileUser.getValidHours() + " Verified" + vh);
+
 
                 email.setText(profileUser.getEmail());
                 email.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
@@ -113,9 +115,10 @@ public class Profile extends AppCompatActivity {
                 }
                 else{
                     orgBadge.setVisibility(View.VISIBLE);
-                    hours.setVisibility(View.INVISIBLE);
-                    verifiedHours.setVisibility(View.INVISIBLE);
-                    orgsLabel.setVisibility(View.INVISIBLE);
+                    hours.setVisibility(View.GONE);
+                    verifiedHours.setVisibility(View.GONE);
+                    orgs.setVisibility(View.GONE);
+                    orgsLabel.setVisibility(View.GONE);
                 }
 
             }

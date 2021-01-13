@@ -17,7 +17,7 @@ public class User {
     private boolean organizer;
 
     private static ArrayList<Long> posts = new ArrayList<>();
-    private static ArrayList<String> orgs = new ArrayList<>();
+    private ArrayList<String> orgs = new ArrayList<>();
 
     public User() {
         this.name = "";
