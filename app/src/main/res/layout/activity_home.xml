@@ -16,8 +16,8 @@
             android:id="@+id/layout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/tag_opportunity"
@@ -25,6 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="42dp"
                 android:layout_marginTop="6dp"
+                android:backgroundTint="@color/gray"
                 android:text="opportunity"
                 android:textSize="10sp" />
 
@@ -35,6 +36,7 @@
                 android:layout_height="42dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="6dp"
+                android:backgroundTint="@color/gray"
                 android:text="experience"
                 android:textSize="10sp" />
 
@@ -46,8 +48,9 @@
                 android:layout_height="42dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="6dp"
-                android:text="virtual"
+                android:backgroundTint="@color/gray"
                 android:minWidth="2dp"
+                android:text="virtual"
                 android:textSize="10sp" />
 
 
@@ -58,23 +61,25 @@
                 android:layout_height="42dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="6dp"
-                android:text="teaching"
+                android:backgroundTint="@color/gray"
                 android:minWidth="2dp"
+                android:text="teaching"
                 android:textSize="10sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_below="@+id/layout1"
             android:gravity="center"
-            android:layout_below="@+id/layout1">
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/tag_environmental"
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="42dp"
+                android:backgroundTint="@color/gray"
                 android:text="environmental"
                 android:textSize="10sp" />
 
@@ -84,6 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="42dp"
                 android:layout_marginStart="8dp"
+                android:backgroundTint="@color/gray"
                 android:text="recreational"
                 android:textSize="10sp" />
 
@@ -93,6 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="42dp"
                 android:layout_marginStart="8dp"
+                android:backgroundTint="@color/gray"
                 android:text="distribution"
                 android:textSize="10sp" />
         </LinearLayout>
@@ -122,6 +129,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="96dp"
             android:layout_marginBottom="50dp" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">

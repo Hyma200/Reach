@@ -65,25 +65,22 @@ public class Home extends AppCompatActivity {
         recreationalTag = findViewById(R.id.tag_recreational);
         distributionTag = findViewById(R.id.tag_distribution);
         ArrayList<String> tags = new ArrayList<String>();
+
         opportunityTag.setOnClickListener(v -> {
-            Toast.makeText(this, "opportunity tag", Toast.LENGTH_SHORT).show();
             oppClicked = !oppClicked;
-            if (oppClicked){
-                //TODO: Darken background color
-                //v.setBackgroundColor();
+            int resId = oppClicked ? R.color.purple : R.color.gray;
+            opportunityTag.setBackgroundColor(getResources().getColor(resId));
+            if (oppClicked) {
                 tags.add("Opportunity");
-            }
-            else{
-                //TODO: Revert background color
-                //v.setBackgroundColor();
+            } else {
                 tags.remove("Opportunity");
             }
-
             generatePosts(tags);
         });
         experienceTag.setOnClickListener(v -> {
-            Toast.makeText(this, "experience tag", Toast.LENGTH_SHORT).show();
             expClicked = !expClicked;
+            int resId = expClicked ? R.color.purple : R.color.gray;
+            experienceTag.setBackgroundColor(getResources().getColor(resId));
             if (expClicked)
                 tags.add("Experience");
             else
@@ -91,8 +88,9 @@ public class Home extends AppCompatActivity {
             generatePosts(tags);
         });
         virtualTag.setOnClickListener(v -> {
-            Toast.makeText(this, "virtual tag", Toast.LENGTH_SHORT).show();
             virClicked = !virClicked;
+            int resId = virClicked ? R.color.purple : R.color.gray;
+            virtualTag.setBackgroundColor(getResources().getColor(resId));
             if (virClicked)
                 tags.add("Virtual");
             else
@@ -100,8 +98,9 @@ public class Home extends AppCompatActivity {
             generatePosts(tags);
         });
         teachingTag.setOnClickListener(v -> {
-            Toast.makeText(this, "teaching tag", Toast.LENGTH_SHORT).show();
             teachClicked = !teachClicked;
+            int resId = teachClicked ? R.color.purple : R.color.gray;
+            teachingTag.setBackgroundColor(getResources().getColor(resId));
             if (teachClicked)
                 tags.add("Teaching");
             else
@@ -109,8 +108,9 @@ public class Home extends AppCompatActivity {
             generatePosts(tags);
         });
         environmentalTag.setOnClickListener(v -> {
-            Toast.makeText(this, "environmental tag", Toast.LENGTH_SHORT).show();
             envClicked = !envClicked;
+            int resId = envClicked ? R.color.purple : R.color.gray;
+            environmentalTag.setBackgroundColor(getResources().getColor(resId));
             if (envClicked)
                 tags.add("Environment");
             else
@@ -118,17 +118,19 @@ public class Home extends AppCompatActivity {
             generatePosts(tags);
         });
         recreationalTag.setOnClickListener(v -> {
-            Toast.makeText(this, "recreational tag", Toast.LENGTH_SHORT).show();
             recClicked = !recClicked;
-            if (recClicked)
+            int resId = recClicked ? R.color.purple : R.color.gray;
+            recreationalTag.setBackgroundColor(getResources().getColor(resId));
+            if (recClicked) {
                 tags.add("Recreational");
-            else
+            } else
                 tags.remove("Recreational");
             generatePosts(tags);
         });
         distributionTag.setOnClickListener(v -> {
-            Toast.makeText(this, "distribution tag", Toast.LENGTH_SHORT).show();
             disClicked = !disClicked;
+            int resId = disClicked ? R.color.purple : R.color.gray;
+            distributionTag.setBackgroundColor(getResources().getColor(resId));
             if (disClicked)
                 tags.add("Distribution");
             else
@@ -146,7 +148,7 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void generatePosts(ArrayList <String> tags) {
+    public void generatePosts(ArrayList<String> tags) {
         ArrayList<Post> posts = new ArrayList<>();
         FirebaseDatabase.getInstance().getReference().child("Posts")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -156,8 +158,8 @@ public class Home extends AppCompatActivity {
                             Post post = snapshot.getValue(Post.class);
                             if (tags == null)
                                 posts.add(post);
-                            else{
-                                for (String currentTag: tags){
+                            else {
+                                for (String currentTag : tags) {
                                     if (post.getTags().contains(currentTag) && !posts.contains(post))
                                         posts.add(post);
                                 }
