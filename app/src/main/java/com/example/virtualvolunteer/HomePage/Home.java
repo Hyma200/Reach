@@ -156,7 +156,7 @@ public class Home extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Post post = snapshot.getValue(Post.class);
-                            if (tags == null)
+                            if (tags == null || tags.size() == 0)
                                 posts.add(post);
                             else {
                                 for (String currentTag : tags) {
