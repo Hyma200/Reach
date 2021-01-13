@@ -68,10 +68,17 @@ public class Home extends AppCompatActivity {
         opportunityTag.setOnClickListener(v -> {
             Toast.makeText(this, "opportunity tag", Toast.LENGTH_SHORT).show();
             oppClicked = !oppClicked;
-            if (oppClicked)
+            if (oppClicked){
+                //TODO: Darken background color
+                //v.setBackgroundColor();
                 tags.add("Opportunity");
-            else
+            }
+            else{
+                //TODO: Revert background color
+                //v.setBackgroundColor();
                 tags.remove("Opportunity");
+            }
+
             generatePosts(tags);
         });
         experienceTag.setOnClickListener(v -> {
