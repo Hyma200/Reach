@@ -29,8 +29,6 @@ import java.util.Collections;
 
 
 public class Home extends AppCompatActivity {
-
-
     private Button opportunityTag;
     private boolean oppClicked = false;
     private Button virtualTag;

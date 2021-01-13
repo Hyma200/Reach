@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 
@@ -40,7 +41,7 @@ public class LogView extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-    DatabaseReference myRef;
+    DatabaseReference myRef = database.getReference("Users").child(user.getEmail().replace('.', '_'));
 
     private static final String TAG = "Database";
     private User logUser;
@@ -62,14 +63,14 @@ public class LogView extends AppCompatActivity {
 
     public void generateHours() {
         ArrayList<Hour> hours = new ArrayList<>();
-
         FirebaseDatabase.getInstance().getReference().child("Hours")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Hour hour = (Hour) snapshot.getValue(Hour.class);
-                            hours.add(hour);
+                            if (hour.getEmail().equals(user.getEmail()))
+                                hours.add(hour);
                         }
                         Collections.reverse(hours);
                         RecyclerView rView = findViewById(R.id.log_rView);
