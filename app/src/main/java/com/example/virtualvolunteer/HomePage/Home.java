@@ -43,6 +43,7 @@ public class Home extends AppCompatActivity {
     private boolean disClicked = false;
     private Button experienceTag;
     private boolean expClicked = false;
+    private ArrayList<Post> posts = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +113,6 @@ public class Home extends AppCompatActivity {
     }
 
     public void generatePosts(String tag) {
-        ArrayList<Post> posts = new ArrayList<>();
 
         FirebaseDatabase.getInstance().getReference().child("Posts")
                 .addListenerForSingleValueEvent(new ValueEventListener() {

@@ -157,6 +157,7 @@
                     <TableRow android:layout_marginTop="8dp">
 
                         <ImageView
+                            android:id="@+id/skillsImage"
                             android:layout_width="42dp"
                             android:layout_height="42dp"
                             android:clickable="true"
@@ -199,6 +200,7 @@
                     android:textSize="22sp" />
 
                 <TextView
+                    android:id="@+id/orgsLabel"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"

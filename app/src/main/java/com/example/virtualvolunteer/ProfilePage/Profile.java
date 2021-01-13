@@ -56,6 +56,7 @@ public class Profile extends AppCompatActivity {
     private ImageView orgBadge;
     private TextView logoutBtn;
     private ArrayAdapter<String> adapter;
+    private TextView orgsLabel;
 
     ArrayList<String> data = new ArrayList<String>();
 
@@ -84,7 +85,7 @@ public class Profile extends AppCompatActivity {
         orgBadge = findViewById(R.id.profile_org_badge);
         verifiedHours = findViewById(R.id.profile_verified);
         logoutBtn = findViewById(R.id.logout_btn);
-
+        orgsLabel = findViewById(R.id.orgsLabel);
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -112,7 +113,11 @@ public class Profile extends AppCompatActivity {
                 }
                 else{
                     orgBadge.setVisibility(View.VISIBLE);
+                    hours.setVisibility(View.INVISIBLE);
+                    verifiedHours.setVisibility(View.INVISIBLE);
+                    orgsLabel.setVisibility(View.INVISIBLE);
                 }
+
             }
 
             @Override
@@ -122,6 +127,8 @@ public class Profile extends AppCompatActivity {
         });
         if (!FirebaseAuth.getInstance().getCurrentUser().getEmail().replace('.', '_').equals(intentEmail)) {
             editBtn.setVisibility(View.INVISIBLE);
+            logoutBtn.setVisibility(View.INVISIBLE);
+
         }
         editBtn.setOnClickListener(v -> {
             openProfileEdit();

@@ -4,7 +4,6 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.format.DateUtils;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,7 +15,6 @@ import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.virtualvolunteer.Navigation;
@@ -72,7 +70,7 @@ public class ProfileEdit extends AppCompatActivity {
         name = findViewById(R.id.profileName);
         location = findViewById(R.id.location);
         bio = findViewById(R.id.bio);
-        skills = findViewById(R.id.skills);
+        skills = findViewById(R.id.skillsImage);
         imagePicker = findViewById(R.id.image_picker);
         image = findViewById(R.id.image);
         saveBtn = findViewById(R.id.profile_edit_save);
