@@ -32,6 +32,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
 
@@ -135,7 +136,9 @@ public class LogSubmit extends AppCompatActivity {
             String date = month.getText().toString() + "/" + day.getText().toString() + "/" + year.getText().toString();
             hour = new Hour(organization.getText().toString(), Integer.parseInt(hours.getText().toString()),event.getText().toString(),mAuth.getCurrentUser().getEmail(),date, "0", false);
             myRef.setValue(hour);
-            currentUser.addOrg(organization.getText().toString());
+            ArrayList<String> currOrgs = currentUser.getOrgs();
+            if(!currOrgs.contains(organization.getText().toString()))
+                currentUser.addOrg(organization.getText().toString());
             currentUser.setHours(currentUser.getHours() + Integer.parseInt(hours.getText().toString()));
             usersRef.setValue(currentUser);
             startEmail();
