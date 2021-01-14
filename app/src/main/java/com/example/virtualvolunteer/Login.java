@@ -56,8 +56,8 @@ public class Login extends AppCompatActivity {
                 view -> {
                     String fEmail = email.getText().toString();
                     String fPassword = password.getText().toString();
-                    if (fEmail == "" || fPassword == "") {
-                        Toast toast = Toast.makeText(Login.this, "All fields Must Be Filled",
+                    if (fEmail.equals("") || fPassword.equals("")) {
+                        Toast toast = Toast.makeText(Login.this, "All fields are required",
                                 Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
