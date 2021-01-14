@@ -1,6 +1,9 @@
 # *Reach* - a social network for helping hands
  *Reach* is an **efficient communication solution** for volunteers and organizers, a space for volunteers to **inspire and learn** from each other’s experiences, and an **hour log and verification tool**- *all in one Android app!*
 
+### Developed by Leela Yaddanapudi, Brenda Henriquez, and Andi Motas
+* Made with Java, Firebase Realtime Database, Android Studio, XML, Firebase Authentication, Firebase Storage
+
 ## Login Page
 <img src="https://github.com/hyma200/VirtualVolunteer/blob/main/util/reach_login.gif" alt="login" width="270" height="570.15" />
 
@@ -36,3 +39,5 @@
 * Verify hours as an organizer using a 6-digit verification code sent via email
 * View logged hours
 
+
+<img src="https://github.com/hyma200/VirtualVolunteer/blob/main/util/reach_meme.png" alt="meme" />
