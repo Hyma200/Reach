@@ -129,7 +129,7 @@ public class Profile extends AppCompatActivity {
             }
         });
         if (!FirebaseAuth.getInstance().getCurrentUser().getEmail().replace('.', '_').equals(intentEmail)) {
-            editBtn.setVisibility(View.INVISIBLE);
+            editBtn.setVisibility(View.GONE);
             logoutBtn.setVisibility(View.INVISIBLE);
 
         }
