@@ -4,14 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import com.example.virtualvolunteer.HomePage.Home;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,18 +43,25 @@ public class Login extends AppCompatActivity {
         signUpBtn = findViewById(R.id.sign_up);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
+        WebView wbv = findViewById(R.id.login_hand);
+
+        WebSettings webSettings = wbv.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setUseWideViewPort(true);
+        webSettings.setLoadWithOverviewMode(true);
+        wbv.loadUrl("file:android_asset/reachBG.gif");
+        wbv.setVerticalScrollBarEnabled(false);
 
         loginBtn.setOnClickListener(
                 view -> {
                     String fEmail = email.getText().toString();
                     String fPassword = password.getText().toString();
-                    if (fEmail == "" || fPassword == ""){
+                    if (fEmail == "" || fPassword == "") {
                         Toast toast = Toast.makeText(Login.this, "All fields Must Be Filled",
                                 Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
-                    }
-                    else{
+                    } else {
                         mAuth.signInWithEmailAndPassword(fEmail, fPassword)
                                 .addOnCompleteListener(this, task -> {
                                     if (task.isSuccessful()) {
