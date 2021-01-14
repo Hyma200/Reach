@@ -36,13 +36,19 @@ public class PostCreate extends AppCompatActivity {
     private ImageView postImage;
     private Uri imageUri;
     private CheckBox opportunityTag;
-    private CheckBox virtualTag;
-    private CheckBox teachingTag;
-    private CheckBox environmentalTag;
-    private CheckBox recreationalTag;
-    private CheckBox distributionTag;
     private CheckBox experienceTag;
+    private Button virtualTag;
+    private boolean virClicked = false;
+    private Button teachingTag;
+    private boolean teachClicked = false;
+    private Button environmentalTag;
+    private boolean envClicked = false;
+    private Button recreationalTag;
+    private boolean recClicked = false;
+    private Button distributionTag;
+    private boolean disClicked = false;
     private final int PICK_IMAGE_REQUEST = 123;
+    private ArrayList<String> tags = new ArrayList<String>();
     private final StorageReference storageRef = FirebaseStorage.getInstance().getReference("uploads");
 
     @Override
@@ -85,17 +91,60 @@ public class PostCreate extends AppCompatActivity {
                 startActivityForResult(imagePickerIntent, PICK_IMAGE_REQUEST);
             }
         });
+
+
+        virtualTag.setOnClickListener(v -> {
+            virClicked = !virClicked;
+            int resId = virClicked ? R.color.purple : R.color.gray;
+            virtualTag.setBackgroundColor(getResources().getColor(resId));
+            if (virClicked)
+                tags.add("Virtual");
+            else
+                tags.remove("Virtual");
+        });
+        teachingTag.setOnClickListener(v -> {
+            teachClicked = !teachClicked;
+            int resId = teachClicked ? R.color.purple : R.color.gray;
+            teachingTag.setBackgroundColor(getResources().getColor(resId));
+            if (teachClicked)
+                tags.add("Teaching");
+            else
+                tags.remove("Teaching");
+        });
+        environmentalTag.setOnClickListener(v -> {
+            envClicked = !envClicked;
+            int resId = envClicked ? R.color.purple : R.color.gray;
+            environmentalTag.setBackgroundColor(getResources().getColor(resId));
+            if (envClicked)
+                tags.add("Environment");
+            else
+                tags.remove("Environment");
+        });
+        recreationalTag.setOnClickListener(v -> {
+            recClicked = !recClicked;
+            int resId = recClicked ? R.color.purple : R.color.gray;
+            recreationalTag.setBackgroundColor(getResources().getColor(resId));
+            if (recClicked) {
+                tags.add("Recreational");
+            } else
+                tags.remove("Recreational");
+        });
+        distributionTag.setOnClickListener(v -> {
+            disClicked = !disClicked;
+            int resId = disClicked ? R.color.purple : R.color.gray;
+            distributionTag.setBackgroundColor(getResources().getColor(resId));
+            if (disClicked)
+                tags.add("Distribution");
+            else
+                tags.remove("Distribution");
+        });
     }
 
     public void storePost(String description) {
-        ArrayList<String> tags = new ArrayList<String>();
         if (opportunityTag.isChecked()) tags.add("Opportunity");
-        if (virtualTag.isChecked()) tags.add("Virtual");
-        if (teachingTag.isChecked()) tags.add("Teaching");
-        if (environmentalTag.isChecked()) tags.add("Environment");
-        if (recreationalTag.isChecked()) tags.add("Recreational");
         if (experienceTag.isChecked()) tags.add("Experience");
-        if (distributionTag.isChecked()) tags.add("Distribution");
+
+
         StorageReference photoRef = storageRef.child(System.currentTimeMillis() + "." + getFileExtension(imageUri));
         photoRef.putFile(imageUri).addOnSuccessListener(taskSnapshot -> {
             if (taskSnapshot.getMetadata() != null) {

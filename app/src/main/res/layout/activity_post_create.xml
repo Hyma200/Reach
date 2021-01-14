@@ -73,6 +73,23 @@
                     android:layout_height="180dp"
                     android:layout_marginTop="12dp" />
 
+
+                <CheckBox
+                    android:id="@+id/new_post_opportunity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="  Looking for volunteers"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <CheckBox
+                    android:id="@+id/new_post_experience"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="  Sharing my experience"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -84,61 +101,79 @@
                     android:textColor="@color/white"
                     android:textSize="24sp" />
 
-                <CheckBox
-                    android:id="@+id/new_post_opportunity"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Volunteer Opportunity"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
 
-                <CheckBox
-                    android:id="@+id/new_post_experience"
+                <LinearLayout
+                    android:id="@+id/layout1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="My Experiences"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-                <CheckBox
-                    android:id="@+id/new_post_virtual"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Virtual"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
+                    <Button
+                        android:id="@+id/new_post_virtual"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="6dp"
+                        android:backgroundTint="@color/gray"
+                        android:minWidth="2dp"
+                        android:text="virtual"
+                        android:textSize="10sp" />
 
-                <CheckBox
-                    android:id="@+id/new_post_teaching"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Teaching"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
 
-                <CheckBox
-                    android:id="@+id/new_post_environmental"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Environmental"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
+                    <Button
+                        android:id="@+id/new_post_teaching"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="6dp"
+                        android:backgroundTint="@color/gray"
+                        android:minWidth="2dp"
+                        android:text="teaching"
+                        android:textSize="10sp" />
 
-                <CheckBox
-                    android:id="@+id/new_post_recreational"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Recreational"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
+                    <Button
+                        android:id="@+id/new_post_environmental"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="6dp"
+                        android:backgroundTint="@color/gray"
+                        android:text="environment"
+                        android:textSize="10sp" />
+                </LinearLayout>
 
-                <CheckBox
-                    android:id="@+id/new_post_distribution"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Distribution"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
+                    android:layout_below="@+id/layout1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/new_post_recreational"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:layout_marginStart="8dp"
+                        android:backgroundTint="@color/gray"
+                        android:text="recreational"
+                        android:textSize="10sp" />
+
+                    <Button
+                        android:id="@+id/new_post_distribution"
+                        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        android:layout_width="wrap_content"
+                        android:layout_height="42dp"
+                        android:layout_marginStart="8dp"
+                        android:backgroundTint="@color/gray"
+                        android:text="distribution"
+                        android:textSize="10sp" />
+                </LinearLayout>
+
 
                 <Button
                     android:id="@+id/new_post_button"
